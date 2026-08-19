@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T22:29:44.971Z",
+  "generatedAt": "2026-08-19T22:41:10.759Z",
   "suite": {
     "tests": 7,
     "humanWroteToVerifyAClaim": 0,
@@ -344,6 +344,198 @@
       "at": "2026-08-19T22:25:52.981Z",
       "session_id": "t-gate-offline",
       "durationWallClock": 0
+    },
+    {
+      "at": "2026-08-19T22:36:23.771Z",
+      "session_id": "t-guard",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:36:25.378Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:36:25.773Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:36:26.088Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:36:26.225Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": true
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:36:26.375Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": false
+    },
+    {
+      "status": "OWED",
+      "reason": "error",
+      "at": "2026-08-19T22:36:26.671Z",
+      "session_id": "t-gate-offline",
+      "message": "CRITIQUE_TEST_MODE stub throw"
+    },
+    {
+      "status": "timeout",
+      "reason": "timeout",
+      "at": "2026-08-19T22:36:26.994Z",
+      "session_id": "t-gate-offline",
+      "durationWallClock": 0
+    },
+    {
+      "at": "2026-08-19T22:40:17.581Z",
+      "phase": "regression",
+      "status": "failed",
+      "source": "recorded",
+      "open": true,
+      "session_id": "t-regression",
+      "claim": null,
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md"
+      ],
+      "failureDetail": "Step 2 (Step 2) failed: action_failed: click @ step 1\nDriver: click: Clicking Toggle Dark Mode button",
+      "steps": [
+        {
+          "type": "run_end",
+          "run_id": "run-0",
+          "status": "passed",
+          "summary": "",
+          "reason": "replay completed",
+          "duration": 2.5,
+          "final_url": "https://techkeyy.github.io/critique/demo/",
+          "actions_executed": 1,
+          "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\2dac2b9f-c82c-4e4f-a7c8-887dd62b9d37\\scratch\\0\\replay-test\\screenshots/step_001.png",
+          "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\2dac2b9f-c82c-4e4f-a7c8-887dd62b9d37\\scratch\\0\\replay-test",
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": ""
+          },
+          "variables_out": {},
+          "store_out": {},
+          "result_code": 100,
+          "reason_code": "success.complete"
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 1,
+          "status": "passed",
+          "duration_s": 2.5,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        },
+        {
+          "type": "run_end",
+          "run_id": "run-1",
+          "status": "failed",
+          "summary": "",
+          "reason": "action_failed: click @ step 1",
+          "duration": 51.22,
+          "final_url": "https://techkeyy.github.io/critique/demo/",
+          "actions_executed": 1,
+          "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\2dac2b9f-c82c-4e4f-a7c8-887dd62b9d37\\scratch\\1\\replay-test\\screenshots/step_001.png",
+          "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\2dac2b9f-c82c-4e4f-a7c8-887dd62b9d37\\scratch\\1\\replay-test",
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": ""
+          },
+          "variables_out": {},
+          "store_out": {},
+          "verdict": {
+            "confirmed": false,
+            "status": "broken",
+            "family": "automation_bug",
+            "category": "locator_rot",
+            "category_proposal": "",
+            "severity": "minor",
+            "root_cause": "The test was recorded against a page where the dark-mode control used different text. On the live page, the same control appears as “SWITCH APPEARANCE,” so the old click target went stale.",
+            "agent_fault_assessment": "The agent did not cause the outcome. It followed the recorded step and attempted to click the dark-mode control, but the live page shows a different button label than the recording expected, so the replay likely could not match the old target reliably.",
+            "bug_title": "Dark mode toggle label changed from recorded text",
+            "signals": [],
+            "confidence": 0.9,
+            "suggestion": "Update the test to target the current dark-mode control using a stable selector, then rerun to verify the theme still changes to dark.",
+            "one_liner": "The replay broke because the recorded dark-mode button target no longer matches the current page, which appears otherwise healthy.",
+            "relevant_steps": [
+              1
+            ],
+            "culprit_step": "step 1-1",
+            "credits_consumed": 1.683
+          }
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 2,
+          "status": "failed",
+          "duration_s": 51.22,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        }
+      ],
+      "testUrl": null,
+      "durationWallClock": 159.929
+    },
+    {
+      "at": "2026-08-19T22:40:17.589Z",
+      "phase": "prosecution",
+      "session_id": "t-regression",
+      "status": "skipped",
+      "source": "replay",
+      "claim": null,
+      "files": [],
+      "tagsInjected": null,
+      "message": "no claim",
+      "durationWallClock": 220.537
+    },
+    {
+      "at": "2026-08-19T22:40:38.585Z",
+      "session_id": "t-regression",
+      "observer_session_id": "t-regression",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "recorded",
+      "durationWallClock": 0.005,
+      "failureDetail": "Step 2 (Step 2) failed: action_failed: click @ step 1\nDriver: click: Clicking Toggle Dark Mode button",
+      "testUrl": null
     }
   ]
 }

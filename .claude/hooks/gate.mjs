@@ -113,11 +113,14 @@ async function prosecute() {
   if (!paths.length) {
     const fallback = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
     if (hasPassedCache(fallback)) {
-      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 90), cwd: PROJECT_ROOT });
+      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 55), cwd: PROJECT_ROOT });
     }
     return { ok: true, status: "passed", failureDetail: null, testUrl: null, durationWallClock: 0, skipped: true };
   }
-  return runSuite({ tags: "critique-gate", paths, parallel: 2 }, { cwd: PROJECT_ROOT });
+  return runSuite(
+    { tags: "critique-gate", paths, parallel: 2 },
+    { cwd: PROJECT_ROOT, timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 55) },
+  );
 }
 
 function persistClaims(dir, payload) {
@@ -136,7 +139,6 @@ function spawnProsecutor(sessionId, dir, claims) {
   try {
     if (process.env.CRITIQUE_TEST_MODE === "1") return;
     if (process.env.CRITIQUE_SKIP_PROSECUTE === "1") return;
-    if (!Array.isArray(claims) || !claims.length) return;
     let diff = "";
     try {
       diff = readFileSync(join(dir, "diff.txt"), "utf8");

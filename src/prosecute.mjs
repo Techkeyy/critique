@@ -114,6 +114,45 @@ function requestIdFrom(verdict) {
   return null;
 }
 
+/**
+ * Replay every already-cached, previously-passing suite member and record any
+ * that now fail. This is what catches a regression the agent introduced into
+ * code an earlier test already covered.
+ */
+async function verifyExistingSuite() {
+  const { selectGateMembers } = await import("./suite.mjs");
+  const testsRoot = join(PROJECT_ROOT, ".testmuai", "tests");
+  const members = selectGateMembers(testsRoot, 10);
+  if (!members.length) return;
+
+  const open = new Set(
+    readJson(LEDGER, [])
+      .filter((e) => e && e.open === true && Array.isArray(e.files))
+      .flatMap((e) => e.files),
+  );
+
+  for (const file of members) {
+    if (open.has(file)) continue; // already recorded, do not re-run
+    const v = await runTestMd(file, { cwd: PROJECT_ROOT, timeout: 400 });
+    if (v && v.ok === false && v.status === "failed") {
+      appendLedger({
+        at: new Date().toISOString(),
+        phase: "regression",
+        status: "failed",
+        source: "recorded",
+        open: true,
+        session_id: sessionId,
+        claim: null,
+        files: [file],
+        failureDetail: v.failureDetail || v.summary || "regression detected",
+        steps: v.steps || [],
+        testUrl: v.testUrl || null,
+        durationWallClock: v.durationWallClock,
+      });
+    }
+  }
+}
+
 async function main() {
   mkdirSync(sessionDir, { recursive: true });
   try {
@@ -128,6 +167,17 @@ async function main() {
   let claimText = null;
   let tagsInjected = null;
   let message = null;
+
+  // Regression pass first, and unconditionally. Tier 1 cannot catch a broken
+  // cached test: a failing replay takes ~185s (measured) against a 55s Tier-1
+  // budget, so it aborts and fails open. Tier 2 has no timeout pressure, so it
+  // replays the existing cached suite here and records any failure — which the
+  // NEXT Stop then blocks on in ~271ms straight from the ledger (D-11).
+  try {
+    await verifyExistingSuite();
+  } catch {
+    /* regression pass must never break prosecution */
+  }
 
   try {
     const claims = readJson(join(sessionDir, "claims.json"), []);
