@@ -1,10 +1,11 @@
 {
   "generatedAt": "2026-08-19T21:30:25.624Z",
   "suite": {
-    "tests": 3,
+    "tests": 5,
     "humanWroteToVerifyAClaim": 0,
     "seededBaseline": 1,
-    "generatedFromClaims": 2
+    "generatedFromClaims": 2,
+    "subjectAppHarness": 2
   },
   "entries": [
     {
