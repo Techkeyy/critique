@@ -8,6 +8,25 @@ A Claude Code plugin that intercepts the coding agent at `Stop`, prosecutes its 
 - Subject app: **https://techkeyy.github.io/critique/demo/**
 - Repo: https://github.com/Techkeyy/critique
 
+## Built by an agent, and gated by itself
+
+Every line of this repo was written by **Claude Code**. No file here was hand-authored; the
+human set direction and made the calls, the agent did the engineering. Commit messages carry no
+AI attribution by house convention, so the provenance is stated here instead.
+
+The part worth looking at: **Critique was running against the agent that was building it.**
+The hooks were armed in this repo from early on, so the build sessions were themselves gated —
+the agent had to get past its own tool to finish a turn.
+
+The published ledger contains those runs. Session `74dc74c1-…` on
+[the dashboard](https://techkeyy.github.io/critique/) is a real Claude Code build session, gated
+live, five times. `LEDGER.md` records the moment the gate blocked that session with another
+session's failure — a genuine scoping bug (D-12) found because the tool was pointed at its own
+authors, not at a staged demo.
+
+The suite grew the same way. Nobody wrote a claim-verification test; Kane authored them from the
+agent's own sentences.
+
 ## Install (stranger)
 
 1. Install [Kane CLI](https://www.npmjs.com/package/@testmuai/kane-cli) and sign in (`kane-cli whoami`).

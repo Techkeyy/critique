@@ -28,7 +28,10 @@ Test the link in an incognito window before pasting it into the form.
 > context. Anything Kane falsifies comes back to the agent as its failure text, so it fixes the
 > problem and tries again. Every prosecution seals into a cached `_test.md` that replays at zero
 > credits, so the repo accretes a regression suite as a by-product of the agent doing normal work
-> — seven tests so far, none written by a human to verify a claim.
+> — seven tests so far, none written by a human to verify a claim. The whole repo was written by
+> Claude Code, and the hooks were armed while it was being built, so Critique spent the hackathon
+> gating the very agent that was writing it; the dashboard ledger includes those live build-session
+> runs, and one real bug (cross-session failure leakage) was found that way rather than in a demo.
 
 ## 4. Live URL
 

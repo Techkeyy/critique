@@ -71,11 +71,16 @@ try {
 // Never publish stub-generated rows. Test runs use MOCKED verdicts; if one of
 // those reaches the dashboard it reads as fabricated evidence, which is worse
 // than showing nothing. Real Kane rows only.
+// Publish only rows from a real gate phase. Offline fail-open tests emit OWED /
+// timeout rows with no phase; 44 of them buried the genuine runs and read as the
+// product failing constantly.
+const REAL_PHASES = new Set(["tier1", "prosecution", "regression"]);
 const isStub = (e) =>
   !e ||
   e.MOCKED === true ||
   (typeof e.testUrl === "string" && e.testUrl.includes("MOCKED")) ||
-  (typeof e.failureDetail === "string" && e.failureDetail.includes("ZZZ_CRITIQUE_FORCE_FAIL"));
+  (typeof e.failureDetail === "string" && e.failureDetail.includes("ZZZ_CRITIQUE_FORCE_FAIL")) ||
+  !REAL_PHASES.has(e.phase);
 const dropped = entries.filter(isStub).length;
 entries = entries.filter((e) => !isStub(e));
 if (dropped) console.log(`publish: dropped ${dropped} stub entr${dropped === 1 ? "y" : "ies"}`);

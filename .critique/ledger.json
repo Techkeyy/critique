@@ -521,5 +521,14 @@
     "at": "2026-08-19T23:33:33.104Z",
     "session_id": "t-gate-offline",
     "durationWallClock": 0
+  },
+  {
+    "at": "2026-08-19T23:45:11.636Z",
+    "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+    "status": "passed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 47.451,
+    "testUrl": null
   }
 ]
