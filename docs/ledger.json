@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-19T21:30:25.624Z",
+  "generatedAt": "2026-08-19T22:24:02.859Z",
   "suite": {
-    "tests": 5,
+    "tests": 7,
     "humanWroteToVerifyAClaim": 0,
-    "seededBaseline": 1,
-    "generatedFromClaims": 2,
-    "subjectAppHarness": 2
+    "generatedFromClaims": 4,
+    "subjectAppHarness": 2,
+    "seededBaseline": 1
   },
   "entries": [
     {
@@ -15,10 +15,7 @@
       "phase": "tier1",
       "source": "replay",
       "durationWallClock": 63.361,
-      "testUrl": null,
-      "claim": null,
-      "failureDetail": null,
-      "steps": []
+      "testUrl": null
     },
     {
       "at": "2026-08-19T19:54:23.600Z",
@@ -27,48 +24,256 @@
       "phase": "tier1",
       "source": "replay",
       "durationWallClock": 58.52,
-      "testUrl": null,
-      "claim": null,
-      "failureDetail": null,
-      "steps": []
+      "testUrl": null
     },
     {
       "at": "2026-08-19T21:26:51.834Z",
+      "phase": "prosecution",
       "session_id": "t-prosecution-1",
       "status": "authored",
-      "phase": "prosecution",
-      "source": "replay",
-      "durationWallClock": 340.455,
       "claim": "I added the dark mode toggle.",
       "files": [
-        ".testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/disable-dark-mode-and-verify_test.md",
-        ".testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
+        "C:/Users/HomePC/Desktop/critique/.testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/disable-dark-mode-and-verify_test.md",
+        "C:/Users/HomePC/Desktop/critique/.testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
       ],
+      "tagsInjected": true,
       "message": "wrote 2 test(s)",
-      "testUrl": null,
-      "failureDetail": null,
-      "steps": []
+      "durationWallClock": 340.455
     },
     {
       "at": "2026-08-19T21:30:25.624Z",
-      "session_id": "t-prosecution-1",
-      "status": "failed",
       "phase": "prosecution",
+      "status": "failed",
       "source": "recorded",
-      "open": true,
-      "durationWallClock": 105,
+      "open": false,
+      "session_id": "t-prosecution-1",
       "claim": "I added the dark mode toggle.",
       "files": [
-        ".testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
+        "C:/Users/HomePC/Desktop/critique/.testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
       ],
-      "testUrl": null,
       "failureDetail": "Step 1 failed: The test looked at the wrong control on the page. Instead of first finding the actual dark-mode button, it interacted with another toggle in a different page flow, so the checks no longer matched the objective.\nUpdate the test to open the page state that really contains the dark-mode control and require a strict match on the visible 'Toggle dark mode' label before clicking. Add a pre-click assertion/screenshot tied to that exact element.\nDriver: assert: the **Toggle dark mode** button is visible",
-      "steps": [
-        { "index": 1, "status": "passed", "summary": "navigate: Navigate to https://kaneai-playground.lambdatest.io" },
-        { "index": 2, "status": "passed", "summary": "click: PRIMARY: Toggle dark mode button" },
-        { "index": 3, "status": "passed", "summary": "analyze: the page text has changed to a light color" },
-        { "index": 4, "status": "failed", "summary": "assert: the **Toggle dark mode** button is visible" }
-      ]
+      "testUrl": null,
+      "durationWallClock": 105,
+      "closedBy": "director-manual-clear"
+    },
+    {
+      "at": "2026-08-19T21:59:32.115Z",
+      "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+      "status": "passed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 43.747,
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-19T22:20:40.846Z",
+      "session_id": "t-guard",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:20:42.130Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:20:42.423Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:20:42.746Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:20:42.901Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": true
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:20:43.048Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": false
+    },
+    {
+      "status": "OWED",
+      "reason": "error",
+      "at": "2026-08-19T22:20:43.425Z",
+      "session_id": "t-gate-offline",
+      "message": "CRITIQUE_TEST_MODE stub throw"
+    },
+    {
+      "status": "timeout",
+      "reason": "timeout",
+      "at": "2026-08-19T22:20:43.840Z",
+      "session_id": "t-gate-offline",
+      "durationWallClock": 0
+    },
+    {
+      "at": "2026-08-19T22:23:38.962Z",
+      "session_id": "t-guard",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:23:41.184Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:23:41.771Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:23:43.146Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:23:43.420Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": true
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:23:43.776Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": false
+    },
+    {
+      "status": "OWED",
+      "reason": "error",
+      "at": "2026-08-19T22:23:44.485Z",
+      "session_id": "t-gate-offline",
+      "message": "CRITIQUE_TEST_MODE stub throw"
+    },
+    {
+      "status": "timeout",
+      "reason": "timeout",
+      "at": "2026-08-19T22:23:45.003Z",
+      "session_id": "t-gate-offline",
+      "durationWallClock": 0
+    },
+    {
+      "at": "2026-08-19T22:23:58.013Z",
+      "session_id": "t-guard",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:23:59.457Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:23:59.789Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:24:00.134Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:24:00.304Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": true
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:24:00.469Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": false
+    },
+    {
+      "status": "OWED",
+      "reason": "error",
+      "at": "2026-08-19T22:24:00.861Z",
+      "session_id": "t-gate-offline",
+      "message": "CRITIQUE_TEST_MODE stub throw"
+    },
+    {
+      "status": "timeout",
+      "reason": "timeout",
+      "at": "2026-08-19T22:24:01.496Z",
+      "session_id": "t-gate-offline",
+      "durationWallClock": 0
     }
   ]
 }

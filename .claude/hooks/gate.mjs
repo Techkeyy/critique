@@ -11,7 +11,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
 import { extractClaims } from "../../src/claims.mjs";
-import { writeSessionDiff } from "../../src/diff.mjs";
+import { touchedCode, writeSessionDiff } from "../../src/diff.mjs";
 import { hasPassedCache, openRecordedFailures } from "../../src/suite.mjs";
 
 const MAX_ATTEMPTS = 3;
@@ -144,6 +144,11 @@ function spawnProsecutor(sessionId, dir, claims) {
       diff = "";
     }
     if (!diff.trim()) return;
+    // Only prosecute turns that changed application code. A turn that edited
+    // only prose (docs, task files, notes) has no browser behaviour to falsify,
+    // and prosecuting it costs ~52 credits and pollutes the suite with tests
+    // derived from narration rather than from the product.
+    if (!touchedCode(readJson(join(dir, "touched.json"), []))) return;
     if (existsSync(join(dir, "prosecute.lock"))) return;
     const child = spawn(process.execPath, [join(PROJECT_ROOT, "src", "prosecute.mjs"), sessionId], {
       cwd: PROJECT_ROOT,

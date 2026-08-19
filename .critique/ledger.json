@@ -125,5 +125,145 @@
     "at": "2026-08-19T22:20:43.840Z",
     "session_id": "t-gate-offline",
     "durationWallClock": 0
+  },
+  {
+    "at": "2026-08-19T22:23:38.962Z",
+    "session_id": "t-guard",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:23:41.184Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:23:41.771Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:23:43.146Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T22:23:43.420Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": true
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T22:23:43.776Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": false
+  },
+  {
+    "status": "OWED",
+    "reason": "error",
+    "at": "2026-08-19T22:23:44.485Z",
+    "session_id": "t-gate-offline",
+    "message": "CRITIQUE_TEST_MODE stub throw"
+  },
+  {
+    "status": "timeout",
+    "reason": "timeout",
+    "at": "2026-08-19T22:23:45.003Z",
+    "session_id": "t-gate-offline",
+    "durationWallClock": 0
+  },
+  {
+    "at": "2026-08-19T22:23:58.013Z",
+    "session_id": "t-guard",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:23:59.457Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:23:59.789Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:24:00.134Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T22:24:00.304Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": true
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T22:24:00.469Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": false
+  },
+  {
+    "status": "OWED",
+    "reason": "error",
+    "at": "2026-08-19T22:24:00.861Z",
+    "session_id": "t-gate-offline",
+    "message": "CRITIQUE_TEST_MODE stub throw"
+  },
+  {
+    "status": "timeout",
+    "reason": "timeout",
+    "at": "2026-08-19T22:24:01.496Z",
+    "session_id": "t-gate-offline",
+    "durationWallClock": 0
   }
 ]

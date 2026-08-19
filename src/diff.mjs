@@ -23,6 +23,20 @@ function gitOut(args) {
   }
 }
 
+// Extensions that can change what a browser does. Everything else is prose.
+const CODE_EXT = /\.(m?[jt]sx?|html?|css|scss|vue|svelte|astro|php|py|rb|go|rs|java|cs)$/i;
+
+/**
+ * True when a turn changed application code. A turn that edited only prose
+ * (docs, task files, notes) has no browser behaviour to falsify — prosecuting
+ * it costs ~52 credits and pollutes the suite with tests derived from
+ * narration rather than from the product.
+ */
+export function touchedCode(touched) {
+  if (!Array.isArray(touched)) return false;
+  return touched.some((f) => CODE_EXT.test(String(f || "")));
+}
+
 export function captureDiffText() {
   try {
     let text = gitOut(["diff", "HEAD"]);
