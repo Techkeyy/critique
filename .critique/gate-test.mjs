@@ -99,6 +99,22 @@ check(
   ledger.slice(-1),
 );
 
+// 5b. Part A: attempts already at cap, user interjects (stop_hook_active false) → still release
+reset();
+writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));
+writeFileSync(join(dir, "attempts.json"), JSON.stringify({ attempts: 3 }));
+const brokenChain = pipe(GATE, payload({ stop_hook_active: false }), { CRITIQUE_KANE_STUB: "fail" });
+check("Part A: attempts=3 stop_hook_active false → exit 0", brokenChain.status === 0, brokenChain);
+check("Part A: did not re-block", !/Attempt /.test(brokenChain.stderr), brokenChain.stderr);
+const receiptBroken = JSON.parse(readFileSync(join(dir, "receipt.json"), "utf8"));
+check(
+  "Part A: OWED receipt with stop_hook_active logged false",
+  receiptBroken.status === "OWED" &&
+    receiptBroken.reason === "max-attempts" &&
+    receiptBroken.stop_hook_active === false,
+  receiptBroken,
+);
+
 // 6. throw → exit 0
 reset();
 writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));

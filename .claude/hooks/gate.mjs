@@ -2,7 +2,7 @@
 /**
  * Stop hook. Fail open. Max 3 attempts then OWED. Never strand the agent.
  *
- * Order: cwd guard → stop_hook_active + attempts ≥ 3 → touched? → Kane → verdict.
+ * Order: cwd guard → attempts ≥ 3 (OWED, regardless of stop_hook_active) → touched? → Kane → verdict.
  * Unexpected exceptions and Kane timeout/error → exit 0 + OWED.
  */
 
@@ -10,6 +10,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
 import { runTestMd } from "../../src/kane.mjs";
+import { extractClaims } from "../../src/claims.mjs";
 
 const MAX_ATTEMPTS = 3;
 const DEFAULT_TEST = join(
@@ -68,14 +69,16 @@ function writeOwed(dir, reason, extra) {
   appendLedger(receipt);
 }
 
-function claimLine(payload) {
-  const raw = payload?.last_assistant_message;
-  if (typeof raw !== "string" || !raw.trim()) return "(no closing claim captured)";
-  const line = raw
-    .split(/\r?\n/)
-    .map((l) => l.trim())
-    .find((l) => l && !l.startsWith("#"));
-  return (line || raw.trim()).slice(0, 280);
+function claimHeader(payload) {
+  try {
+    const claims = extractClaims(payload?.last_assistant_message);
+    if (!Array.isArray(claims) || claims.length === 0) {
+      return "Claim: (none stated — verifying baseline)";
+    }
+    return "Claim: " + claims.map((c) => c.text).join(" | ");
+  } catch {
+    return "Claim: (none stated — verifying baseline)";
+  }
 }
 
 function formatFailStderr({ payload, verdict, attempts }) {
@@ -83,7 +86,7 @@ function formatFailStderr({ payload, verdict, attempts }) {
   const url = verdict?.testUrl ? String(verdict.testUrl) : "(none)";
   return (
     "CRITIQUE GATE: verification failed.\n" +
-    `Claim: ${claimLine(payload)}\n` +
+    `${claimHeader(payload)}\n` +
     `${detail}\n` +
     `Dashboard: ${url}\n` +
     `Fix the failing step and stop again. Attempt ${attempts}/${MAX_ATTEMPTS}.`
@@ -129,8 +132,12 @@ async function main() {
   mkdirSync(dir, { recursive: true });
 
   const attempts = readAttempts(dir);
-  if (payload.stop_hook_active === true && attempts >= MAX_ATTEMPTS) {
-    writeOwed(dir, "max-attempts", { session_id: sessionId, attempts });
+  if (attempts >= MAX_ATTEMPTS) {
+    writeOwed(dir, "max-attempts", {
+      session_id: sessionId,
+      attempts,
+      stop_hook_active: payload.stop_hook_active === true,
+    });
     process.exit(0);
   }
 
@@ -177,7 +184,6 @@ async function main() {
 
 main().catch((err) => {
   try {
-    const payload = {};
     writeOwed(sessionDir("unknown"), "error", { message: String(err?.message || err) });
   } catch {
     /* still fail open */
