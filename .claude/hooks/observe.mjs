@@ -7,6 +7,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
+import { writeSessionDiff } from "../../src/diff.mjs";
 
 function editedPath(payload) {
   const input = payload?.tool_input || payload?.toolInput || {};
@@ -40,6 +41,7 @@ try {
   }
   if (!list.includes(path)) list.push(path);
   writeFileSync(file, JSON.stringify(list, null, 2));
+  writeSessionDiff(dir);
 } catch {
   // swallow — PostToolUse must not poison the turn
 }

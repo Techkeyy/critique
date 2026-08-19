@@ -5,7 +5,7 @@
  */
 
 import { spawnSync } from "node:child_process";
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const GATE = ".claude/hooks/gate.mjs";
@@ -70,6 +70,7 @@ const obs = pipe(OBSERVE, {
 check("observe exit 0", obs.status === 0);
 const touched = JSON.parse(readFileSync(join(dir, "touched.json"), "utf8"));
 check("observe recorded path", Array.isArray(touched) && touched[0] === "src/kane.mjs", touched);
+check("observe wrote diff.txt", existsSync(join(dir, "diff.txt")));
 
 // 3. MOCKED fail → stderr + exit 2, attempts=1
 writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));

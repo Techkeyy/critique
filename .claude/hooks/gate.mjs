@@ -6,10 +6,12 @@
  * Unexpected exceptions and Kane timeout/error → exit 0 + OWED.
  */
 
+import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
 import { extractClaims } from "../../src/claims.mjs";
+import { writeSessionDiff } from "../../src/diff.mjs";
 
 const MAX_ATTEMPTS = 3;
 const DEFAULT_TEST = join(
@@ -117,10 +119,52 @@ async function prosecute() {
     return { ok: false, status: "error", failureDetail: "Kane error", testUrl: null, durationWallClock: 0, MOCKED: true };
   }
 
-  const testPath = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
-  const timeout = Number(process.env.CRITIQUE_KANE_TIMEOUT || 90);
-  const { runTestMd } = await import("../../src/kane.mjs");
-  return runTestMd(testPath, { timeout, cwd: PROJECT_ROOT });
+  const { runSuite, runTestMd } = await import("../../src/kane.mjs");
+  const { selectGateMembers } = await import("../../src/suite.mjs");
+  const testsRoot = join(PROJECT_ROOT, ".testmuai", "tests");
+  const paths = selectGateMembers(testsRoot, 3);
+  if (!paths.length) {
+    const fallback = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
+    return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 90), cwd: PROJECT_ROOT });
+  }
+  return runSuite({ tags: "critique-gate", paths, parallel: 2 }, { cwd: PROJECT_ROOT });
+}
+
+function persistClaims(dir, payload) {
+  let claims = [];
+  try {
+    claims = extractClaims(payload?.last_assistant_message);
+    if (!Array.isArray(claims)) claims = [];
+  } catch {
+    claims = [];
+  }
+  writeJson(join(dir, "claims.json"), claims);
+  return claims;
+}
+
+function spawnProsecutor(sessionId, dir, claims) {
+  try {
+    if (process.env.CRITIQUE_KANE_STUB) return;
+    if (process.env.CRITIQUE_SKIP_PROSECUTE === "1") return;
+    if (!Array.isArray(claims) || !claims.length) return;
+    let diff = "";
+    try {
+      diff = readFileSync(join(dir, "diff.txt"), "utf8");
+    } catch {
+      diff = "";
+    }
+    if (!diff.trim()) return;
+    if (existsSync(join(dir, "prosecute.lock"))) return;
+    const child = spawn(process.execPath, [join(PROJECT_ROOT, "src", "prosecute.mjs"), sessionId], {
+      cwd: PROJECT_ROOT,
+      detached: true,
+      stdio: "ignore",
+      windowsHide: true,
+    });
+    child.unref();
+  } catch {
+    /* fire-and-forget — never block the hook */
+  }
 }
 
 async function main() {
@@ -144,6 +188,9 @@ async function main() {
   const touched = readJson(join(dir, "touched.json"), []);
   if (!Array.isArray(touched) || touched.length === 0) process.exit(0);
 
+  writeSessionDiff(dir);
+  const claims = persistClaims(dir, payload);
+
   let verdict;
   try {
     verdict = await prosecute();
@@ -159,6 +206,7 @@ async function main() {
     writeOwed(dir, verdict?.status === "timeout" ? "timeout" : "error", {
       session_id: sessionId,
       status: verdict?.status || "error",
+      durationWallClock: verdict?.durationWallClock,
     });
     process.exit(0);
   }
@@ -168,17 +216,20 @@ async function main() {
       at: new Date().toISOString(),
       session_id: sessionId,
       status: "passed",
+      phase: "tier1",
       durationWallClock: verdict.durationWallClock,
       testUrl: verdict.testUrl || null,
     });
     writeJson(join(dir, "touched.json"), []);
     writeAttempts(dir, 0);
+    spawnProsecutor(sessionId, dir, claims);
     process.exit(0);
   }
 
   const next = attempts + 1;
   writeAttempts(dir, next);
   process.stderr.write(formatFailStderr({ payload, verdict, attempts: next }));
+  spawnProsecutor(sessionId, dir, claims);
   process.exit(2);
 }
 

@@ -9,6 +9,7 @@ const TERMINAL_TYPES = new Set([
   "test_md_summary",
   "testrun_done",
   "testrun_summary",
+  "generate_done",
 ]);
 
 export function isTerminalEvent(obj) {
@@ -24,7 +25,7 @@ export function selectTerminalEvent(events) {
     if (!ev || typeof ev !== "object") continue;
     if (ev.type === "run_end") runEnd = ev;
     else if (ev.type === "test_md_summary" || ev.type === "testrun_summary") summary = ev;
-    else if (ev.type === "test_md_done" || ev.type === "testrun_done") done = ev;
+    else if (ev.type === "test_md_done" || ev.type === "testrun_done" || ev.type === "generate_done") done = ev;
   }
   return done || summary || runEnd || null;
 }

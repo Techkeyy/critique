@@ -42,7 +42,7 @@ function resolveKaneInvocation() {
 function passthroughFlags(opts = {}) {
   const flags = [];
   if (opts.agent !== false) flags.push("--agent");
-  flags.push("--headless");
+  if (opts.headless !== false) flags.push("--headless");
   if (opts.timeout != null) flags.push("--timeout", String(opts.timeout));
   if (opts.maxSteps != null) flags.push("--max-steps", String(opts.maxSteps));
   return flags;
@@ -171,6 +171,7 @@ export function verdictFrom({ parsed, exitCode, wallClockMs, stderr }) {
       sessionId,
       steps,
       failureDetail: buildFailureDetail(events, null, stderr),
+      events,
       raw: { events, stderr, exitCode },
     };
   }
@@ -194,6 +195,7 @@ export function verdictFrom({ parsed, exitCode, wallClockMs, stderr }) {
     sessionId,
     steps,
     failureDetail: ok ? null : buildFailureDetail(events, terminal, stderr),
+    events,
     raw: terminal,
   };
 }
@@ -213,15 +215,44 @@ export async function runTestMd(path, opts = {}) {
   return runArgs(["testmd", "run", String(path), ...passthroughFlags(opts)], opts);
 }
 
-export async function runSuite({ tags, paths } = {}, opts = {}) {
+export async function runSuite({ tags, paths, parallel } = {}, opts = {}) {
   const args = ["testrun", "run"];
   if (Array.isArray(paths)) {
     for (const p of paths) args.push(String(p));
   }
   if (Array.isArray(tags) && tags.length) args.push("--tags", tags.join(","));
   else if (typeof tags === "string" && tags) args.push("--tags", tags);
-  // testrun has no --agent flag (R10). NDJSON still flows when stdout is piped.
-  args.push(...passthroughFlags({ ...opts, agent: false }));
+  if (parallel != null) args.push("--parallel", String(parallel));
+  // testrun has no --agent flag (R10) and no --timeout. NDJSON still flows when stdout is piped.
+  args.push(...passthroughFlags({ ...opts, agent: false, timeout: undefined }));
+  return runArgs(args, opts);
+}
+
+/** Low-level spawn for generate / other subcommands. */
+export async function runKane(args, opts = {}) {
+  return runArgs(args, opts);
+}
+
+export async function runGenerate(objective, opts = {}) {
+  const args = ["generate", String(objective)];
+  if (opts.files) {
+    const files = Array.isArray(opts.files) ? opts.files.join(",") : String(opts.files);
+    args.push("--files", files);
+  }
+  if (opts.scenarioLimit != null) args.push("--scenario-limit", String(opts.scenarioLimit));
+  if (opts.perScenarioLimit != null) args.push("--per-scenario-limit", String(opts.perScenarioLimit));
+  if (opts.memory) args.push("--memory");
+  if (opts.name) args.push("--name", String(opts.name));
+  if (opts.refine && opts.req) args.push("--refine", "--req", String(opts.req));
+  args.push(...passthroughFlags({ ...opts, agent: true, headless: false, timeout: undefined }));
+  return runArgs(args, opts);
+}
+
+export async function generateSave(req, opts = {}) {
+  const args = ["generate", "--save", "--req", String(req)];
+  if (opts.out) args.push("--out", String(opts.out));
+  if (opts.name) args.push("--name", String(opts.name));
+  args.push(...passthroughFlags({ ...opts, agent: true, headless: false, timeout: undefined }));
   return runArgs(args, opts);
 }
 

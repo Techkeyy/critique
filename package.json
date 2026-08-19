@@ -8,5 +8,8 @@
     ".": "./src/kane.mjs",
     "./kane": "./src/kane.mjs",
     "./ndjson": "./src/ndjson.mjs"
+  },
+  "scripts": {
+    "critique:verify": "kane-cli testrun run --tags critique-gate --headless --parallel 2"
   }
 }
