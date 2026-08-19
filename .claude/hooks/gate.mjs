@@ -100,28 +100,10 @@ function formatFailStderr({ payload, verdict, attempts }) {
 }
 
 async function prosecute() {
-  if (process.env.CRITIQUE_KANE_STUB === "fail") {
-    return {
-      ok: false,
-      status: "failed",
-      failureDetail:
-        "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-      testUrl: "https://test-manager.lambdatest.com/MOCKED",
-      durationWallClock: 0,
-      MOCKED: true,
-    };
-  }
-  if (process.env.CRITIQUE_KANE_STUB === "pass") {
-    return { ok: true, status: "passed", failureDetail: null, testUrl: null, durationWallClock: 0, MOCKED: true };
-  }
-  if (process.env.CRITIQUE_KANE_STUB === "throw") {
-    throw new Error("CRITIQUE_KANE_STUB=throw");
-  }
-  if (process.env.CRITIQUE_KANE_STUB === "timeout") {
-    return { ok: false, status: "timeout", failureDetail: "Kane timed out", testUrl: null, durationWallClock: 0, MOCKED: true };
-  }
-  if (process.env.CRITIQUE_KANE_STUB === "error") {
-    return { ok: false, status: "error", failureDetail: "Kane error", testUrl: null, durationWallClock: 0, MOCKED: true };
+  if (process.env.CRITIQUE_TEST_MODE === "1") {
+    const { stubVerdict } = await import("../../src/gate-test-stubs.mjs");
+    const stub = stubVerdict(process.env.CRITIQUE_TEST_STUB);
+    if (stub) return stub;
   }
 
   const { runSuite, runTestMd } = await import("../../src/kane.mjs");
@@ -152,7 +134,7 @@ function persistClaims(dir, payload) {
 
 function spawnProsecutor(sessionId, dir, claims) {
   try {
-    if (process.env.CRITIQUE_KANE_STUB) return;
+    if (process.env.CRITIQUE_TEST_MODE === "1") return;
     if (process.env.CRITIQUE_SKIP_PROSECUTE === "1") return;
     if (!Array.isArray(claims) || !claims.length) return;
     let diff = "";
@@ -200,8 +182,8 @@ async function main() {
   const claims = persistClaims(dir, payload);
   const t0 = Date.now();
 
-  const recorded = openRecordedFailures(readJson(ledgerFile(), []));
-  if (recorded.length && !process.env.CRITIQUE_KANE_STUB) {
+  const recorded = openRecordedFailures(readJson(ledgerFile(), []), sessionId);
+  if (recorded.length) {
     const rec = recorded[recorded.length - 1];
     const next = attempts + 1;
     writeAttempts(dir, next);
@@ -214,7 +196,8 @@ async function main() {
     };
     appendLedger({
       at: new Date().toISOString(),
-      session_id: sessionId,
+      session_id: rec.session_id || sessionId,
+      observer_session_id: sessionId,
       status: "failed",
       phase: "tier1",
       source: "recorded",

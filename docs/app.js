@@ -63,13 +63,20 @@ function renderHome(data) {
   list.innerHTML = sessions
     .map((s) => {
       const claim = [...s.items].reverse().find((e) => e.claim)?.claim;
-      return `<a class="card" href="#/s/${encodeURIComponent(s.id)}">
+      const failIdx = s.items.findIndex((e) => e && e.failureDetail);
+      const href = `#/s/${encodeURIComponent(s.id)}`;
+      const failHint =
+        failIdx >= 0
+          ? `<div class="muted" style="margin-top:8px;color:var(--fail)">Has Kane failure — open, then click the failed event</div>`
+          : "";
+      return `<a class="card session-link" href="${href}" data-session="${esc(s.id)}">
         <div class="row">
           <span class="sid">${esc(s.id)}</span>
           ${pill(s.last.status)}
         </div>
         <div style="margin-top:10px;color:var(--text-2)">${claim ? esc(claim) : "<span class='unavail'>No claim extracted on this session</span>"}</div>
         <div class="muted" style="margin-top:8px;font-size:12px">${esc(s.items.length)} events · last ${esc(s.last.at || "")} · source ${esc(s.last.source || "—")}</div>
+        ${failHint}
       </a>`;
     })
     .join("");
@@ -91,13 +98,17 @@ function renderSession(data, id) {
   list.innerHTML = entries
     .map((e, i) => {
       const href = `#/s/${encodeURIComponent(id)}/e/${i}`;
-      return `<a class="card" href="${href}">
+      const failBit = e.failureDetail
+        ? `<pre class="mono" style="margin-top:12px;max-height:8em;overflow:auto">${esc(e.failureDetail)}</pre>`
+        : "";
+      return `<a class="card event-link" href="${href}" data-event="${i}">
         <div class="row">
           <span class="eyebrow">${esc(e.phase || "event")} · ${esc(e.source || "—")}</span>
           ${pill(e.status)}
         </div>
         <div class="claim" style="font-size:22px;margin:12px 0 0">${e.claim ? esc(e.claim) : "<span class='unavail'>No claim</span>"}</div>
         <div class="muted" style="margin-top:8px;font-size:12px">${esc(e.at || "")}${e.durationWallClock != null ? " · " + esc(e.durationWallClock) + "s" : ""}</div>
+        ${failBit}
       </a>`;
     })
     .join("");

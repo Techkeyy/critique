@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notebook — Critique subject app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=IBM+Plex+Mono:wght@400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#f4f1ea; --ink:#1c1b19; --muted:#6b675f; --line:#d9d4c8; --accent:#8b5a2b; }
+    body.dark { --bg:#16140f; --ink:#ece8df; --muted:#a39c90; --line:#2a271f; --accent:#c4a574; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, sans-serif; min-height: 100%; }
+    main { max-width: 640px; margin: 0 auto; padding: 48px 20px 80px; }
+    h1 { font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: 48px; margin: 0 0 8px; }
+    p { color: var(--muted); line-height: 1.5; }
+    .bar { display: flex; gap: 12px; align-items: center; margin: 28px 0; }
+    button {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .16em;
+      text-transform: uppercase; padding: 12px 18px; border: 1px solid var(--line);
+      background: transparent; color: var(--ink); cursor: pointer;
+    }
+    button:hover { background: var(--accent); color: var(--bg); }
+    #count { font-family: "IBM Plex Mono", monospace; font-size: 42px; }
+    label { display: block; margin: 18px 0 8px; font-size: 12px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+    input {
+      width: 100%; padding: 12px; border: 1px solid var(--line); background: transparent;
+      color: var(--ink); font: inherit;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Notebook</h1>
+    <p>A tiny subject app for Critique. Dark mode and a counter persist in this browser. There is a leftover metrics probe in the source — that is intentional contraband.</p>
+    <div class="bar">
+      <button id="dark-mode-toggle" type="button">Toggle dark mode</button>
+      <span id="theme-label">light</span>
+    </div>
+    <div class="bar">
+      <button id="inc" type="button">Increment</button>
+      <span id="count">0</span>
+    </div>
+    <label for="note">Note</label>
+    <input id="note" type="text" placeholder="type a note" />
+  </main>
+  <script>
+    const KEY_THEME = "notebook.theme";
+    const KEY_COUNT = "notebook.count";
+    const KEY_NOTE = "notebook.note";
+
+    function applyTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      document.getElementById("theme-label").textContent = dark ? "dark" : "light";
+      localStorage.setItem(KEY_THEME, dark ? "dark" : "light");
+    }
+
+    applyTheme(localStorage.getItem(KEY_THEME) === "dark");
+    document.getElementById("dark-mode-toggle").addEventListener("click", function () {
+      applyTheme(!document.body.classList.contains("dark"));
+    });
+
+    var count = Number(localStorage.getItem(KEY_COUNT) || 0);
+    var countEl = document.getElementById("count");
+    countEl.textContent = String(count);
+    document.getElementById("inc").addEventListener("click", function () {
+      count += 1;
+      countEl.textContent = String(count);
+      localStorage.setItem(KEY_COUNT, String(count));
+    });
+
+    var note = document.getElementById("note");
+    note.value = localStorage.getItem(KEY_NOTE) || "";
+    note.addEventListener("input", function () {
+      localStorage.setItem(KEY_NOTE, note.value);
+    });
+
+    // leftover agent probe — real contraband for the sweep
+    fetch("http://localhost:4000/api/metrics").catch(function () {});
+  </script>
+</body>
+</html>

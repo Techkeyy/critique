@@ -23,7 +23,7 @@ function run(cwd, extra = {}, env = {}) {
     execFileSync("node", [GATE], {
       input: payload,
       stdio: ["pipe", "pipe", "pipe"],
-      env: { ...process.env, ...env },
+      env: { ...process.env, CRITIQUE_TEST_MODE: "1", ...env },
     });
     return "exit 0 ALLOWED";
   } catch (e) {
@@ -42,7 +42,7 @@ const cases = [
   ["OUTSIDE (backslash) ", winPath("C:/Users/HomePC/Desktop/other"), {}, {}, "ALLOW"],
   ["OUTSIDE (forward)   ", "C:/Users/HomePC/Desktop/other", {}, {}, "ALLOW"],
   ["INSIDE  no-edit     ", winPath("C:/Users/HomePC/Desktop/critique"), {}, {}, "ALLOW"],
-  ["INSIDE  fail-stub   ", winPath("C:/Users/HomePC/Desktop/critique"), {}, { CRITIQUE_KANE_STUB: "fail" }, "BLOCK"],
+  ["INSIDE  fail-stub   ", winPath("C:/Users/HomePC/Desktop/critique"), {}, { CRITIQUE_TEST_STUB: "fail" }, "BLOCK"],
   ["INSIDE  (subdir)    ", winPath("C:/Users/HomePC/Desktop/critique/src"), {}, {}, "ALLOW"],
   ["LOOKALIKE sibling   ", winPath("C:/Users/HomePC/Desktop/critique-other"), {}, {}, "ALLOW"],
 ];

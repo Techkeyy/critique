@@ -48,13 +48,22 @@ if (hasPassedCache(join(root, "case0_test.md"))) {
   process.exit(1);
 }
 
-const rec = openRecordedFailures([
-  { source: "recorded", status: "failed", open: true, files: ["a_test.md"] },
-  { source: "replay", status: "failed", open: true },
-  { source: "recorded", status: "failed", open: false },
-]);
-if (rec.length !== 1) {
-  console.error("openRecordedFailures", rec);
+const rec = [
+  { source: "recorded", status: "failed", open: true, session_id: "sess-a", files: ["a_test.md"] },
+  { source: "replay", status: "failed", open: true, session_id: "sess-a" },
+  { source: "recorded", status: "failed", open: false, session_id: "sess-a" },
+  { source: "recorded", status: "failed", open: true, session_id: "sess-b" },
+];
+if (openRecordedFailures(rec, "sess-a").length !== 1) {
+  console.error("openRecordedFailures session filter", rec);
+  process.exit(1);
+}
+if (openRecordedFailures(rec, "sess-b").length !== 1) {
+  console.error("openRecordedFailures other session", rec);
+  process.exit(1);
+}
+if (openRecordedFailures(rec, "sess-z").length !== 0) {
+  console.error("openRecordedFailures should be empty for unknown session");
   process.exit(1);
 }
 const cleared = clearRecordedForFiles(

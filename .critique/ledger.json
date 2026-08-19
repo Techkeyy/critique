@@ -36,7 +36,7 @@
     "phase": "prosecution",
     "status": "failed",
     "source": "recorded",
-    "open": true,
+    "open": false,
     "session_id": "t-prosecution-1",
     "claim": "I added the dark mode toggle.",
     "files": [
@@ -44,6 +44,16 @@
     ],
     "failureDetail": "Step 1 failed: The test looked at the wrong control on the page. Instead of first finding the actual dark-mode button, it interacted with another toggle in a different page flow, so the checks no longer matched the objective.\nUpdate the test to open the page state that really contains the dark-mode control and require a strict match on the visible 'Toggle dark mode' label before clicking. Add a pre-click assertion/screenshot tied to that exact element.\nDriver: assert: the **Toggle dark mode** button is visible",
     "testUrl": null,
-    "durationWallClock": 105
+    "durationWallClock": 105,
+    "closedBy": "director-manual-clear"
+  },
+  {
+    "at": "2026-08-19T21:59:32.115Z",
+    "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+    "status": "passed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 43.747,
+    "testUrl": null
   }
 ]

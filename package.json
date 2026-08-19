@@ -10,6 +10,7 @@
     "./ndjson": "./src/ndjson.mjs"
   },
   "scripts": {
-    "critique:verify": "kane-cli testrun run --tags critique-gate --headless --parallel 2"
+    "critique:verify": "kane-cli testrun run --tags critique-gate --headless --parallel 2",
+    "critique:clear": "node src/clear.mjs"
   }
 }

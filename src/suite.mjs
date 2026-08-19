@@ -84,15 +84,14 @@ export function selectGateMembers(testsRoot, limit = 3) {
     .map((t) => t.path);
 }
 
-export function openRecordedFailures(entries) {
+export function openRecordedFailures(entries, sessionId) {
   const list = Array.isArray(entries) ? entries : [];
-  return list.filter(
-    (e) =>
-      e &&
-      e.source === "recorded" &&
-      e.status === "failed" &&
-      e.open !== false,
-  );
+  const sid = sessionId == null || sessionId === "" ? null : String(sessionId);
+  return list.filter((e) => {
+    if (!e || e.source !== "recorded" || e.status !== "failed" || e.open === false) return false;
+    if (sid == null) return true;
+    return String(e.session_id || "") === sid;
+  });
 }
 
 export function clearRecordedForFiles(entries, files) {
