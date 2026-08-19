@@ -57,46 +57,6 @@
     "testUrl": null
   },
   {
-    "at": "2026-08-19T22:20:40.846Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:20:42.130Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:20:42.423Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:20:42.746Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
     "status": "OWED",
     "reason": "max-attempts",
     "at": "2026-08-19T22:20:42.901Z",
@@ -125,46 +85,6 @@
     "at": "2026-08-19T22:20:43.840Z",
     "session_id": "t-gate-offline",
     "durationWallClock": 0
-  },
-  {
-    "at": "2026-08-19T22:23:38.962Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:23:41.184Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:23:41.771Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:23:43.146Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
   },
   {
     "status": "OWED",
@@ -197,46 +117,6 @@
     "durationWallClock": 0
   },
   {
-    "at": "2026-08-19T22:23:58.013Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:23:59.457Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:23:59.789Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:24:00.134Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
     "status": "OWED",
     "reason": "max-attempts",
     "at": "2026-08-19T22:24:00.304Z",
@@ -267,46 +147,6 @@
     "durationWallClock": 0
   },
   {
-    "at": "2026-08-19T22:25:49.874Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:25:51.239Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:25:51.547Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:25:51.934Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
     "status": "OWED",
     "reason": "max-attempts",
     "at": "2026-08-19T22:25:52.126Z",
@@ -335,46 +175,6 @@
     "at": "2026-08-19T22:25:52.981Z",
     "session_id": "t-gate-offline",
     "durationWallClock": 0
-  },
-  {
-    "at": "2026-08-19T22:36:23.771Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:36:25.378Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:36:25.773Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:36:26.088Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
   },
   {
     "status": "OWED",
@@ -534,46 +334,6 @@
     "clearedBy": "critique:clear"
   },
   {
-    "at": "2026-08-19T22:43:37.741Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:43:40.267Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:43:40.811Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:43:41.225Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
     "status": "OWED",
     "reason": "max-attempts",
     "at": "2026-08-19T22:43:41.375Z",
@@ -602,46 +362,6 @@
     "at": "2026-08-19T22:43:42.034Z",
     "session_id": "t-gate-offline",
     "durationWallClock": 0
-  },
-  {
-    "at": "2026-08-19T22:44:50.584Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:44:52.535Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:44:52.835Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T22:44:53.607Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
   },
   {
     "status": "OWED",
@@ -683,46 +403,6 @@
     "testUrl": null
   },
   {
-    "at": "2026-08-19T23:31:47.882Z",
-    "session_id": "t-guard",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T23:31:53.603Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T23:31:56.041Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
-    "at": "2026-08-19T23:31:57.692Z",
-    "session_id": "t-gate-offline",
-    "status": "failed",
-    "phase": "tier1",
-    "source": "replay",
-    "durationWallClock": 0,
-    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
-    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
-  },
-  {
     "status": "OWED",
     "reason": "max-attempts",
     "at": "2026-08-19T23:31:58.608Z",
@@ -749,6 +429,96 @@
     "status": "timeout",
     "reason": "timeout",
     "at": "2026-08-19T23:32:02.592Z",
+    "session_id": "t-gate-offline",
+    "durationWallClock": 0
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T23:32:42.431Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": true
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T23:32:42.611Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": false
+  },
+  {
+    "status": "OWED",
+    "reason": "error",
+    "at": "2026-08-19T23:32:43.237Z",
+    "session_id": "t-gate-offline",
+    "message": "CRITIQUE_TEST_MODE stub throw"
+  },
+  {
+    "status": "timeout",
+    "reason": "timeout",
+    "at": "2026-08-19T23:32:43.641Z",
+    "session_id": "t-gate-offline",
+    "durationWallClock": 0
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T23:33:09.659Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": true
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T23:33:09.954Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": false
+  },
+  {
+    "status": "OWED",
+    "reason": "error",
+    "at": "2026-08-19T23:33:10.497Z",
+    "session_id": "t-gate-offline",
+    "message": "CRITIQUE_TEST_MODE stub throw"
+  },
+  {
+    "status": "timeout",
+    "reason": "timeout",
+    "at": "2026-08-19T23:33:11.040Z",
+    "session_id": "t-gate-offline",
+    "durationWallClock": 0
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T23:33:31.704Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": true
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T23:33:31.873Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": false
+  },
+  {
+    "status": "OWED",
+    "reason": "error",
+    "at": "2026-08-19T23:33:32.385Z",
+    "session_id": "t-gate-offline",
+    "message": "CRITIQUE_TEST_MODE stub throw"
+  },
+  {
+    "status": "timeout",
+    "reason": "timeout",
+    "at": "2026-08-19T23:33:33.104Z",
     "session_id": "t-gate-offline",
     "durationWallClock": 0
   }

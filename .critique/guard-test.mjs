@@ -2,6 +2,9 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+// Keep stub verdicts out of the real ledger — they get published otherwise.
+const TEST_LEDGER_DEFAULT = join(".critique", "sessions", "t-guardrun-ledger.json");
+
 const BS = String.fromCharCode(92);
 const winPath = (p) => p.split("/").join(BS);
 const GATE = ".claude/hooks/gate.mjs";
@@ -23,7 +26,7 @@ function run(cwd, extra = {}, env = {}) {
     execFileSync("node", [GATE], {
       input: payload,
       stdio: ["pipe", "pipe", "pipe"],
-      env: { ...process.env, CRITIQUE_TEST_MODE: "1", ...env },
+      env: { CRITIQUE_LEDGER_FILE: TEST_LEDGER_DEFAULT, ...process.env, CRITIQUE_TEST_MODE: "1", ...env },
     });
     return "exit 0 ALLOWED";
   } catch (e) {

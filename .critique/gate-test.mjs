@@ -8,6 +8,11 @@ import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+// Every gate invocation in this file must write to a throwaway ledger.
+// Stub verdicts leaking into .critique/ledger.json end up published on the
+// dashboard as MOCKED rows, which reads as fabricated evidence.
+const TEST_LEDGER_DEFAULT = join(".critique", "sessions", "t-testrun-ledger.json");
+
 const GATE = ".claude/hooks/gate.mjs";
 const OBSERVE = ".claude/hooks/observe.mjs";
 const SESSION = "t-gate-offline";
@@ -19,7 +24,7 @@ function pipe(script, payload, env = {}) {
   const r = spawnSync("node", [script], {
     input: JSON.stringify(payload),
     encoding: "utf8",
-    env: { ...process.env, CRITIQUE_TEST_MODE: "1", ...env },
+    env: { CRITIQUE_LEDGER_FILE: TEST_LEDGER_DEFAULT, ...process.env, CRITIQUE_TEST_MODE: "1", ...env },
   });
   return { status: r.status, stdout: r.stdout || "", stderr: r.stderr || "" };
 }
