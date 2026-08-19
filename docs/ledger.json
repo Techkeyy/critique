@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T22:25:46.073Z",
+  "generatedAt": "2026-08-19T22:29:44.971Z",
   "suite": {
     "tests": 7,
     "humanWroteToVerifyAClaim": 0,
@@ -272,6 +272,76 @@
       "status": "timeout",
       "reason": "timeout",
       "at": "2026-08-19T22:24:01.496Z",
+      "session_id": "t-gate-offline",
+      "durationWallClock": 0
+    },
+    {
+      "at": "2026-08-19T22:25:49.874Z",
+      "session_id": "t-guard",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:25:51.239Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:25:51.547Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "at": "2026-08-19T22:25:51.934Z",
+      "session_id": "t-gate-offline",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 0,
+      "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+      "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:25:52.126Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": true
+    },
+    {
+      "status": "OWED",
+      "reason": "max-attempts",
+      "at": "2026-08-19T22:25:52.272Z",
+      "session_id": "t-gate-offline",
+      "attempts": 3,
+      "stop_hook_active": false
+    },
+    {
+      "status": "OWED",
+      "reason": "error",
+      "at": "2026-08-19T22:25:52.684Z",
+      "session_id": "t-gate-offline",
+      "message": "CRITIQUE_TEST_MODE stub throw"
+    },
+    {
+      "status": "timeout",
+      "reason": "timeout",
+      "at": "2026-08-19T22:25:52.981Z",
       "session_id": "t-gate-offline",
       "durationWallClock": 0
     }
