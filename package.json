@@ -1,0 +1,12 @@
+{
+  "name": "critique",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Stop-hook gate that prosecutes coding-agent claims via Kane CLI",
+  "exports": {
+    ".": "./src/kane.mjs",
+    "./kane": "./src/kane.mjs",
+    "./ndjson": "./src/ndjson.mjs"
+  }
+}
