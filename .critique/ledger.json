@@ -3,6 +3,8 @@
     "at": "2026-08-19T19:51:59.307Z",
     "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
     "status": "passed",
+    "phase": "tier1",
+    "source": "replay",
     "durationWallClock": 63.361,
     "testUrl": null
   },
@@ -10,6 +12,8 @@
     "at": "2026-08-19T19:54:23.600Z",
     "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
     "status": "passed",
+    "phase": "tier1",
+    "source": "replay",
     "durationWallClock": 58.52,
     "testUrl": null
   },
@@ -26,5 +30,20 @@
     "tagsInjected": true,
     "message": "wrote 2 test(s)",
     "durationWallClock": 340.455
+  },
+  {
+    "at": "2026-08-19T21:30:25.624Z",
+    "phase": "prosecution",
+    "status": "failed",
+    "source": "recorded",
+    "open": true,
+    "session_id": "t-prosecution-1",
+    "claim": "I added the dark mode toggle.",
+    "files": [
+      "C:/Users/HomePC/Desktop/critique/.testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
+    ],
+    "failureDetail": "Step 1 failed: The test looked at the wrong control on the page. Instead of first finding the actual dark-mode button, it interacted with another toggle in a different page flow, so the checks no longer matched the objective.\nUpdate the test to open the page state that really contains the dark-mode control and require a strict match on the visible 'Toggle dark mode' label before clicking. Add a pre-click assertion/screenshot tied to that exact element.\nDriver: assert: the **Toggle dark mode** button is visible",
+    "testUrl": null,
+    "durationWallClock": 105
   }
 ]

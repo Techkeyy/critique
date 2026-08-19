@@ -1,9 +1,10 @@
 /**
  * Select at most N most-recently-modified tagged _test.md files for Tier 1.
+ * D-11: only members with a passed, valid cached execution.
  */
 
 import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { basename, dirname, join } from "node:path";
 
 const TAG = "critique-gate";
 
@@ -36,6 +37,22 @@ function hasTag(fm, tag) {
   return fm.toLowerCase().includes(tag.toLowerCase());
 }
 
+export function cacheMetaPath(testPath) {
+  const stem = basename(testPath).replace(/_test\.md$/i, "");
+  return join(dirname(testPath), `output-${stem}`, ".internal", "meta.json");
+}
+
+/** Replay-safe: valid cache AND a passed execution. Failed authorings still mark valid:true. */
+export function hasPassedCache(testPath) {
+  try {
+    const meta = JSON.parse(readFileSync(cacheMetaPath(testPath), "utf8"));
+    const ex = meta && Array.isArray(meta.executions) ? meta.executions : [];
+    return ex.some((e) => e && e.valid === true && String(e.status).toLowerCase() === "passed");
+  } catch {
+    return false;
+  }
+}
+
 export function listTaggedTests(testsRoot, tag = TAG) {
   const files = [];
   walkMd(testsRoot, files);
@@ -62,6 +79,29 @@ export function listTaggedTests(testsRoot, tag = TAG) {
 
 export function selectGateMembers(testsRoot, limit = 3) {
   return listTaggedTests(testsRoot)
+    .filter((t) => hasPassedCache(t.path))
     .slice(0, limit)
     .map((t) => t.path);
+}
+
+export function openRecordedFailures(entries) {
+  const list = Array.isArray(entries) ? entries : [];
+  return list.filter(
+    (e) =>
+      e &&
+      e.source === "recorded" &&
+      e.status === "failed" &&
+      e.open !== false,
+  );
+}
+
+export function clearRecordedForFiles(entries, files) {
+  const set = new Set((files || []).map((f) => String(f).replace(/\\/g, "/").toLowerCase()));
+  if (!set.size) return Array.isArray(entries) ? entries : [];
+  return (Array.isArray(entries) ? entries : []).map((e) => {
+    if (!e || e.source !== "recorded" || e.open === false) return e;
+    const hits = (e.files || []).some((f) => set.has(String(f).replace(/\\/g, "/").toLowerCase()));
+    if (!hits) return e;
+    return { ...e, open: false, clearedAt: new Date().toISOString() };
+  });
 }

@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-19T21:30:25.624Z",
+  "suite": {
+    "tests": 3,
+    "humanWroteToVerifyAClaim": 0,
+    "seededBaseline": 1,
+    "generatedFromClaims": 2
+  },
+  "entries": [
+    {
+      "at": "2026-08-19T19:51:59.307Z",
+      "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+      "status": "passed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 63.361,
+      "testUrl": null,
+      "claim": null,
+      "failureDetail": null,
+      "steps": []
+    },
+    {
+      "at": "2026-08-19T19:54:23.600Z",
+      "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+      "status": "passed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 58.52,
+      "testUrl": null,
+      "claim": null,
+      "failureDetail": null,
+      "steps": []
+    },
+    {
+      "at": "2026-08-19T21:26:51.834Z",
+      "session_id": "t-prosecution-1",
+      "status": "authored",
+      "phase": "prosecution",
+      "source": "replay",
+      "durationWallClock": 340.455,
+      "claim": "I added the dark mode toggle.",
+      "files": [
+        ".testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/disable-dark-mode-and-verify_test.md",
+        ".testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
+      ],
+      "message": "wrote 2 test(s)",
+      "testUrl": null,
+      "failureDetail": null,
+      "steps": []
+    },
+    {
+      "at": "2026-08-19T21:30:25.624Z",
+      "session_id": "t-prosecution-1",
+      "status": "failed",
+      "phase": "prosecution",
+      "source": "recorded",
+      "open": true,
+      "durationWallClock": 105,
+      "claim": "I added the dark mode toggle.",
+      "files": [
+        ".testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
+      ],
+      "testUrl": null,
+      "failureDetail": "Step 1 failed: The test looked at the wrong control on the page. Instead of first finding the actual dark-mode button, it interacted with another toggle in a different page flow, so the checks no longer matched the objective.\nUpdate the test to open the page state that really contains the dark-mode control and require a strict match on the visible 'Toggle dark mode' label before clicking. Add a pre-click assertion/screenshot tied to that exact element.\nDriver: assert: the **Toggle dark mode** button is visible",
+      "steps": [
+        { "index": 1, "status": "passed", "summary": "navigate: Navigate to https://kaneai-playground.lambdatest.io" },
+        { "index": 2, "status": "passed", "summary": "click: PRIMARY: Toggle dark mode button" },
+        { "index": 3, "status": "passed", "summary": "analyze: the page text has changed to a light color" },
+        { "index": 4, "status": "failed", "summary": "assert: the **Toggle dark mode** button is visible" }
+      ]
+    }
+  ]
+}

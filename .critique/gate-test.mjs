@@ -130,7 +130,42 @@ writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));
 const to = pipe(GATE, payload(), { CRITIQUE_KANE_STUB: "timeout" });
 check("timeout fail-open exit 0", to.status === 0, to);
 
-// 8. outside cwd never blocks even with touched+fail
+// 8. D-11 recorded failure blocks without Kane, under 2s
+reset();
+writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));
+writeFileSync(join(dir, "attempts.json"), JSON.stringify({ attempts: 0 }));
+const recLedger = join(".critique", "tmp-recorded-ledger.json");
+writeFileSync(
+  recLedger,
+  JSON.stringify(
+    [
+      {
+        source: "recorded",
+        status: "failed",
+        open: true,
+        failureDetail:
+          "Step 1 failed: The test looked at the wrong control on the page. Instead of first finding the actual dark-mode button, it interacted with another toggle in a different page flow, so the checks no longer matched the objective.",
+        testUrl: null,
+      },
+    ],
+    null,
+    2,
+  ),
+);
+const recT0 = Date.now();
+const recBlock = pipe(GATE, payload({ last_assistant_message: "I added the dark mode toggle." }), {
+  CRITIQUE_LEDGER_FILE: recLedger,
+  CRITIQUE_SKIP_PROSECUTE: "1",
+});
+const recMs = Date.now() - recT0;
+check("D-11 recorded block exit 2", recBlock.status === 2, recBlock);
+check("D-11 recorded stderr has failureDetail", /wrong control/.test(recBlock.stderr), recBlock.stderr);
+check("D-11 recorded block under 2s", recMs < 2000, String(recMs));
+try {
+  rmSync(recLedger, { force: true });
+} catch {}
+
+// 9. outside cwd never blocks even with touched+fail
 reset();
 writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));
 const outside = pipe(

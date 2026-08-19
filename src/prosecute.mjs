@@ -9,6 +9,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PROJECT_ROOT } from "./guard.mjs";
 import { generateSave, runGenerate, runTestMd } from "./kane.mjs";
+import { clearRecordedForFiles } from "./suite.mjs";
 
 const PLAY_URL = "https://kaneai-playground.lambdatest.io";
 const OUT_DIR = join(PROJECT_ROOT, ".testmuai", "tests", "prosecutions");
@@ -202,12 +203,45 @@ async function main() {
     }
     tagsInjected = files.length ? (anyPreserved && !anyInject ? false : anyInject) : null;
 
+    const verdicts = [];
     for (const f of files) {
-      await runTestMd(f, { cwd: PROJECT_ROOT, timeout: 400 });
+      const v = await runTestMd(f, { cwd: PROJECT_ROOT, timeout: 400 });
+      verdicts.push({ file: f, v });
     }
 
-    status = files.length ? "authored" : "error";
-    message = files.length ? `wrote ${files.length} test(s)` : "save wrote no _test.md";
+    const failed = verdicts.filter((x) => x.v && x.v.ok === false);
+    if (!files.length) {
+      status = "error";
+      message = "save wrote no _test.md";
+    } else if (failed.length) {
+      status = "failed";
+      message = `${failed.length}/${files.length} test(s) failed`;
+      for (const x of failed) {
+        appendLedger({
+          at: new Date().toISOString(),
+          phase: "prosecution",
+          status: "failed",
+          source: "recorded",
+          open: true,
+          session_id: sessionId,
+          claim: claimText,
+          files: [x.file],
+          failureDetail: x.v.failureDetail || x.v.summary || "prosecution failed",
+          steps: x.v.steps || [],
+          testUrl: x.v.testUrl || null,
+          durationWallClock: x.v.durationWallClock,
+        });
+      }
+    } else {
+      status = "authored";
+      message = `wrote ${files.length} test(s)`;
+      const current = readJson(LEDGER, []);
+      const next = clearRecordedForFiles(
+        current,
+        files,
+      );
+      writeFileSync(LEDGER, JSON.stringify(next, null, 2));
+    }
   } catch (err) {
     status = "error";
     message = String(err?.message || err);
@@ -217,6 +251,7 @@ async function main() {
       phase: "prosecution",
       session_id: sessionId,
       status,
+      source: status === "failed" ? "recorded" : "replay",
       claim: claimText,
       files,
       tagsInjected,

@@ -12,6 +12,7 @@ import { join } from "node:path";
 import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
 import { extractClaims } from "../../src/claims.mjs";
 import { writeSessionDiff } from "../../src/diff.mjs";
+import { hasPassedCache, openRecordedFailures } from "../../src/suite.mjs";
 
 const MAX_ATTEMPTS = 3;
 const DEFAULT_TEST = join(
@@ -49,8 +50,12 @@ function writeAttempts(dir, n) {
   writeJson(join(dir, "attempts.json"), { attempts: n, at: new Date().toISOString() });
 }
 
+function ledgerFile() {
+  return process.env.CRITIQUE_LEDGER_FILE || join(PROJECT_ROOT, ".critique", "ledger.json");
+}
+
 function appendLedger(entry) {
-  const file = join(PROJECT_ROOT, ".critique", "ledger.json");
+  const file = ledgerFile();
   const list = readJson(file, []);
   const arr = Array.isArray(list) ? list : [];
   arr.push(entry);
@@ -125,7 +130,10 @@ async function prosecute() {
   const paths = selectGateMembers(testsRoot, 3);
   if (!paths.length) {
     const fallback = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
-    return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 90), cwd: PROJECT_ROOT });
+    if (hasPassedCache(fallback)) {
+      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 90), cwd: PROJECT_ROOT });
+    }
+    return { ok: true, status: "passed", failureDetail: null, testUrl: null, durationWallClock: 0, skipped: true };
   }
   return runSuite({ tags: "critique-gate", paths, parallel: 2 }, { cwd: PROJECT_ROOT });
 }
@@ -190,6 +198,33 @@ async function main() {
 
   writeSessionDiff(dir);
   const claims = persistClaims(dir, payload);
+  const t0 = Date.now();
+
+  const recorded = openRecordedFailures(readJson(ledgerFile(), []));
+  if (recorded.length && !process.env.CRITIQUE_KANE_STUB) {
+    const rec = recorded[recorded.length - 1];
+    const next = attempts + 1;
+    writeAttempts(dir, next);
+    const verdict = {
+      ok: false,
+      status: "failed",
+      failureDetail: rec.failureDetail,
+      testUrl: rec.testUrl || null,
+      durationWallClock: (Date.now() - t0) / 1000,
+    };
+    appendLedger({
+      at: new Date().toISOString(),
+      session_id: sessionId,
+      status: "failed",
+      phase: "tier1",
+      source: "recorded",
+      durationWallClock: verdict.durationWallClock,
+      failureDetail: rec.failureDetail || null,
+      testUrl: rec.testUrl || null,
+    });
+    process.stderr.write(formatFailStderr({ payload, verdict, attempts: next }));
+    process.exit(2);
+  }
 
   let verdict;
   try {
@@ -217,6 +252,7 @@ async function main() {
       session_id: sessionId,
       status: "passed",
       phase: "tier1",
+      source: "replay",
       durationWallClock: verdict.durationWallClock,
       testUrl: verdict.testUrl || null,
     });
@@ -228,6 +264,16 @@ async function main() {
 
   const next = attempts + 1;
   writeAttempts(dir, next);
+  appendLedger({
+    at: new Date().toISOString(),
+    session_id: sessionId,
+    status: "failed",
+    phase: "tier1",
+    source: "replay",
+    durationWallClock: verdict.durationWallClock,
+    failureDetail: verdict.failureDetail || null,
+    testUrl: verdict.testUrl || null,
+  });
   process.stderr.write(formatFailStderr({ payload, verdict, attempts: next }));
   spawnProsecutor(sessionId, dir, claims);
   process.exit(2);
