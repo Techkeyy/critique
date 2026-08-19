@@ -49,6 +49,13 @@ credits and needs no network.
   is left in place rather than deleted, because it is real evidence of the failure mode.
 - Suite counts on the dashboard are derived from the filesystem by `critique:publish`, never
   hand-maintained.
+- **The contraband sweep covers one check, not the five originally planned.** Kane's assertion
+  engine is `dom` or `visual` only — there is no console/storage assertion mode — so
+  "no console errors" and "no secret in localStorage" could not be authored as passing checks
+  (both came back `broken`). The working check is the leftover `localhost:4000` probe, which
+  asserts against page source. The subject app also carries a real click-triggered
+  `window.analytics` TypeError and a placeholder token in `localStorage`; both are genuine
+  agent debris, and neither is currently covered by a test. Called out rather than hidden.
 
 ## Demo
 
