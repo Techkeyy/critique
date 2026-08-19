@@ -71,6 +71,11 @@ Last updated: 19 Aug 2026, ~21:10 IST · **~50 hours to deadline** (21 Aug 23:59
 | Settings changes load **without a session restart** | hook fired on an already-running session | observed |
 | `~/.claude/settings.json` | was absent; **now created** by Director with the Stop registration | Director |
 | Project `.claude/settings.json` | valid JSON, single `hooks` key | Director inspection |
+| **A cached test that now FAILS takes ~185s to replay** | 185s wall / 160s internal, `replay_decisions: 2, author_decisions: 0`, ~4 credits. It does *not* re-author — the failing assertion just burns time. **Exceeds any viable hook budget.** | Builder, measured |
+| Passing replay of the demo test | **53s wall / 41s internal, 0 credits** | Builder, measured |
+| Tier-1 Kane timeout | **75s** — above the 53s passing case, below the 120s hook timeout | D-13 |
+| Tier-2 regression pass (broken app) | 221s detached, caught the break, recorded it | Builder, measured |
+| **Block from a recorded regression** | **331ms**, exit 2, real Kane failure text | Builder, measured |
 | **Failed authoring does NOT cache** | re-run shows `author_decisions: 1`, ~19 credits, ~105s each time | Task #7 |
 | **Prosecution cost** (generate + save + author) | **51.88 credits**, 340s (background) | Task #7 |
 | `generate` rejects `--files` together with `--save` | `--files` is new/refine only; `--save` needs `--req` → two-step flow | Task #7 |
@@ -155,6 +160,18 @@ Last updated: 19 Aug 2026, ~21:10 IST · **~50 hours to deadline** (21 Aug 23:59
   `openRecordedFailures()` with no session filter and blocks on the newest open failure from
   anywhere in the repo. It also wrote a spurious `source: "recorded"` entry into the victim
   session's history. Fix: filter by `session_id`. Turn N gates turn N+1 **of the same session**.
+- **D-13 — TIER 1 NEVER WAITS FOR A FAILURE; TIER 2 FINDS REGRESSIONS.**
+  Measured: a cached test that now fails takes **185s** to replay, versus **53s** when it passes.
+  Tier 1 therefore cannot detect a regression — it would blow the hook budget and fail open,
+  producing *no block at all* precisely when a block is warranted.
+  - Tier-1 Kane timeout set to **75s**: comfortably above the 53s passing case, far below 185s.
+    A regression makes Tier 1 abort quickly and fail open, which is now the intended behaviour.
+  - `prosecute.mjs` runs a **regression pass** first and unconditionally (detached, 400s budget),
+    replaying every cached previously-passing member and recording failures.
+  - The prosecutor is now spawned whenever **code** changed, not only when a claim was extracted —
+    otherwise a silent regression is never caught.
+  - Net effect, verified: break → Tier 2 records in 221s → **next Stop blocks in 331ms** with real
+    Kane text. The denial is near-instant on camera instead of a 3-minute stall.
 - **D-08** All Windows path comparisons normalize to **forward slashes, lowercased**, on both
   sides. Backslash escaping is corrupted silently by shells, heredocs, and JSON round-trips.
 - **D-09 (tooling)** **Do not use Bash heredocs to write files containing backslashes** on this

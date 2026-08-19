@@ -17,45 +17,73 @@ Use a **new** Claude Code session with cwd = this repo so `session_id` is clean.
 
 ---
 
-## Beat 1 — Claim, then DENIED (0:00–0:50)
+## The reliable path (verified end to end)
 
-1. In the subject app tab, show dark mode working: click **Toggle dark mode**, label reads `dark`.
-2. In Claude Code, ask the agent to "add a second unused button and say you are done."
-   Alternatively, edit `docs/demo/index.html` yourself (so `touched.json` is non-empty) and have the agent claim:
+Tier 1 cannot catch a regression: a cached test that now fails takes **185s** to replay versus
+53s when it passes, so Tier 1 aborts and fails open by design (D-13). The denial comes from
+**Tier 2**, which finds the break in the background, and the **next** Stop blocks in **331ms**.
 
-   > I added the dark mode toggle.
-
-3. Let the agent stop.
-4. **What you should see:** Stop is blocked. Stderr / the agent’s next turn quotes Kane’s failure (or, if this session already has a recorded dark-mode failure, the **271ms recorded block** with `failureDetail` about the wrong control / missing toggle on the old playground tests).
-5. If nothing blocks: you did not touch a file this turn, or `critique:clear` wiped a recorded failure and there is no cached failing prosecution *for this session*. Touch `docs/demo/index.html`, claim something false about the demo, stop again.
-
-**Fragile:** recorded failures are per-session. A failure from an earlier session will not deny this one (D-12). Stay in the same Claude session for beats 1–3.
+So the loop is: break it → Tier 2 records → next turn is denied instantly.
 
 ---
 
-## Beat 2 — Real failure text (0:50–1:20)
+## Pre-stage (before recording, ~6 min)
+
+```
+npm run critique:clear
+```
+
+1. In a Claude session in this repo, have the agent break the toggle in
+   `docs/demo/index.html` — e.g. change the button label to `Switch appearance` — and claim
+   *"I updated the dark mode toggle."*
+2. Commit and push. Wait ~45s for Pages, confirm the live demo shows the new label.
+3. Let the agent stop. Tier 1 passes or aborts; the agent is allowed to finish. Tier 2 spawns.
+4. Wait ~4 minutes. Confirm the regression was recorded:
+
+```
+node -e "const l=require('./.critique/ledger.json');console.log(l.filter(e=>e.open===true).length)"
+```
+
+Must print `1`. **Stay in this same Claude session** — recorded failures are session-scoped (D-12).
+
+---
+
+## Beat 1 — DENIED, instantly (0:00–0:40)
+
+Hit record here.
+
+1. In the same session, have the agent claim *"I fixed the dark mode toggle."* and stop.
+2. **What you see:** the Stop is blocked in well under a second, quoting Kane verbatim:
+
+```
+CRITIQUE GATE: verification failed.
+Claim: I fixed the dark mode toggle.
+Step 2 (Step 2) failed: action_failed: click @ step 1
+Driver: click: Clicking Toggle Dark Mode button
+Fix the failing step and stop again. Attempt 1/3.
+```
+
+Say the line out loud: *the agent is not allowed to finish.*
+
+---
+
+## Beat 2 — Real failure text on the dashboard (0:40–1:10)
 
 1. Open https://techkeyy.github.io/critique/
-2. Click **1:** the session whose claim is `I added the dark mode toggle.`
-3. Click **2:** the event marked **failed**.
-4. **What you should see:** `Failure detail` verbatim, including “wrong control” / the localhost or dark-mode assertion, plus the step timeline. Headline numbers **3** (or more) and **0** humans wrote a claim-test.
-
-Do not type the hash by hand. Two clicks.
+2. Click the session. Click the event marked **failed**.
+3. Full `Failure detail` plus the step timeline. Two clicks, no typing.
 
 ---
 
-## Beat 3 — Patch, then green (1:20–2:10)
+## Beat 3 — Patch, then green (1:10–2:10)
 
-Stay in the **same** Claude session.
+Same session.
 
-1. If the denial was the old playground prosecution: that test cannot go green (the playground has no toggle). For a green beat, work the **subject app**:
-   - True claim: `I added the dark mode toggle.` against `https://techkeyy.github.io/critique/demo/` — the toggle is real.
-2. Let Kane replay the cached `dark_mode_toggle_test.md` (0 credits).
-3. **What you should see:** Stop allowed. `kane-cli balance` unchanged. Ledger `source: "replay"`, `status: "passed"`.
+1. Have the agent restore the button label to `Toggle dark mode`. Commit, push, wait for Pages.
+2. Stop again. Tier 2 replays the cached test, it passes, the recorded failure clears.
+3. **What you see:** Stop allowed. `kane-cli balance` unchanged — **the replay is free.**
 
-If you need a fresh cache: `kane-cli testmd run .testmuai/tests/prosecutions/demo/dark_mode_toggle_test.md --agent --headless` once; later replays are free.
-
----
+Show the balance before and after on screen. 0 credits is the point.
 
 ## Beat 4 — Suite grew, humans: 0 (2:10–2:35)
 

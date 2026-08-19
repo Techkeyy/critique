@@ -113,13 +113,13 @@ async function prosecute() {
   if (!paths.length) {
     const fallback = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
     if (hasPassedCache(fallback)) {
-      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 55), cwd: PROJECT_ROOT });
+      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 75), cwd: PROJECT_ROOT });
     }
     return { ok: true, status: "passed", failureDetail: null, testUrl: null, durationWallClock: 0, skipped: true };
   }
   return runSuite(
     { tags: "critique-gate", paths, parallel: 2 },
-    { cwd: PROJECT_ROOT, timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 55) },
+    { cwd: PROJECT_ROOT, timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 75) },
   );
 }
 
