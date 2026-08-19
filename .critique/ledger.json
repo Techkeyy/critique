@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "at": "2026-08-19T19:51:59.307Z",
+    "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+    "status": "passed",
+    "durationWallClock": 63.361,
+    "testUrl": null
+  },
+  {
+    "at": "2026-08-19T19:54:23.600Z",
+    "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+    "status": "passed",
+    "durationWallClock": 58.52,
+    "testUrl": null
+  },
+  {
+    "at": "2026-08-19T21:26:51.834Z",
+    "phase": "prosecution",
+    "session_id": "t-prosecution-1",
+    "status": "authored",
+    "claim": "I added the dark mode toggle.",
+    "files": [
+      "C:/Users/HomePC/Desktop/critique/.testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/disable-dark-mode-and-verify_test.md",
+      "C:/Users/HomePC/Desktop/critique/.testmuai/tests/prosecutions/i-added-the-dark-mode-toggle/DMode-Toggle-OnOff/enable-dark-mode-and-verify_test.md"
+    ],
+    "tagsInjected": true,
+    "message": "wrote 2 test(s)",
+    "durationWallClock": 340.455
+  }
+]
