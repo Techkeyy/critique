@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T22:44:55.989Z",
+  "generatedAt": "2026-08-19T22:56:13.978Z",
   "suite": {
     "tests": 7,
     "humanWroteToVerifyAClaim": 0,
@@ -681,6 +681,15 @@
       "at": "2026-08-19T22:44:54.748Z",
       "session_id": "t-gate-offline",
       "durationWallClock": 0
+    },
+    {
+      "at": "2026-08-19T22:46:31.817Z",
+      "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+      "status": "passed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 62.642,
+      "testUrl": null
     }
   ]
 }

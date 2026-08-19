@@ -67,6 +67,10 @@
       count += 1;
       countEl.textContent = String(count);
       localStorage.setItem(KEY_COUNT, String(count));
+      // leftover agent debris: analytics was never wired up, so this throws on
+      // every click. The counter still works and the page still looks correct —
+      // which is exactly why a screenshot or a static linter will never see it.
+      window.analytics.track("increment", { count: count });
     });
 
     var note = document.getElementById("note");
@@ -77,6 +81,11 @@
 
     // leftover agent probe — real contraband for the sweep
     fetch("http://localhost:4000/api/metrics").catch(function () {});
+
+    // leftover agent debris: a bearer token parked in localStorage where any
+    // script on the page can read it. Placeholder value, but the shape is the
+    // one agents really leave behind. Static tools do not see runtime storage.
+    localStorage.setItem("notebook.apiToken", "sk_test_DEMO_PLACEHOLDER_not_a_real_secret");
   </script>
 </body>
 </html>
