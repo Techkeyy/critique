@@ -9,7 +9,6 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
-import { runTestMd } from "../../src/kane.mjs";
 import { extractClaims } from "../../src/claims.mjs";
 
 const MAX_ATTEMPTS = 3;
@@ -120,6 +119,7 @@ async function prosecute() {
 
   const testPath = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
   const timeout = Number(process.env.CRITIQUE_KANE_TIMEOUT || 90);
+  const { runTestMd } = await import("../../src/kane.mjs");
   return runTestMd(testPath, { timeout, cwd: PROJECT_ROOT });
 }
 
