@@ -5,6 +5,7 @@
 
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
+import { homedir } from "node:os";
 import { join } from "node:path";
 import {
   parseNdjsonStream,
@@ -13,6 +14,8 @@ import {
   durationFrom,
   statusFrom,
   selectTerminalEvent,
+  collectStepEvents,
+  buildFailureDetail,
 } from "./ndjson.mjs";
 
 function resolveKaneInvocation() {
@@ -37,10 +40,59 @@ function resolveKaneInvocation() {
 }
 
 function passthroughFlags(opts = {}) {
-  const flags = ["--agent", "--headless"];
+  const flags = [];
+  if (opts.agent !== false) flags.push("--agent");
+  flags.push("--headless");
   if (opts.timeout != null) flags.push("--timeout", String(opts.timeout));
   if (opts.maxSteps != null) flags.push("--max-steps", String(opts.maxSteps));
   return flags;
+}
+
+function sessionIdFrom(terminal, events) {
+  if (terminal && typeof terminal.session_id === "string" && terminal.session_id) {
+    return terminal.session_id;
+  }
+  for (const ev of events || []) {
+    if (ev && typeof ev.session_id === "string" && ev.session_id) return ev.session_id;
+  }
+  return null;
+}
+
+function lookLikePath(p) {
+  if (typeof p !== "string" || !p) return false;
+  if (p.includes("/") || p.includes("\\")) return true;
+  if (/^[a-zA-Z]:/.test(p)) return true;
+  return false;
+}
+
+function sessionRootFromPath(p) {
+  if (typeof p !== "string") return null;
+  const m = /(?:^|[/\\])sessions[/\\]([^/\\]+)/i.exec(p);
+  if (!m) return null;
+  return p.slice(0, m.index + m[0].length);
+}
+
+/** Real directory or null — never a bare UUID (Task #4). */
+export function resolveSessionDir(terminal, events) {
+  const id = sessionIdFrom(terminal, events);
+  if (id && !lookLikePath(id)) {
+    const guessed = join(homedir(), ".testmuai", "kaneai", "sessions", id);
+    if (existsSync(guessed)) return guessed;
+  }
+  const candidates = [];
+  if (terminal?.session_dir) candidates.push(terminal.session_dir);
+  for (const ev of events || []) {
+    if (ev?.session_dir) candidates.push(ev.session_dir);
+    if (ev?.run_dir) candidates.push(ev.run_dir);
+    if (ev?.screenshot_path) candidates.push(ev.screenshot_path);
+  }
+  for (const c of candidates) {
+    const root = sessionRootFromPath(c);
+    if (root && existsSync(root)) return root;
+    if (lookLikePath(c) && existsSync(c)) return c;
+  }
+  if (id && lookLikePath(id) && existsSync(id)) return id;
+  return null;
 }
 
 function spawnKane(args, opts = {}) {
@@ -96,33 +148,41 @@ function pickTerminal(events) {
   return terminal;
 }
 
-function verdictFrom({ parsed, exitCode, wallClockMs, stderr }) {
+export function verdictFrom({ parsed, exitCode, wallClockMs, stderr }) {
   const events = parsed?.events || [];
   const terminal = pickTerminal(events);
   const durationWallClock = wallClockMs / 1000;
+  const steps = collectStepEvents(events);
+  const sessionId = sessionIdFrom(terminal, events);
+  const sessionDir = resolveSessionDir(terminal, events);
 
   if (!terminal) {
+    const summary = (stderr && stderr.trim()) || "no terminal event in Kane NDJSON stream";
     return {
       ok: false,
       status: "error",
-      summary: (stderr && stderr.trim()) || "no terminal event in Kane NDJSON stream",
+      summary,
       oneLiner: null,
       credits: 0,
       durationSelfReported: 0,
       durationWallClock,
       testUrl: null,
-      sessionDir: null,
+      sessionDir,
+      sessionId,
+      steps,
+      failureDetail: buildFailureDetail(events, null, stderr),
       raw: { events, stderr, exitCode },
     };
   }
 
   const status = statusFrom(terminal, exitCode);
+  const ok = status === "passed";
   const summary =
     (typeof terminal.summary === "string" && terminal.summary) ||
     (typeof terminal.message === "string" && terminal.message) ||
     "";
   return {
-    ok: status === "passed",
+    ok,
     status,
     summary,
     oneLiner: typeof terminal.one_liner === "string" ? terminal.one_liner : null,
@@ -130,7 +190,10 @@ function verdictFrom({ parsed, exitCode, wallClockMs, stderr }) {
     durationSelfReported: durationFrom(terminal),
     durationWallClock,
     testUrl: terminal.test_url ?? terminal.share_url ?? null,
-    sessionDir: terminal.session_dir ?? terminal.session_id ?? null,
+    sessionDir,
+    sessionId,
+    steps,
+    failureDetail: ok ? null : buildFailureDetail(events, terminal, stderr),
     raw: terminal,
   };
 }
@@ -157,7 +220,8 @@ export async function runSuite({ tags, paths } = {}, opts = {}) {
   }
   if (Array.isArray(tags) && tags.length) args.push("--tags", tags.join(","));
   else if (typeof tags === "string" && tags) args.push("--tags", tags);
-  args.push(...passthroughFlags(opts));
+  // testrun has no --agent flag (R10). NDJSON still flows when stdout is piped.
+  args.push(...passthroughFlags({ ...opts, agent: false }));
   return runArgs(args, opts);
 }
 

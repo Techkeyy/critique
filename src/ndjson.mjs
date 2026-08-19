@@ -121,3 +121,107 @@ export function statusFrom(event, exitCode) {
   if (exitCode === 3) return "timeout";
   return "error";
 }
+
+export function isFailedStatus(value) {
+  const s = String(value || "").toLowerCase();
+  return s === "failed" || s === "error" || s === "broken" || s === "timeout";
+}
+
+/** Per-step events the feedback loop needs (D-07). Terminal-only is not enough. */
+export function collectStepEvents(events) {
+  const out = [];
+  for (const ev of events || []) {
+    if (!ev || typeof ev !== "object") continue;
+    if (ev.type === "run_end" || ev.type === "test_md_step_end") out.push(ev);
+  }
+  return out;
+}
+
+function stepIndexOf(ev) {
+  if (typeof ev.step_index === "number") return ev.step_index;
+  if (typeof ev.index === "number") return ev.index;
+  if (typeof ev.run_id === "string") {
+    const m = /run-(\d+)/i.exec(ev.run_id);
+    if (m) return Number(m[1]) + 1;
+  }
+  return null;
+}
+
+function headingFor(events, stepIndex) {
+  if (stepIndex == null) return null;
+  for (const ev of events || []) {
+    if (ev && ev.type === "test_md_step_start" && ev.step_index === stepIndex) {
+      return ev.heading || ev.ref || null;
+    }
+  }
+  return null;
+}
+
+function firstFailedDriver(events) {
+  for (const ev of events || []) {
+    if (!ev || typeof ev !== "object") continue;
+    if (ev.type === "step_end" && isFailedStatus(ev.status)) return ev;
+    if (ev.type === "step_event" && ev.event === "assertion" && ev.passed === false) return ev;
+    if (!ev.type && ev.status === "failed" && ev.remark) return ev;
+  }
+  return null;
+}
+
+/**
+ * Human-readable failure string for the agent. Must be non-empty on ok:false
+ * and usable without opening any other file (R9).
+ */
+export function buildFailureDetail(events, terminal, stderr) {
+  const lines = [];
+  const steps = collectStepEvents(events);
+  const failing = steps.find((s) => isFailedStatus(s.status) || isFailedStatus(s.overall_status));
+
+  if (failing) {
+    const idx = stepIndexOf(failing);
+    const heading = headingFor(events, idx);
+    const why =
+      (typeof failing.summary === "string" && failing.summary.trim()) ||
+      (typeof failing.reason === "string" && failing.reason.trim()) ||
+      (typeof failing.detail === "string" && failing.detail.trim()) ||
+      "";
+    const label = idx != null ? `Step ${idx}` : "A step";
+    const head = heading ? ` (${heading})` : "";
+    lines.push(`${label}${head} failed${why ? `: ${why}` : "."}`);
+  }
+
+  const driver = firstFailedDriver(events);
+  if (driver) {
+    const bit =
+      driver.summary ||
+      driver.detail ||
+      driver.remark ||
+      driver.reason ||
+      "";
+    if (bit && !lines.some((l) => l.includes(bit))) {
+      lines.push(`Driver: ${bit}`);
+    }
+  }
+
+  if (terminal) {
+    const tWhy =
+      (typeof terminal.summary === "string" && terminal.summary.trim()) ||
+      (typeof terminal.reason === "string" && terminal.reason.trim()) ||
+      "";
+    if (tWhy && !lines.some((l) => l.includes(tWhy))) lines.push(tWhy);
+    if (terminal.test_url) lines.push(`Dashboard: ${terminal.test_url}`);
+    if (terminal.share_url && terminal.share_url !== terminal.test_url) {
+      lines.push(`Share: ${terminal.share_url}`);
+    }
+  }
+
+  const err = typeof stderr === "string" ? stderr.trim() : "";
+  if (!lines.length && err) {
+    const first = err.split(/\r?\n/).find((l) => l.trim()) || err;
+    lines.push(first.slice(0, 500));
+  }
+
+  if (!lines.length) {
+    return "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.";
+  }
+  return lines.join("\n");
+}

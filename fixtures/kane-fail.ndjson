@@ -1,0 +1,11 @@
+{"type":"test_md_step_start","step_index":1,"heading":"Step 1","ref":null}
+{"type":"run_end","run_id":"run-0","status":"passed","summary":"","reason":"replay completed","duration":1.1}
+{"type":"test_md_step_end","step_index":1,"status":"passed","duration_s":1.1}
+{"type":"test_md_step_start","step_index":2,"heading":"Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL","ref":null}
+{"type":"run_start","objective":"Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL"}
+{"type":"step_event","index":2,"event":"assertion","detail":"the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL","passed":false}
+{"type":"step_end","index":2,"status":"failed","duration":2.0,"summary":"assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started"}
+{"type":"run_end","run_id":"run-1","status":"failed","summary":"Assertion failed: page title was KaneAI – Getting Started, not ZZZ_CRITIQUE_FORCE_FAIL","reason":"assertion failed","duration":2.4}
+{"type":"test_md_step_end","step_index":2,"status":"failed","duration_s":2.4,"failed_sub_step_index":2}
+{"type":"test_md_summary","overall_status":"failed","duration_s":12,"steps":{"total":2,"passed":1,"failed":1,"skipped":0,"replay_decisions":1,"author_decisions":1}}
+{"type":"test_md_done","overall_status":"failed","duration_s":12,"session_id":"00000000-0000-4000-8000-000000000001"}

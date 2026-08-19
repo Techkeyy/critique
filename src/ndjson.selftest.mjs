@@ -32,8 +32,25 @@ assert(streamed.events.length === parsed.events.length, "stream and text parsers
 const empty = await parseNdjsonStream(Readable.from(["hello world\nnot-json\n"]));
 assert(empty.terminal === null && empty.events.length === 0, "plain-text-only stream: no throw, no terminal");
 
+const failText = readFileSync(new URL("../fixtures/kane-fail.ndjson", import.meta.url), "utf8");
+const failParsed = parseNdjsonText(failText);
+assert(failParsed.terminal && failParsed.terminal.type === "test_md_done", "fail fixture terminal is test_md_done");
+const { collectStepEvents, buildFailureDetail } = await import("./ndjson.mjs");
+const steps = collectStepEvents(failParsed.events);
+assert(steps.length >= 2, "fail fixture collected run_end/test_md_step_end steps");
+assert(
+  steps.some((s) => s.type === "test_md_step_end" && s.status === "failed"),
+  "fail fixture has a failed test_md_step_end",
+);
+const detail = buildFailureDetail(failParsed.events, failParsed.terminal, "");
+assert(typeof detail === "string" && detail.length > 0, "failureDetail non-empty");
+assert(/Step 2/.test(detail), "failureDetail names step 2");
+assert(/ZZZ_CRITIQUE_FORCE_FAIL/.test(detail), "failureDetail names the assertion");
+
 if (process.exitCode) {
   console.error("selftest failed");
   process.exit(1);
 }
 console.log("selftest passed");
+console.log("failureDetail:\n" + detail);
+
