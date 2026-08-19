@@ -11,6 +11,7 @@
   },
   "scripts": {
     "critique:verify": "kane-cli testrun run --tags critique-gate --headless --parallel 2",
-    "critique:clear": "node src/clear.mjs"
+    "critique:clear": "node src/clear.mjs",
+    "test": "node src/ndjson.selftest.mjs && node src/claims.selftest.mjs && node src/suite.selftest.mjs && node .critique/guard-test.mjs && node .critique/gate-test.mjs"
   }
 }

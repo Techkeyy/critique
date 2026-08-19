@@ -176,3 +176,116 @@ REMAINING ISSUES         — anything incomplete
 ASSUMPTIONS              — decisions made without direction
 RECOMMENDED NEXT STEP    — advisory only
 ```
+
+---
+
+# STATUS AFTER TASKS #1–#2 (Director review)
+
+**Task #1: ACCEPTED WITH ONE FAILURE.** Git ✓. Replay benchmark ✓ — and better than hoped:
+**39–42s wall clock at 0.0000 credits.** AC-4 and AC-5 FAILED: the Stop hook never fired.
+
+**Task #2: ACCEPTED WITH CORRECTIONS.** Adapter and parser work; AC-1 returned `ok: true`.
+Two defects found in review — see Task #4. Good catches on the thin replay schema and on
+`testrun` lacking `--agent`; both are now tracked risks.
+
+**Ruling D-05: SYNCHRONOUS GATE.** Replay is within budget and free. Complexity is the larger
+risk with ~46h left. Mandatory: the two Kane calls run **in parallel**, not sequentially.
+
+---
+
+# TASK #3 — Prove or kill the Stop hook (BLOCKING, highest priority)
+
+**OBJECTIVE:** Obtain a captured `Stop` hook payload and observable proof that `exit 2` + stderr
+blocks the agent and reaches the model. Or prove it cannot be done, so we pivot.
+
+**CONTEXT:** This is the product. Two attempts have failed. Evidence says the cause is
+**registration, not auth**: a live session with cwd = this project was not intercepted, and
+`--debug` reported `Hooks: Found 0 total hooks in registry`. Director has verified the project
+`.claude/settings.json` is valid JSON and that `~/.claude/settings.json` does not exist.
+
+**Leading hypothesis (D-06):** project-level hooks require a trust/approval step that cannot be
+driven non-interactively. User-level hooks are implicitly trusted.
+
+**REQUIRED CHANGES — work the ladder in order, stop at the first rung that succeeds:**
+
+**Rung 1 — user-level registration.** Create `~/.claude/settings.json` (it does not exist)
+registering the same `Stop` hook, pointing at an **absolute** path to `gate-probe.mjs` — do not
+rely on `${CLAUDE_PROJECT_DIR}` there. Then **add a cwd guard as the first statement** in
+`gate-probe.mjs`: read `cwd` from the payload (fall back to `process.cwd()`); if it is not under
+`C:\Users\HomePC\Desktop\critique`, `process.exit(0)` immediately. This is mandatory — without it
+the hook fires in every project the user opens.
+
+Restart the session with cwd = this project, send a trivial message, observe.
+
+**Rung 2 — if still silent.** Run with `--debug` and report the hook registry count and any
+settings-loading errors verbatim. Determine whether Claude Code is reading the user settings file
+at all.
+
+**Rung 3 — if still silent.** Report back immediately and stop. Do not burn hours. The user may
+need to approve hooks interactively (the Director cannot drive that dialog), and that is a
+question for them, not something to work around.
+
+**DO NOT:**
+- Do not fabricate a `probe-log.json`. An unproven bet must stay visibly unproven.
+- Do not register a hook at user level without the cwd guard.
+- Do not modify `console_clean_test.md` or delete `output-console_clean/`.
+- Do not start building the gate on the assumption this works.
+
+**ACCEPTANCE CRITERIA:**
+1. `.critique/probe-log.json` exists, written by a real agent turn, containing ≥1 `Stop` payload.
+2. Report the exact top-level keys, and explicitly whether `last_assistant_message` and
+   `stop_hook_active` are present.
+3. Verbatim account: did the agent refuse to stop, and did the stderr text appear in its context?
+4. State which settings file the working registration lives in.
+
+**REPORT BACK:** Which rung worked. The verbatim payload keys. What the agent did when blocked.
+If all three rungs fail, say so plainly and stop — do not improvise an alternative.
+
+**PIVOT TRIGGER (Director):** If this is not proven by **20 Aug 09:00 IST**, the gate moves to a
+`pre-commit` hook that rejects the commit with the Kane verdict attached. That fallback is already
+designed in `BUILD_PLAN.md` §7 and the product survives it. Do not pivot on your own initiative —
+report, and the Director will call it.
+
+---
+
+# TASK #4 — Adapter corrections (run during Task #3's waits)
+
+**OBJECTIVE:** Make the adapter's verdict rich enough to drive the feedback loop.
+
+**CONTEXT (R9, CRITICAL):** On cached replay the terminal events carry no `summary`, `one_liner`,
+or `test_url`. The gate's entire purpose is handing the agent a *useful* failure message. Right
+now a failed gate would return an empty string. That defect invalidates the product, so it ranks
+above every remaining feature.
+
+**REQUIRED CHANGES:**
+
+1. **Retain per-step events.** `src/ndjson.mjs` must collect **all** `run_end` and
+   `test_md_step_end` events, not only the terminal one. Expose them as `steps[]` on the verdict.
+2. **Add `failureDetail`.** On `ok: false`, populate a human-readable string built from the first
+   failing step: its index, objective/remark, and any error text. This is the payload written to
+   stderr by the gate — it is what the agent reads and acts on.
+3. **Fix `sessionDir`.** It currently holds a bare `session_id` UUID, which is not a path.
+   Either resolve the real directory under `~/.testmuai/kaneai/sessions/<id>/` and verify it
+   exists, or rename the field to `sessionId` and add a separate `sessionDir` that is a real path
+   or `null`. Failure diagnosis depends on locating `{session_dir}/runs/{n}/run-test/actions.ndjson`.
+4. **Resolve R10.** Determine empirically whether `testrun run` accepts `--agent`. Run it once
+   against the existing cached contraband test with `--tags contraband`. If the flag is rejected,
+   drop it and confirm whether NDJSON still appears when stdout is piped. Report the answer.
+
+**IMPLEMENTATION REQUIREMENTS:**
+- Replay is free — you may re-run the cached test as often as needed. **Do not** author new tests.
+- Keep zero runtime dependencies. Keep the parser non-throwing.
+- Preserve the existing verdict field names; add, don't rename, except for the `sessionDir` fix.
+
+**ACCEPTANCE CRITERIA:**
+1. Verdict includes a populated `steps[]` on a passing cached replay.
+2. Forcing a failure (temporarily point the sweep at a URL that will not satisfy the assertion,
+   in a **copy** of the test file — not the original) produces a non-empty `failureDetail` that a
+   developer could act on without opening any other file.
+3. `sessionDir` is either a verified-existing path or `null`, never a bare UUID.
+4. A definitive yes/no on `testrun run --agent`.
+
+**DO NOT:** Do not modify `console_clean_test.md` or its cache. Work on a copy for the failure test.
+
+**REPORT BACK:** The verdict object for both a passing and a failing replay, the `testrun --agent`
+answer, and the resolved `sessionDir` value.

@@ -55,5 +55,75 @@
     "source": "replay",
     "durationWallClock": 43.747,
     "testUrl": null
+  },
+  {
+    "at": "2026-08-19T22:20:40.846Z",
+    "session_id": "t-guard",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:20:42.130Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:20:42.423Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "at": "2026-08-19T22:20:42.746Z",
+    "session_id": "t-gate-offline",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 0,
+    "failureDetail": "Step 2 (Verify the page title is exactly ZZZ_CRITIQUE_FORCE_FAIL) failed: assert: expected title ZZZ_CRITIQUE_FORCE_FAIL, got KaneAI – Getting Started",
+    "testUrl": "https://test-manager.lambdatest.com/MOCKED"
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T22:20:42.901Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": true
+  },
+  {
+    "status": "OWED",
+    "reason": "max-attempts",
+    "at": "2026-08-19T22:20:43.048Z",
+    "session_id": "t-gate-offline",
+    "attempts": 3,
+    "stop_hook_active": false
+  },
+  {
+    "status": "OWED",
+    "reason": "error",
+    "at": "2026-08-19T22:20:43.425Z",
+    "session_id": "t-gate-offline",
+    "message": "CRITIQUE_TEST_MODE stub throw"
+  },
+  {
+    "status": "timeout",
+    "reason": "timeout",
+    "at": "2026-08-19T22:20:43.840Z",
+    "session_id": "t-gate-offline",
+    "durationWallClock": 0
   }
 ]

@@ -1,4 +1,18 @@
 output-*/
 *.evidence
 node_modules/
+
+# Runtime session state — per-machine, never meaningful in the repo
 .critique/sessions/
+
+# Debug and benchmark debris from the build. The committed evidence lives in
+# .critique/ledger.json and docs/ledger.json; these are scratch artifacts.
+.critique/*.txt
+.critique/*.err
+.critique/*.out
+.critique/*.ndjson
+.critique/latest
+.critique/probe-blocked-once
+.critique/probe-log.json
+.critique/d11-ac.mjs
+.critique/spawn-timing.mjs

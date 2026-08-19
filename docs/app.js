@@ -35,6 +35,13 @@ function renderHome(data) {
   const tests = suite.tests ?? "—";
   const human = suite.humanWroteToVerifyAClaim ?? 0;
 
+  // Breakdown must reconcile with the headline total, or the stat reads as wrong.
+  const parts = [];
+  if (suite.generatedFromClaims) parts.push(`${suite.generatedFromClaims} generated from claims`);
+  if (suite.subjectAppHarness) parts.push(`${suite.subjectAppHarness} subject-app harness`);
+  if (suite.seededBaseline) parts.push(`${suite.seededBaseline} seeded baseline`);
+  const breakdown = parts.length ? parts.join(" · ") : "no tests yet";
+
   app.innerHTML = `
     <p class="eyebrow">Kane CLI hackathon · live ledger</p>
     <h1>The agent<br>marks its own<br>homework.</h1>
@@ -43,7 +50,7 @@ function renderHome(data) {
       <div class="stat">
         <div class="eyebrow">Tests in suite</div>
         <div class="n">${esc(tests)}</div>
-        <p>${esc(suite.generatedFromClaims ?? "—")} generated from claims · ${esc(suite.seededBaseline ?? "—")} seeded baseline</p>
+        <p>${esc(breakdown)}</p>
       </div>
       <div class="stat">
         <div class="eyebrow">Written by humans to verify a claim</div>
