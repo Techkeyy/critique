@@ -83,7 +83,7 @@ function renderHome(data) {
           ${pill(s.last.status)}
         </div>
         <div class="claim">${claim ? esc(claim) : '<span class="muted">No claim was extracted on this session</span>'}</div>
-        <div class="muted" style="margin-top:8px;font-size:12px">${esc(s.items.length)} events · last ${esc(s.last.at || "")} · source ${esc(s.last.source || "not recorded")}</div>
+        <div class="meta">${esc(s.items.length)} events · last ${esc(s.last.at || "")} · source ${esc(s.last.source || "not recorded")}</div>
         ${failHint}
       </a>`;
     })
@@ -95,7 +95,7 @@ function renderSession(data, id) {
   app.innerHTML = `
     <a class="back" href="#/">Back to sessions</a>
     <p class="eyebrow" style="margin-top:28px">Session</p>
-    <h1 style="font-size:clamp(28px,5vw,48px)">${esc(id)}</h1>
+    <h1 class="sid-title">${esc(id)}</h1>
     <div class="list" id="events"></div>
   `;
   const list = document.getElementById("events");
@@ -107,15 +107,15 @@ function renderSession(data, id) {
     .map((e, i) => {
       const href = `#/s/${encodeURIComponent(id)}/e/${i}`;
       const failBit = e.failureDetail
-        ? `<pre class="mono" style="margin-top:12px;max-height:8em;overflow:auto">${esc(e.failureDetail)}</pre>`
+        ? `<pre class="mono excerpt">${esc(e.failureDetail)}</pre>`
         : "";
       return `<a class="event-link" href="${href}" data-event="${i}">
         <div class="row-top">
           <span class="eyebrow">${esc(e.phase || "event")} · ${esc(e.source || "not recorded")}</span>
           ${pill(e.status)}
         </div>
-        <div class="claim" style="font-size:22px;margin:12px 0 0">${e.claim ? esc(e.claim) : '<span class="muted">No claim</span>'}</div>
-        <div class="muted" style="margin-top:8px;font-size:12px">${esc(e.at || "")}${e.durationWallClock != null ? " · " + esc(e.durationWallClock) + "s" : ""}</div>
+        <div class="claim">${e.claim ? esc(e.claim) : '<span class="muted">No claim</span>'}</div>
+        <div class="meta">${esc(e.at || "")}${e.durationWallClock != null ? " · " + esc(e.durationWallClock) + "s" : ""}</div>
         ${failBit}
       </a>`;
     })
