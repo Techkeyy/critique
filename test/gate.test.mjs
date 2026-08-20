@@ -171,7 +171,17 @@ const recBlock = pipe(GATE, payload({ last_assistant_message: "I added the dark 
 const recMs = Date.now() - recT0;
 check("D-11 recorded block exit 2", recBlock.status === 2, recBlock);
 check("D-11 recorded stderr has failureDetail", /wrong control/.test(recBlock.stderr), recBlock.stderr);
-check("D-11 recorded block under 2s", recMs < 2000, String(recMs));
+// Assert on the gate's own measured duration, not on wall time around a whole
+// node process. Process startup plus fs made this flake over 2s under load while
+// the gate itself was answering in milliseconds.
+const recRows = JSON.parse(readFileSync(recLedger, "utf8"));
+const recRow = recRows[recRows.length - 1];
+check(
+  "D-11 recorded block is near-instant (gate-measured)",
+  typeof recRow.durationWallClock === "number" && recRow.durationWallClock < 1,
+  String(recRow.durationWallClock) + "s",
+);
+check("D-11 recorded block process under 8s", recMs < 8000, String(recMs));
 try {
   rmSync(recLedger, { force: true });
 } catch {}
