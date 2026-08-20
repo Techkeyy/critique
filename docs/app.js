@@ -64,7 +64,11 @@ function renderHome(data) {
 
   app.innerHTML = `
     <section class="hero">
-      <img class="hero-art" src="./img/hero.jpg" alt="A gloved investigator reviewing a claim form stamped NOT APPROVED on a dark desk beside a typewriter." />
+      <picture>
+        <source media="(max-width: 860px)" srcset="./img/hero-sm.jpg" />
+        <img class="hero-art" src="./img/hero.jpg" width="1672" height="941" fetchpriority="high"
+             alt="A gloved investigator at a rain-lit desk, hand pressed on a claim form stamped NOT APPROVED beside a typewriter and a stopped clock." />
+      </picture>
       <div class="hero-scrim"></div>
       <div class="hero-copy">
         <h1 class="wordmark">CRITI<em>Q</em>UE</h1>

@@ -131,22 +131,24 @@ a { color: inherit; text-decoration: none; }
 
 .hero-art {
   position: absolute;
-  inset: 0 0 0 auto;
-  width: 62%;
+  inset: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center right;
+  object-position: 62% center;
   z-index: 0;
 }
-/* Fade the photograph into the page so the plate has no visible seam. */
+/* The copy sits over the window and ashtray, which carry detail. Hold the left
+   third at near-black so the type keeps its contrast, then release the scrim
+   before the claim form so the evidence stays legible. */
 .hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, #000 0%, #000 34%, rgba(0,0,0,0.86) 46%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0) 78%),
-    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 74%, rgba(0,0,0,0.75) 100%);
+    linear-gradient(90deg, #000 0%, rgba(0,0,0,0.95) 26%, rgba(0,0,0,0.78) 40%, rgba(0,0,0,0.34) 56%, rgba(0,0,0,0.06) 72%, rgba(0,0,0,0) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0) 68%, rgba(0,0,0,0.8) 100%);
 }
 
 .hero-copy { position: relative; z-index: 2; max-width: 620px; }
@@ -190,11 +192,10 @@ a { color: inherit; text-decoration: none; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
 @media (max-width: 860px) {
-  .hero { min-height: 0; }
-  .hero-art { width: 100%; opacity: 0.42; object-position: center; }
+  .hero { min-height: 0; padding-top: clamp(40px, 9vw, 64px); }
+  .hero-art { object-position: 68% center; opacity: 0.38; }
   .hero-scrim {
-    background:
-      linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.86) 55%, #000 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.88) 58%, #000 100%);
   }
 }
 
