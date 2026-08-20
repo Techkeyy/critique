@@ -97,6 +97,7 @@ npm run critique:install  # register the hooks
 | `src/publish.mjs` | Derive dashboard data and suite counts from the filesystem |
 | `src/install.mjs` | Merge hooks into user settings, back up, uninstall cleanly |
 | `src/init.mjs` | Write the `.critique/` opt-in marker for a project |
+| `test/` | Hook-level suites: guard scoping, gate behaviour, 58 stress cases |
 
 ## Why two tiers, and why that is not a compromise
 
