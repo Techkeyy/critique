@@ -64,6 +64,24 @@ export function inProject(cwd) {
   return findWorkspace(cwd) !== null;
 }
 
+/**
+ * Session ids arrive in the hook payload and get joined into a path. Anything
+ * containing `..` or a drive letter escapes the workspace and writes wherever it
+ * likes, so treat the id as untrusted: keep only characters that are safe in a
+ * directory name, and refuse anything left over.
+ */
+export function safeSessionId(id) {
+  const cleaned = String(id ?? "")
+    .replace(/[^A-Za-z0-9._-]/g, "-")
+    .replace(/^[.-]+/, "")
+    .replace(/\.+$/, "")
+    .slice(0, 100);
+  // Reserved device names on Windows resolve to hardware, not directories.
+  const reserved = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
+  if (!cleaned || reserved.test(cleaned)) return "unknown";
+  return cleaned;
+}
+
 export function readStdinPayload() {
   let input = "";
   try {

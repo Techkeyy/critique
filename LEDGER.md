@@ -180,6 +180,12 @@ Last updated: 19 Aug 2026, ~21:10 IST · **~50 hours to deadline** (21 Aug 23:59
   prosecutor) and the discovered workspace (sessions, ledger, suite). One install gates any
   number of projects and stays inert everywhere that never opted in. `src/init.mjs` writes the
   marker. Covered by `src/guard.selftest.mjs`, including a lookalike-sibling case.
+- **D-15 — SESSION IDS ARE UNTRUSTED INPUT.** Found by the stress test, confirmed on disk: a
+  payload `session_id` of `../../../escaped` created a directory **outside the workspace**, on the
+  user's Desktop. The id flows from the hook payload straight into `join()`. `safeSessionId()`
+  now strips path separators and traversal, caps length at 100, rejects Windows reserved device
+  names, and falls back to `unknown`; real UUIDs pass through unchanged. Applied in `gate.mjs`,
+  `observe.mjs` and `prosecute.mjs` (argv is equally untrusted).
 - **D-08** All Windows path comparisons normalize to **forward slashes, lowercased**, on both
   sides. Backslash escaping is corrupted silently by shells, heredocs, and JSON round-trips.
 - **D-09 (tooling)** **Do not use Bash heredocs to write files containing backslashes** on this

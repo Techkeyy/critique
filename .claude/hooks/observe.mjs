@@ -6,7 +6,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { payloadCwd, readStdinPayload, workspaceFor } from "../../src/guard.mjs";
+import { payloadCwd, readStdinPayload, safeSessionId, workspaceFor } from "../../src/guard.mjs";
 import { writeSessionDiff } from "../../src/diff.mjs";
 
 function editedPath(payload) {
@@ -26,7 +26,7 @@ try {
   const ws = workspaceFor(payload);
   if (!ws) process.exit(0);
 
-  const sessionId = payload.session_id || payload.sessionId || "unknown";
+  const sessionId = safeSessionId(payload.session_id || payload.sessionId);
   const path = editedPath(payload);
   if (!path) process.exit(0);
 

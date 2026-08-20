@@ -7,13 +7,13 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { findWorkspace, INSTALL_ROOT } from "./guard.mjs";
+import { findWorkspace, INSTALL_ROOT, safeSessionId } from "./guard.mjs";
 import { generateSave, runGenerate, runTestMd } from "./kane.mjs";
 import { clearRecordedForFiles } from "./suite.mjs";
 
 const PLAY_URL = "https://kaneai-playground.lambdatest.io";
 
-const sessionId = process.argv[2] || "unknown";
+const sessionId = safeSessionId(process.argv[2]);
 // The gate passes the workspace explicitly; discovery is the standalone fallback.
 const PROJECT_ROOT = process.argv[3] || findWorkspace(process.cwd()) || INSTALL_ROOT;
 

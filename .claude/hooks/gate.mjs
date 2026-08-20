@@ -9,7 +9,7 @@
 import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { INSTALL_ROOT, payloadCwd, readStdinPayload, workspaceFor } from "../../src/guard.mjs";
+import { INSTALL_ROOT, payloadCwd, readStdinPayload, safeSessionId, workspaceFor } from "../../src/guard.mjs";
 import { extractClaims } from "../../src/claims.mjs";
 import { touchedCode, writeSessionDiff } from "../../src/diff.mjs";
 import { hasPassedCache, openRecordedFailures } from "../../src/suite.mjs";
@@ -168,7 +168,7 @@ async function main() {
   if (!ws) process.exit(0);
   WS = ws;
 
-  const sessionId = payload.session_id || payload.sessionId || "unknown";
+  const sessionId = safeSessionId(payload.session_id || payload.sessionId);
   const dir = sessionDir(sessionId);
   mkdirSync(dir, { recursive: true });
 

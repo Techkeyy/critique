@@ -68,9 +68,13 @@ npm run critique:verify   # full tagged suite, unbounded, outside the hook
 npm run critique:clear    # close recorded failures + wipe .critique/sessions
 npm run critique:publish  # rebuild docs/ledger.json from real state
 npm run critique:init     # opt the current project in
+npm run stress            # adversarial payloads, concurrency, corrupted state
 ```
 
-`npm test` covers the NDJSON parser, claim extraction, suite selection, the code/prose
+`npm test` runs 48 stress cases on top of the unit suite: malformed and truncated stdin,
+hostile session ids that would otherwise write outside the workspace, corrupted state and
+ledger files, the loop-safety cap, every Kane failure mode, 8 concurrent gates, and
+out-of-scope silence. It covers the NDJSON parser, claim extraction, suite selection, the code/prose
 filter, the cwd guard, and the gate itself — including the fail-open path, the 3-attempt
 release, the D-11 recorded-failure block, and D-12 cross-session isolation. It spends no
 credits and needs no network.
