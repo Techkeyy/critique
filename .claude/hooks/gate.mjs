@@ -198,7 +198,12 @@ async function main() {
 
   const recorded = openRecordedFailures(readJson(ledgerFile(), []), sessionId);
   if (recorded.length) {
-    const rec = recorded[recorded.length - 1];
+    // Prefer the newest entry that actually carries failure text. Some rows are
+    // recorded without step detail, and taking the newest blindly let one of
+    // those mask a good one, handing the agent nothing it could act on.
+    const usable = recorded.filter((r) => String(r?.failureDetail || "").trim());
+    const pool = usable.length ? usable : recorded;
+    const rec = pool[pool.length - 1];
     const next = attempts + 1;
     writeAttempts(dir, next);
     const verdict = {
