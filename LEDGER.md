@@ -172,6 +172,14 @@ Last updated: 19 Aug 2026, ~21:10 IST · **~50 hours to deadline** (21 Aug 23:59
     otherwise a silent regression is never caught.
   - Net effect, verified: break → Tier 2 records in 221s → **next Stop blocks in 331ms** with real
     Kane text. The denial is near-instant on camera instead of a 3-minute stall.
+- **D-14 — WORKSPACE BY MARKER, NOT BY HARDCODED PATH.** The guard previously matched one
+  absolute directory, so Critique only worked inside its own clone: a developer could install it
+  and then not use it on their own code, which fails the "would I install this tonight" test.
+  Now `findWorkspace()` walks up from the agent's cwd looking for a `.critique/` marker.
+  Two roots are separated: `INSTALL_ROOT` (where Critique's code lives, used to spawn the
+  prosecutor) and the discovered workspace (sessions, ledger, suite). One install gates any
+  number of projects and stays inert everywhere that never opted in. `src/init.mjs` writes the
+  marker. Covered by `src/guard.selftest.mjs`, including a lookalike-sibling case.
 - **D-08** All Windows path comparisons normalize to **forward slashes, lowercased**, on both
   sides. Backslash escaping is corrupted silently by shells, heredocs, and JSON round-trips.
 - **D-09 (tooling)** **Do not use Bash heredocs to write files containing backslashes** on this
