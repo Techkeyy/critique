@@ -73,6 +73,7 @@ function renderHome(data) {
           <a class="btn solid" href="#ledger">Read the ledger</a>
           <a class="btn" href="./demo/">Open the app under test</a>
         </div>
+        <p class="caption">The app under test is Notebook, a small app with a dark mode toggle, a counter and a note field. Kane drives it in a real browser. It also carries deliberate contraband so the sweep has something real to catch.</p>
       </div>
     </section>
 
