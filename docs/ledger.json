@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-20T09:32:48.340Z",
+  "generatedAt": "2026-08-20T23:43:39.097Z",
   "suite": {
-    "tests": 7,
+    "tests": 11,
     "humanWroteToVerifyAClaim": 0,
-    "generatedFromClaims": 4,
+    "generatedFromClaims": 8,
     "subjectAppHarness": 2,
     "seededBaseline": 1
   },
@@ -406,6 +406,457 @@
       "reason": "infrastructure",
       "phase": "gate",
       "at": "2026-08-20T09:11:45.304Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "kaneStatus": "failed",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 9.239,
+      "status": "OWED",
+      "reason": "infrastructure",
+      "phase": "gate",
+      "at": "2026-08-20T10:00:55.854Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "kaneStatus": "failed",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 6.48,
+      "status": "OWED",
+      "reason": "infrastructure",
+      "phase": "gate",
+      "at": "2026-08-20T10:06:29.984Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "kaneStatus": "failed",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 9.696,
+      "status": "OWED",
+      "reason": "infrastructure",
+      "phase": "gate",
+      "at": "2026-08-20T11:31:40.184Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "kaneStatus": "failed",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 30.689,
+      "status": "OWED",
+      "reason": "infrastructure",
+      "phase": "gate",
+      "at": "2026-08-20T11:50:34.995Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "kaneStatus": "failed",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 7.761,
+      "status": "OWED",
+      "reason": "infrastructure",
+      "phase": "gate",
+      "at": "2026-08-20T12:42:15.443Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "kaneStatus": "failed",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 10.032,
+      "status": "OWED",
+      "reason": "infrastructure",
+      "phase": "gate",
+      "at": "2026-08-20T13:15:19.198Z"
+    },
+    {
+      "at": "2026-08-20T21:50:24.901Z",
+      "phase": "regression",
+      "status": "failed",
+      "source": "recorded",
+      "open": true,
+      "session_id": "demo",
+      "claim": null,
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md"
+      ],
+      "failureDetail": "Step 2 (Step 2) failed: action_failed: click @ step 1\nDriver: click: Clicking Toggle Dark Mode button",
+      "steps": [
+        {
+          "type": "run_end",
+          "run_id": "run-0",
+          "status": "passed",
+          "summary": "",
+          "reason": "replay completed",
+          "duration": 2.28,
+          "final_url": "https://techkeyy.github.io/critique/demo/",
+          "actions_executed": 1,
+          "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\0\\replay-test\\screenshots/step_001.png",
+          "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\0\\replay-test",
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": ""
+          },
+          "variables_out": {},
+          "store_out": {},
+          "result_code": 100,
+          "reason_code": "success.complete"
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 1,
+          "status": "passed",
+          "duration_s": 2.28,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        },
+        {
+          "type": "run_end",
+          "run_id": "run-1",
+          "status": "failed",
+          "summary": "",
+          "reason": "action_failed: click @ step 1",
+          "duration": 57.98,
+          "final_url": "https://techkeyy.github.io/critique/demo/",
+          "actions_executed": 1,
+          "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\1\\replay-test\\screenshots/step_001.png",
+          "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\1\\replay-test",
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": ""
+          },
+          "variables_out": {},
+          "store_out": {},
+          "verdict": {
+            "confirmed": false,
+            "status": "broken",
+            "family": "automation_bug",
+            "category": "locator_rot",
+            "category_proposal": "",
+            "severity": "minor",
+            "root_cause": "The test was recorded against an older version of the page that used a different button name. The live page still shows an appearance toggle, but the recorded click target no longer matches it.",
+            "agent_fault_assessment": "The agent did not cause the outcome. It followed the recorded step, but the recording appears to target an old button label. On the live page, the dark-mode control is present in a different form, so the replayed click likely could not find or match the original target.",
+            "bug_title": "Dark-mode toggle label change broke recorded click",
+            "signals": [],
+            "confidence": 0.93,
+            "suggestion": "Update the test to use a stable locator for the appearance toggle, and keep the text check separate if the wording itself is a requirement.",
+            "one_liner": "The replay broke because it looked for an outdated dark-mode button target rather than because the page visibly malfunctioned.",
+            "relevant_steps": [
+              1
+            ],
+            "culprit_step": "step 1-1",
+            "credits_consumed": 2.1856
+          }
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 2,
+          "status": "failed",
+          "duration_s": 57.98,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        }
+      ],
+      "testUrl": null,
+      "durationWallClock": 98.12
+    },
+    {
+      "at": "2026-08-20T21:50:24.906Z",
+      "phase": "prosecution",
+      "session_id": "demo",
+      "status": "skipped",
+      "source": "replay",
+      "claim": null,
+      "files": [],
+      "tagsInjected": null,
+      "message": "no claim",
+      "durationWallClock": 197.174
+    },
+    {
+      "at": "2026-08-20T21:52:04.996Z",
+      "session_id": "demo",
+      "observer_session_id": "demo",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "recorded",
+      "durationWallClock": 0.004,
+      "failureDetail": "Step 2 (Step 2) failed: action_failed: click @ step 1\nDriver: click: Clicking Toggle Dark Mode button",
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-20T22:02:16.951Z",
+      "phase": "prosecution",
+      "status": "failed",
+      "source": "recorded",
+      "open": false,
+      "session_id": "demo",
+      "claim": "I fixed the dark mode toggle.",
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\verify-dark-mode-setting-persists_test.md"
+      ],
+      "failureDetail": "Step 1 (Step 1) failed: The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "type": "run_end",
+          "status": "failed",
+          "summary": "The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.",
+          "one_liner": "The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting.",
+          "final_state": {},
+          "reason": "AP determined agent is stuck — no viable actions remain",
+          "duration": 122.4,
+          "bifurcated": false,
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": "(failed) The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting."
+          },
+          "credits_consumed": 17.091314999999998,
+          "session_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\d57203cf-3f8c-44ca-9f7d-6529a9adf40c",
+          "run_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\d57203cf-3f8c-44ca-9f7d-6529a9adf40c\\runs\\0",
+          "result_code": 330,
+          "reason_code": "stuck.ap_stuck",
+          "per_flow_metadata": [
+            {
+              "result_code": "330",
+              "reason_code": "stuck.ap_stuck",
+              "error_message": "AP determined agent is stuck — no viable actions remain",
+              "summary": "The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.",
+              "one_liner": "The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting.",
+              "credits_consumed": 17.091314999999998
+            }
+          ],
+          "run_id": "run-0",
+          "verdict": {
+            "confirmed": false,
+            "status": "broken",
+            "family": "automation_bug",
+            "category": "agent_misstep",
+            "category_proposal": "",
+            "severity": "major",
+            "root_cause": "The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.",
+            "agent_fault_assessment": "The agent caused the failed run by interacting with the wrong control. Instead of finding and enabling a dark mode setting, it clicked the \"Enable Notification\" toggle labeled \"Off,\" then refreshed the page. Because the run never exercised a dark mode feature, it could not complete the persistence check and ended stuck.",
+            "bug_title": "Agent toggled notifications instead of dark mode",
+            "signals": [],
+            "confidence": 0.95,
+            "suggestion": "Update the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.",
+            "one_liner": "The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting.",
+            "relevant_steps": [
+              2,
+              3
+            ],
+            "culprit_step": "0-2",
+            "credits_consumed": 2.7661,
+            "mode": "terminal"
+          }
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 1,
+          "status": "failed",
+          "duration_s": 122.4,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        }
+      ],
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
+      "durationWallClock": 180.941,
+      "clearedAt": "2026-08-20T23:43:18.992Z",
+      "clearedReason": "test quarantined: targeted Kane playground, not the app under test"
+    },
+    {
+      "at": "2026-08-20T22:02:16.957Z",
+      "phase": "prosecution",
+      "session_id": "demo",
+      "status": "failed",
+      "source": "recorded",
+      "claim": "I fixed the dark mode toggle.",
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\disable-dark-mode-and-verify_test.md",
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\enable-dark-mode-and-verify_test.md",
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\verify-dark-mode-setting-persists_test.md"
+      ],
+      "tagsInjected": true,
+      "message": "1/3 test(s) failed",
+      "durationWallClock": 556.092
+    },
+    {
+      "at": "2026-08-20T22:18:30.791Z",
+      "phase": "prosecution",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "skipped",
+      "source": "replay",
+      "claim": null,
+      "files": [],
+      "tagsInjected": null,
+      "message": "no claim",
+      "durationWallClock": 106.131
+    },
+    {
+      "at": "2026-08-20T22:23:12.520Z",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 114.109,
+      "failureDetail": "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.",
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-20T22:24:07.401Z",
+      "session_id": "demo",
+      "observer_session_id": "demo",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "recorded",
+      "durationWallClock": 0.008,
+      "failureDetail": null,
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-20T22:26:48.516Z",
+      "session_id": "demo",
+      "observer_session_id": "demo",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "recorded",
+      "durationWallClock": 0.008,
+      "failureDetail": "Step 1 (Step 1) failed: The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page"
+    },
+    {
+      "at": "2026-08-20T22:29:31.487Z",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 111.322,
+      "failureDetail": "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.",
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-20T23:31:26.831Z",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 98.473,
+      "failureDetail": "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.",
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-20T23:40:04.784Z",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 116.172,
+      "failureDetail": "disable-dark-mode-and-verify_test.md failed.",
+      "testUrl": null
+    },
+    {
+      "at": "2026-08-20T23:40:26.024Z",
+      "phase": "prosecution",
+      "status": "failed",
+      "source": "recorded",
+      "open": true,
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "claim": "It edits the file, says it's fixed, tries to finish.",
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\it-edits-the-file-says-it-s-fixed-tries-\\File-Edit-Fix-Finish\\edit-file-content-mark-as_test.md"
+      ],
+      "failureDetail": "Step 1 (Step 1) failed: The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GRGGXYAPMHTNVT863JE8VP/dashboard/share/US_563OCE2IOLBAP4PGVOM8NG667CFI1JZF0L4VF8BXQ8WOQC95AGU38Y4MT7HPEXKR?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "type": "run_end",
+          "status": "failed",
+          "summary": "The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.",
+          "one_liner": "The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons.",
+          "final_state": {},
+          "reason": "AP determined agent is stuck — no viable actions remain",
+          "duration": 181.9,
+          "bifurcated": false,
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": "(failed) The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons."
+          },
+          "credits_consumed": 46.79137500000001,
+          "session_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\62c6cd46-f685-418e-a170-8360339a3ec5",
+          "run_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\62c6cd46-f685-418e-a170-8360339a3ec5\\runs\\0",
+          "result_code": 330,
+          "reason_code": "stuck.ap_stuck",
+          "per_flow_metadata": [
+            {
+              "result_code": "330",
+              "reason_code": "stuck.ap_stuck",
+              "error_message": "AP determined agent is stuck — no viable actions remain",
+              "summary": "The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.",
+              "one_liner": "The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons.",
+              "credits_consumed": 46.79137500000001
+            }
+          ],
+          "run_id": "run-0",
+          "verdict": {
+            "confirmed": false,
+            "status": "broken",
+            "family": "automation_bug",
+            "category": "agent_misstep",
+            "category_proposal": "",
+            "severity": "major",
+            "root_cause": "The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.",
+            "agent_fault_assessment": "The agent's own actions caused this outcome. The objective was to edit existing code and then use the 'Fixed' and 'Finish' buttons, but the evidence shows it instead interacted with unrelated tutorial UI: it clicked the 'Execute Custom Code' tile, then clicked 'Submit' in a 'Fill Form' card, and later clicked the same tile again. Those choices moved the run away from the requested path until the agent had no viable next actions.",
+            "bug_title": "Automation drifted into Fill Form tutorial instead of code-editor task",
+            "signals": [],
+            "confidence": 0.93,
+            "suggestion": "Restart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.",
+            "one_liner": "The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons.",
+            "relevant_steps": [
+              5,
+              8,
+              9
+            ],
+            "culprit_step": "step 0-8",
+            "credits_consumed": 4.827249999999999,
+            "mode": "terminal"
+          }
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 1,
+          "status": "failed",
+          "duration_s": 181.9,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        }
+      ],
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GRGGXYAPMHTNVT863JE8VP/dashboard/share/US_563OCE2IOLBAP4PGVOM8NG667CFI1JZF0L4VF8BXQ8WOQC95AGU38Y4MT7HPEXKR?type=summary&agentView=true&fqdn=summary-page",
+      "durationWallClock": 257.957
+    },
+    {
+      "at": "2026-08-20T23:40:26.032Z",
+      "phase": "prosecution",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "failed",
+      "source": "recorded",
+      "claim": "It edits the file, says it's fixed, tries to finish.",
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\it-edits-the-file-says-it-s-fixed-tries-\\File-Edit-Fix-Finish\\edit-file-content-mark-as_test.md"
+      ],
+      "tagsInjected": true,
+      "message": "1/1 test(s) failed",
+      "durationWallClock": 539.09
     }
   ]
 }

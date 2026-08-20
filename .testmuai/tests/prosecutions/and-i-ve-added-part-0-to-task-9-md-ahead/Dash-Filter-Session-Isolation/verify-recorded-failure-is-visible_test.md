@@ -3,7 +3,7 @@ mode: testing
 max_steps: 30
 timeout: 300
 variables: {}
-tags: [critique-gate]
+tags: [quarantined]
 url: https://kaneai-playground.lambdatest.io
 ---
 

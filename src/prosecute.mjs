@@ -12,7 +12,11 @@ import { generateSave, runGenerate, runTestMd } from "./kane.mjs";
 import { clearRecordedForFiles } from "./suite.mjs";
 import { isInfrastructureFailure } from "./ndjson.mjs";
 
-const PLAY_URL = "https://kaneai-playground.lambdatest.io";
+// The app under test. Prosecutions must target the real application, not Kane's
+// playground: tests written against the playground can never pass here, and once
+// cached they sit in the gate blocking every turn with a failure nobody can fix.
+const PLAY_URL =
+  process.env.CRITIQUE_APP_URL || "https://critique-six.vercel.app/demo/";
 
 const sessionId = safeSessionId(process.argv[2]);
 // The gate passes the workspace explicitly; discovery is the standalone fallback.

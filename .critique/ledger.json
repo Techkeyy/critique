@@ -926,7 +926,7 @@
     "phase": "prosecution",
     "status": "failed",
     "source": "recorded",
-    "open": true,
+    "open": false,
     "session_id": "demo",
     "claim": "I fixed the dark mode toggle.",
     "files": [
@@ -1000,7 +1000,9 @@
       }
     ],
     "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
-    "durationWallClock": 180.941
+    "durationWallClock": 180.941,
+    "clearedAt": "2026-08-20T23:43:18.992Z",
+    "clearedReason": "test quarantined: targeted Kane playground, not the app under test"
   },
   {
     "at": "2026-08-20T22:02:16.957Z",
@@ -1081,5 +1083,111 @@
     "durationWallClock": 98.473,
     "failureDetail": "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.",
     "testUrl": null
+  },
+  {
+    "at": "2026-08-20T23:40:04.784Z",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 116.172,
+    "failureDetail": "disable-dark-mode-and-verify_test.md failed.",
+    "testUrl": null
+  },
+  {
+    "at": "2026-08-20T23:40:26.024Z",
+    "phase": "prosecution",
+    "status": "failed",
+    "source": "recorded",
+    "open": true,
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "claim": "It edits the file, says it's fixed, tries to finish.",
+    "files": [
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\it-edits-the-file-says-it-s-fixed-tries-\\File-Edit-Fix-Finish\\edit-file-content-mark-as_test.md"
+    ],
+    "failureDetail": "Step 1 (Step 1) failed: The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GRGGXYAPMHTNVT863JE8VP/dashboard/share/US_563OCE2IOLBAP4PGVOM8NG667CFI1JZF0L4VF8BXQ8WOQC95AGU38Y4MT7HPEXKR?type=summary&agentView=true&fqdn=summary-page",
+    "steps": [
+      {
+        "type": "run_end",
+        "status": "failed",
+        "summary": "The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.",
+        "one_liner": "The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons.",
+        "final_state": {},
+        "reason": "AP determined agent is stuck — no viable actions remain",
+        "duration": 181.9,
+        "bifurcated": false,
+        "total_runs": 1,
+        "context": {
+          "memory": {},
+          "variables": {},
+          "pointer": "(failed) The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons."
+        },
+        "credits_consumed": 46.79137500000001,
+        "session_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\62c6cd46-f685-418e-a170-8360339a3ec5",
+        "run_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\62c6cd46-f685-418e-a170-8360339a3ec5\\runs\\0",
+        "result_code": 330,
+        "reason_code": "stuck.ap_stuck",
+        "per_flow_metadata": [
+          {
+            "result_code": "330",
+            "reason_code": "stuck.ap_stuck",
+            "error_message": "AP determined agent is stuck — no viable actions remain",
+            "summary": "The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.",
+            "one_liner": "The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons.",
+            "credits_consumed": 46.79137500000001
+          }
+        ],
+        "run_id": "run-0",
+        "verdict": {
+          "confirmed": false,
+          "status": "broken",
+          "family": "automation_bug",
+          "category": "agent_misstep",
+          "category_proposal": "",
+          "severity": "major",
+          "root_cause": "The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.",
+          "agent_fault_assessment": "The agent's own actions caused this outcome. The objective was to edit existing code and then use the 'Fixed' and 'Finish' buttons, but the evidence shows it instead interacted with unrelated tutorial UI: it clicked the 'Execute Custom Code' tile, then clicked 'Submit' in a 'Fill Form' card, and later clicked the same tile again. Those choices moved the run away from the requested path until the agent had no viable next actions.",
+          "bug_title": "Automation drifted into Fill Form tutorial instead of code-editor task",
+          "signals": [],
+          "confidence": 0.93,
+          "suggestion": "Restart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.",
+          "one_liner": "The run failed because the agent followed the wrong on-screen workflow and never reached the code editor or the 'Fixed'/'Finish' buttons.",
+          "relevant_steps": [
+            5,
+            8,
+            9
+          ],
+          "culprit_step": "step 0-8",
+          "credits_consumed": 4.827249999999999,
+          "mode": "terminal"
+        }
+      },
+      {
+        "type": "test_md_step_end",
+        "step_index": 1,
+        "status": "failed",
+        "duration_s": 181.9,
+        "ref_kind": null,
+        "unit_kind": null,
+        "inlined_count": null,
+        "failed_sub_step_index": null
+      }
+    ],
+    "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GRGGXYAPMHTNVT863JE8VP/dashboard/share/US_563OCE2IOLBAP4PGVOM8NG667CFI1JZF0L4VF8BXQ8WOQC95AGU38Y4MT7HPEXKR?type=summary&agentView=true&fqdn=summary-page",
+    "durationWallClock": 257.957
+  },
+  {
+    "at": "2026-08-20T23:40:26.032Z",
+    "phase": "prosecution",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "failed",
+    "source": "recorded",
+    "claim": "It edits the file, says it's fixed, tries to finish.",
+    "files": [
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\it-edits-the-file-says-it-s-fixed-tries-\\File-Edit-Fix-Finish\\edit-file-content-mark-as_test.md"
+    ],
+    "tagsInjected": true,
+    "message": "1/1 test(s) failed",
+    "durationWallClock": 539.09
   }
 ]
