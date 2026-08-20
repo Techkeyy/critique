@@ -1,6 +1,14 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { mkdtempSync } from "node:fs";
+
+// Derive every path from the actual checkout. Hardcoding one machine's layout
+// made this suite pass only on the author's box.
+const HERE = process.cwd();
+const OUTSIDE = mkdtempSync(join(tmpdir(), "critique-outside-"));
+const LOOKALIKE = HERE + "-other";
 
 // Keep stub verdicts out of the real ledger — they get published otherwise.
 const TEST_LEDGER_DEFAULT = join(".critique", "sessions", "t-guardrun-ledger.json");
@@ -42,12 +50,12 @@ function seedTouched() {
 }
 
 const cases = [
-  ["OUTSIDE (backslash) ", winPath("C:/Users/HomePC/Desktop/other"), {}, {}, "ALLOW"],
-  ["OUTSIDE (forward)   ", "C:/Users/HomePC/Desktop/other", {}, {}, "ALLOW"],
-  ["INSIDE  no-edit     ", winPath("C:/Users/HomePC/Desktop/critique"), {}, {}, "ALLOW"],
-  ["INSIDE  fail-stub   ", winPath("C:/Users/HomePC/Desktop/critique"), {}, { CRITIQUE_TEST_STUB: "fail" }, "BLOCK"],
-  ["INSIDE  (subdir)    ", winPath("C:/Users/HomePC/Desktop/critique/src"), {}, {}, "ALLOW"],
-  ["LOOKALIKE sibling   ", winPath("C:/Users/HomePC/Desktop/critique-other"), {}, {}, "ALLOW"],
+  ["OUTSIDE (backslash) ", winPath(OUTSIDE), {}, {}, "ALLOW"],
+  ["OUTSIDE (forward)   ", OUTSIDE.split(BS).join("/"), {}, {}, "ALLOW"],
+  ["INSIDE  no-edit     ", winPath(HERE), {}, {}, "ALLOW"],
+  ["INSIDE  fail-stub   ", winPath(HERE), {}, { CRITIQUE_TEST_STUB: "fail" }, "BLOCK"],
+  ["INSIDE  (subdir)    ", winPath(join(HERE, "src")), {}, {}, "ALLOW"],
+  ["LOOKALIKE sibling   ", winPath(LOOKALIKE), {}, {}, "ALLOW"],
 ];
 
 let failed = 0;

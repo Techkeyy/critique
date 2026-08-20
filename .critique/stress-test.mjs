@@ -207,7 +207,7 @@ console.log("\n7. OBSERVE HOOK");
 
 console.log("\n8. OUT OF SCOPE STAYS SILENT");
 {
-  for (const cwd of ["C:/Users/HomePC/Desktop", "C:/", "/tmp", CWD + "-other", ""]) {
+  for (const cwd of [join(CWD, ".."), "C:/", "/tmp", CWD + "-other", ""]) {
     const r = runHook(GATE, base({ cwd }));
     check(r.code === 0 && !r.stderr, "inert at " + JSON.stringify(cwd || "(empty)"), "exit " + r.code);
   }

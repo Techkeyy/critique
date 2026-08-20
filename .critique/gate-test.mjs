@@ -7,6 +7,11 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { mkdtempSync } from "node:fs";
+
+const HERE = process.cwd();
+const OUTSIDE = mkdtempSync(join(tmpdir(), "critique-outside-"));
 
 // Every gate invocation in this file must write to a throwaway ledger.
 // Stub verdicts leaking into .critique/ledger.json end up published on the
@@ -38,7 +43,7 @@ function payload(over = {}) {
   return {
     ...captured,
     session_id: SESSION,
-    cwd: "C:/Users/HomePC/Desktop/critique",
+    cwd: HERE,
     stop_hook_active: false,
     last_assistant_message: "I added the dark mode toggle.",
     ...over,
@@ -208,7 +213,7 @@ reset();
 writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));
 const outside = pipe(
   GATE,
-  payload({ cwd: "C:/Users/HomePC/Desktop/other" }),
+  payload({ cwd: OUTSIDE }),
   { CRITIQUE_TEST_STUB: "fail" },
 );
 check("outside cwd exit 0", outside.status === 0, outside);
