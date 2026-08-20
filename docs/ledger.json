@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T07:55:47.431Z",
+  "generatedAt": "2026-08-20T08:04:23.547Z",
   "suite": {
     "tests": 7,
     "humanWroteToVerifyAClaim": 0,
@@ -227,6 +227,123 @@
       "source": "replay",
       "durationWallClock": 55.286,
       "testUrl": null
+    },
+    {
+      "at": "2026-08-20T08:02:06.002Z",
+      "phase": "regression",
+      "status": "failed",
+      "source": "recorded",
+      "open": true,
+      "session_id": "t-x",
+      "claim": null,
+      "files": [
+        "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\demo\\localhost_metrics_probe_test.md"
+      ],
+      "failureDetail": "Step 2 (Step 2) failed: analyzer_failed: @ step 1\nDriver: analyze: Checking whether the inline script contains the metrics fetch call",
+      "steps": [
+        {
+          "type": "run_end",
+          "run_id": "run-0",
+          "status": "passed",
+          "summary": "",
+          "reason": "replay completed",
+          "duration": 2.42,
+          "final_url": "https://techkeyy.github.io/critique/demo/",
+          "actions_executed": 1,
+          "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\20e4d9cb-ba2e-40c7-b0ac-306323b3d3bc\\scratch\\0\\replay-test\\screenshots/step_001.png",
+          "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\20e4d9cb-ba2e-40c7-b0ac-306323b3d3bc\\scratch\\0\\replay-test",
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": ""
+          },
+          "variables_out": {},
+          "store_out": {},
+          "result_code": 100,
+          "reason_code": "success.complete"
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 1,
+          "status": "passed",
+          "duration_s": 2.42,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        },
+        {
+          "type": "run_end",
+          "run_id": "run-1",
+          "status": "failed",
+          "summary": "",
+          "reason": "analyzer_failed: @ step 1",
+          "duration": 35.58,
+          "final_url": "https://techkeyy.github.io/critique/demo/",
+          "actions_executed": 1,
+          "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\20e4d9cb-ba2e-40c7-b0ac-306323b3d3bc\\scratch\\1\\replay-test\\screenshots/step_001.png",
+          "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\20e4d9cb-ba2e-40c7-b0ac-306323b3d3bc\\scratch\\1\\replay-test",
+          "total_runs": 1,
+          "context": {
+            "memory": {},
+            "variables": {},
+            "pointer": ""
+          },
+          "variables_out": {},
+          "store_out": {},
+          "verdict": {
+            "confirmed": false,
+            "status": "broken",
+            "family": "automation_bug",
+            "category": "agent_misstep",
+            "category_proposal": "",
+            "severity": "minor",
+            "root_cause": "The test looked only inside inline code, while the live page behavior suggests the metrics probe is still present elsewhere in the page's JavaScript.",
+            "agent_fault_assessment": "The agent did not alter the page or misclick anything, but the replay logic appears to have used the wrong verification method. It checked only for an inline-script match, while the live page evidence already shows the app still tries to reach the localhost metrics endpoint. That makes this a test-analysis problem rather than a product regression caused by the agent.",
+            "bug_title": "Metrics fetch check limited to inline script",
+            "signals": [
+              {
+                "excerpt": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+                "kind": "console_error",
+                "step": "step 1-1"
+              }
+            ],
+            "confidence": 0.85,
+            "suggestion": "Update the check to inspect all loaded JavaScript or observe the actual request to http://localhost:4000/api/metrics instead of requiring that exact text to appear in inline script.",
+            "one_liner": "The page still appears to trigger the localhost metrics call, but the replay failed because it checked the wrong thing.",
+            "relevant_steps": [
+              1
+            ],
+            "culprit_step": "step 1-1",
+            "credits_consumed": 4.324275
+          }
+        },
+        {
+          "type": "test_md_step_end",
+          "step_index": 2,
+          "status": "failed",
+          "duration_s": 35.58,
+          "ref_kind": null,
+          "unit_kind": null,
+          "inlined_count": null,
+          "failed_sub_step_index": null
+        }
+      ],
+      "testUrl": null,
+      "durationWallClock": 87.052
+    },
+    {
+      "at": "2026-08-20T08:02:38.497Z",
+      "phase": "prosecution",
+      "session_id": "t-x",
+      "status": "skipped",
+      "source": "replay",
+      "claim": null,
+      "files": [],
+      "tagsInjected": null,
+      "message": "no claim",
+      "durationWallClock": 119.569
     }
   ]
 }

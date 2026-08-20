@@ -9,22 +9,20 @@
 import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
+import { INSTALL_ROOT, payloadCwd, readStdinPayload, workspaceFor } from "../../src/guard.mjs";
 import { extractClaims } from "../../src/claims.mjs";
 import { touchedCode, writeSessionDiff } from "../../src/diff.mjs";
 import { hasPassedCache, openRecordedFailures } from "../../src/suite.mjs";
 
 const MAX_ATTEMPTS = 3;
-const DEFAULT_TEST = join(
-  PROJECT_ROOT,
-  ".testmuai",
-  "tests",
-  "contraband",
-  "console_clean_test.md",
-);
+
+// The project being gated. Resolved from the payload in main().
+let WS = INSTALL_ROOT;
+// Lazy: WS is not known until the payload is parsed.
+const defaultTest = () => join(WS, ".testmuai", "tests", "contraband", "console_clean_test.md");
 
 function sessionDir(sessionId) {
-  return join(PROJECT_ROOT, ".critique", "sessions", sessionId || "unknown");
+  return join(WS, ".critique", "sessions", sessionId || "unknown");
 }
 
 function readJson(path, fallback) {
@@ -51,7 +49,7 @@ function writeAttempts(dir, n) {
 }
 
 function ledgerFile() {
-  return process.env.CRITIQUE_LEDGER_FILE || join(PROJECT_ROOT, ".critique", "ledger.json");
+  return process.env.CRITIQUE_LEDGER_FILE || join(WS, ".critique", "ledger.json");
 }
 
 function appendLedger(entry) {
@@ -59,7 +57,7 @@ function appendLedger(entry) {
   const list = readJson(file, []);
   const arr = Array.isArray(list) ? list : [];
   arr.push(entry);
-  mkdirSync(join(PROJECT_ROOT, ".critique"), { recursive: true });
+  mkdirSync(join(WS, ".critique"), { recursive: true });
   writeJson(file, arr);
 }
 
@@ -108,18 +106,18 @@ async function prosecute() {
 
   const { runSuite, runTestMd } = await import("../../src/kane.mjs");
   const { selectGateMembers } = await import("../../src/suite.mjs");
-  const testsRoot = join(PROJECT_ROOT, ".testmuai", "tests");
+  const testsRoot = join(WS, ".testmuai", "tests");
   const paths = selectGateMembers(testsRoot, 3);
   if (!paths.length) {
-    const fallback = process.env.CRITIQUE_TEST_MD || DEFAULT_TEST;
+    const fallback = process.env.CRITIQUE_TEST_MD || defaultTest();
     if (hasPassedCache(fallback)) {
-      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 75), cwd: PROJECT_ROOT });
+      return runTestMd(fallback, { timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 75), cwd: WS });
     }
     return { ok: true, status: "passed", failureDetail: null, testUrl: null, durationWallClock: 0, skipped: true };
   }
   return runSuite(
     { tags: "critique-gate", paths, parallel: 2 },
-    { cwd: PROJECT_ROOT, timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 75) },
+    { cwd: WS, timeout: Number(process.env.CRITIQUE_KANE_TIMEOUT || 75) },
   );
 }
 
@@ -152,8 +150,8 @@ function spawnProsecutor(sessionId, dir, claims) {
     // derived from narration rather than from the product.
     if (!touchedCode(readJson(join(dir, "touched.json"), []))) return;
     if (existsSync(join(dir, "prosecute.lock"))) return;
-    const child = spawn(process.execPath, [join(PROJECT_ROOT, "src", "prosecute.mjs"), sessionId], {
-      cwd: PROJECT_ROOT,
+    const child = spawn(process.execPath, [join(INSTALL_ROOT, "src", "prosecute.mjs"), sessionId, WS], {
+      cwd: WS,
       detached: true,
       stdio: "ignore",
       windowsHide: true,
@@ -166,7 +164,9 @@ function spawnProsecutor(sessionId, dir, claims) {
 
 async function main() {
   const payload = readStdinPayload();
-  if (!inProject(payloadCwd(payload))) process.exit(0);
+  const ws = workspaceFor(payload);
+  if (!ws) process.exit(0);
+  WS = ws;
 
   const sessionId = payload.session_id || payload.sessionId || "unknown";
   const dir = sessionDir(sessionId);

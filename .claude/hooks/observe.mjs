@@ -6,7 +6,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { inProject, payloadCwd, PROJECT_ROOT, readStdinPayload } from "../../src/guard.mjs";
+import { payloadCwd, readStdinPayload, workspaceFor } from "../../src/guard.mjs";
 import { writeSessionDiff } from "../../src/diff.mjs";
 
 function editedPath(payload) {
@@ -23,13 +23,14 @@ function editedPath(payload) {
 
 try {
   const payload = readStdinPayload();
-  if (!inProject(payloadCwd(payload))) process.exit(0);
+  const ws = workspaceFor(payload);
+  if (!ws) process.exit(0);
 
   const sessionId = payload.session_id || payload.sessionId || "unknown";
   const path = editedPath(payload);
   if (!path) process.exit(0);
 
-  const dir = join(PROJECT_ROOT, ".critique", "sessions", sessionId);
+  const dir = join(ws, ".critique", "sessions", sessionId);
   mkdirSync(dir, { recursive: true });
   const file = join(dir, "touched.json");
   let list = [];

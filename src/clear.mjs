@@ -6,7 +6,9 @@
 
 import { existsSync, readdirSync, rmSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { PROJECT_ROOT } from "./guard.mjs";
+import { findWorkspace, INSTALL_ROOT } from "./guard.mjs";
+
+const PROJECT_ROOT = findWorkspace(process.cwd()) || INSTALL_ROOT;
 
 const ledgerPath = join(PROJECT_ROOT, ".critique", "ledger.json");
 const sessions = join(PROJECT_ROOT, ".critique", "sessions");

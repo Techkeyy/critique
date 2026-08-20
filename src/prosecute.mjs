@@ -7,15 +7,18 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PROJECT_ROOT } from "./guard.mjs";
+import { findWorkspace, INSTALL_ROOT } from "./guard.mjs";
 import { generateSave, runGenerate, runTestMd } from "./kane.mjs";
 import { clearRecordedForFiles } from "./suite.mjs";
 
 const PLAY_URL = "https://kaneai-playground.lambdatest.io";
-const OUT_DIR = join(PROJECT_ROOT, ".testmuai", "tests", "prosecutions");
-const LEDGER = join(PROJECT_ROOT, ".critique", "ledger.json");
 
 const sessionId = process.argv[2] || "unknown";
+// The gate passes the workspace explicitly; discovery is the standalone fallback.
+const PROJECT_ROOT = process.argv[3] || findWorkspace(process.cwd()) || INSTALL_ROOT;
+
+const OUT_DIR = join(PROJECT_ROOT, ".testmuai", "tests", "prosecutions");
+const LEDGER = join(PROJECT_ROOT, ".critique", "ledger.json");
 const sessionDir = join(PROJECT_ROOT, ".critique", "sessions", sessionId);
 const lockPath = join(sessionDir, "prosecute.lock");
 

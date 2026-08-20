@@ -32,22 +32,33 @@ agent's own sentences.
 
 1. Install [Kane CLI](https://www.npmjs.com/package/@testmuai/kane-cli) and sign in. Check with `kane-cli whoami`.
 2. Clone this repo. Node 20 or newer. There are no dependencies to install.
-3. From the clone root:
+3. Register the hooks once, from the clone root:
 
 ```
 npm run critique:install
 ```
 
-That registers two hooks in `~/.claude/settings.json`. It merges rather than
+That writes two entries into `~/.claude/settings.json`. It merges rather than
 overwrites, backs the file up first, refuses to touch a file it cannot parse, and
-is safe to run twice. Remove it with `npm run critique:uninstall`, which takes out
-only Critique's own entries and leaves every other hook alone.
+is safe to run twice. `npm run critique:uninstall` removes only Critique's own
+entries and leaves every other hook alone.
 
-4. Open Claude Code with this folder as the working directory. Edit a file, let the
-   agent finish, and the gate runs.
+## Using it on your own project
 
-The gate is scoped to this folder. In any other project the hooks fire and exit
-immediately, so nothing else you work on is affected.
+The hooks are registered globally but do nothing until a project opts in. The
+opt-in signal is a `.critique/` directory, so from any repo you want gated:
+
+```
+node /path/to/critique/src/init.mjs
+```
+
+That creates `.critique/` and `.testmuai/tests/`, and adds the runtime state to
+your `.gitignore`. Open Claude Code there and the gate is live. To opt back out,
+delete the `.critique` folder.
+
+Projects that never opted in are untouched: the hooks fire, find no marker, and
+exit immediately. A sibling directory with a similar name is not a match either,
+which `npm test` checks explicitly.
 
 ## Commands
 
@@ -56,6 +67,7 @@ npm test                  # all unit + hook tests (no Kane, no credits, ~2s)
 npm run critique:verify   # full tagged suite, unbounded, outside the hook
 npm run critique:clear    # close recorded failures + wipe .critique/sessions
 npm run critique:publish  # rebuild docs/ledger.json from real state
+npm run critique:init     # opt the current project in
 ```
 
 `npm test` covers the NDJSON parser, claim extraction, suite selection, the code/prose
