@@ -11,7 +11,18 @@
     body.dark { --bg:#16140f; --ink:#ece8df; --muted:#a39c90; --line:#2a271f; --accent:#c4a574; }
     * { box-sizing: border-box; }
     html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, sans-serif; min-height: 100%; }
-    main { max-width: 640px; margin: 0 auto; padding: 48px 20px 80px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 0 20px; height: 56px; border-bottom: 1px solid var(--line);
+      max-width: 900px; margin: 0 auto;
+    }
+    .topbar a, .topbar .tag {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: .16em; text-transform: uppercase; color: var(--muted); text-decoration: none;
+    }
+    .topbar a:hover { color: var(--accent); }
+    .topbar .tag { color: var(--accent); }
+    main { max-width: 640px; margin: 0 auto; padding: 44px 20px 80px; }
     h1 { font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: 48px; margin: 0 0 8px; }
     p { color: var(--muted); line-height: 1.5; }
     .bar { display: flex; gap: 12px; align-items: center; margin: 28px 0; }
@@ -30,9 +41,13 @@
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <a href="../">Back to the Critique ledger</a>
+    <span class="tag">Subject app</span>
+  </header>
   <main>
     <h1>Notebook</h1>
-    <p>A tiny subject app for Critique. Dark mode and a counter persist in this browser. There is a leftover metrics probe in the source. That is intentional contraband.</p>
+    <p>This is the app Critique points Kane at. Try it: toggle dark mode, increment the counter, type a note, then reload and watch them persist. Those are the flows the cached Kane tests exercise. The source also carries deliberate contraband, a leftover metrics probe and a token in local storage, so the sweep has something real to find.</p>
     <div class="bar">
       <button id="dark-mode-toggle" type="button">Toggle dark mode</button>
       <span id="theme-label">light</span>
