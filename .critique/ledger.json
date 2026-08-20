@@ -80,11 +80,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:20:43.840Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -110,11 +111,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:23:45.003Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -140,11 +142,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:24:01.496Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -170,11 +173,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:25:52.981Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -200,11 +204,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:36:26.994Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "at": "2026-08-19T22:40:17.581Z",
@@ -357,11 +362,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:43:42.034Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -387,11 +393,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T22:44:54.748Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "at": "2026-08-19T22:46:31.817Z",
@@ -426,11 +433,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T23:32:02.592Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -456,11 +464,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T23:32:43.641Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -486,11 +495,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T23:33:11.040Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "status": "OWED",
@@ -516,11 +526,12 @@
     "message": "CRITIQUE_TEST_MODE stub throw"
   },
   {
-    "status": "timeout",
+    "status": "OWED",
     "reason": "timeout",
     "at": "2026-08-19T23:33:33.104Z",
     "session_id": "t-gate-offline",
-    "durationWallClock": 0
+    "durationWallClock": 0,
+    "kaneStatus": "timeout"
   },
   {
     "at": "2026-08-19T23:45:11.636Z",
@@ -687,5 +698,14 @@
     "durationWallClock": 8.201,
     "failureDetail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
     "testUrl": null
+  },
+  {
+    "status": "OWED",
+    "reason": "infrastructure",
+    "at": "2026-08-20T08:35:38.797Z",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+    "durationWallClock": 7.277,
+    "kaneStatus": "failed"
   }
 ]

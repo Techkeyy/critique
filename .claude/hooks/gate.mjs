@@ -64,10 +64,12 @@ function appendLedger(entry) {
 
 function writeOwed(dir, reason, extra) {
   const receipt = {
+    ...extra,
+    // status last: callers pass Kane's own status in `extra`, and letting that
+    // overwrite "OWED" mislabels an allowed pass-through as a failure.
     status: "OWED",
     reason,
     at: new Date().toISOString(),
-    ...extra,
   };
   mkdirSync(dir, { recursive: true });
   writeJson(join(dir, "receipt.json"), receipt);
@@ -231,7 +233,7 @@ async function main() {
   if (!verdict || verdict.status === "timeout" || verdict.status === "error") {
     writeOwed(dir, verdict?.status === "timeout" ? "timeout" : "error", {
       session_id: sessionId,
-      status: verdict?.status || "error",
+      kaneStatus: verdict?.status || "error",
       durationWallClock: verdict?.durationWallClock,
     });
     process.exit(0);
@@ -244,7 +246,7 @@ async function main() {
   if (!verdict.ok && isInfrastructureFailure(verdict.failureDetail || verdict.summary)) {
     writeOwed(dir, "infrastructure", {
       session_id: sessionId,
-      status: verdict.status,
+      kaneStatus: verdict.status,
       detail: (verdict.failureDetail || verdict.summary || "").slice(0, 300),
       durationWallClock: verdict.durationWallClock,
     });
