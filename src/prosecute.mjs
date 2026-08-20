@@ -136,9 +136,29 @@ async function verifyExistingSuite() {
   );
 
   for (const file of members) {
-    if (open.has(file)) continue; // already recorded, do not re-run
+    const wasOpen = open.has(file);
     const v = await runTestMd(file, { cwd: PROJECT_ROOT, timeout: 400 });
+
+    // An already-recorded failure must still be re-run. Skipping it meant the
+    // debt could never be observed as fixed, so the agent could correct the code
+    // and stay blocked forever with no way to clear it.
+    if (v && v.ok === true && wasOpen) {
+      const current = readJson(LEDGER, []);
+      writeFileSync(LEDGER, JSON.stringify(clearRecordedForFiles(current, [file]), null, 2));
+      appendLedger({
+        at: new Date().toISOString(),
+        phase: "regression",
+        status: "passed",
+        source: "replay",
+        session_id: sessionId,
+        files: [file],
+        durationWallClock: v.durationWallClock,
+      });
+      continue;
+    }
+
     if (v && v.ok === false && v.status === "failed") {
+      if (wasOpen) continue; // still broken, already on record, do not duplicate
       appendLedger({
         at: new Date().toISOString(),
         phase: "regression",

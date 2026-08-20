@@ -1017,5 +1017,17 @@
     "tagsInjected": true,
     "message": "1/3 test(s) failed",
     "durationWallClock": 556.092
+  },
+  {
+    "at": "2026-08-20T22:18:30.791Z",
+    "phase": "prosecution",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "skipped",
+    "source": "replay",
+    "claim": null,
+    "files": [],
+    "tagsInjected": null,
+    "message": "no claim",
+    "durationWallClock": 106.131
   }
 ]
