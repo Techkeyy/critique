@@ -219,6 +219,10 @@ async function main() {
       failureDetail: rec.failureDetail || null,
       testUrl: rec.testUrl || null,
     });
+    // Re-verify in the background even while blocking. Without this the recorded
+    // failure can never clear: every stop takes this branch, Tier 2 never runs,
+    // and the session burns its three attempts into OWED with no way back.
+    spawnProsecutor(sessionId, dir, claims);
     process.stderr.write(formatFailStderr({ payload, verdict, attempts: next }));
     process.exit(2);
   }
