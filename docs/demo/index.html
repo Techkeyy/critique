@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Notebook — Critique subject app</title>
+  <title>Notebook, the Critique subject app</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=IBM+Plex+Mono:wght@400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
@@ -16,13 +16,13 @@
     p { color: var(--muted); line-height: 1.5; }
     .bar { display: flex; gap: 12px; align-items: center; margin: 28px 0; }
     button {
-      font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .16em;
-      text-transform: uppercase; padding: 12px 18px; border: 1px solid var(--line);
+      font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .01em;
+      padding: 12px 18px; border: 1px solid var(--line); border-radius: 8px;
       background: transparent; color: var(--ink); cursor: pointer;
     }
     button:hover { background: var(--accent); color: var(--bg); }
     #count { font-family: "IBM Plex Mono", monospace; font-size: 42px; }
-    label { display: block; margin: 18px 0 8px; font-size: 12px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+    label { display: block; margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: .02em; }
     input {
       width: 100%; padding: 12px; border: 1px solid var(--line); background: transparent;
       color: var(--ink); font: inherit;
@@ -32,7 +32,7 @@
 <body>
   <main>
     <h1>Notebook</h1>
-    <p>A tiny subject app for Critique. Dark mode and a counter persist in this browser. There is a leftover metrics probe in the source — that is intentional contraband.</p>
+    <p>A tiny subject app for Critique. Dark mode and a counter persist in this browser. There is a leftover metrics probe in the source. That is intentional contraband.</p>
     <div class="bar">
       <button id="dark-mode-toggle" type="button">Toggle dark mode</button>
       <span id="theme-label">light</span>
@@ -68,7 +68,7 @@
       countEl.textContent = String(count);
       localStorage.setItem(KEY_COUNT, String(count));
       // leftover agent debris: analytics was never wired up, so this throws on
-      // every click. The counter still works and the page still looks correct —
+      // every click. The counter still works and the page still looks correct,
       // which is exactly why a screenshot or a static linter will never see it.
       window.analytics.track("increment", { count: count });
     });
@@ -79,7 +79,7 @@
       localStorage.setItem(KEY_NOTE, note.value);
     });
 
-    // leftover agent probe — real contraband for the sweep
+    // leftover agent probe: real contraband for the sweep
     fetch("http://localhost:4000/api/metrics").catch(function () {});
 
     // leftover agent debris: a bearer token parked in localStorage where any
