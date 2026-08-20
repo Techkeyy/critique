@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T08:44:24.718Z",
+  "generatedAt": "2026-08-20T08:45:51.868Z",
   "suite": {
     "tests": 7,
     "humanWroteToVerifyAClaim": 0,
@@ -366,6 +366,16 @@
       "durationWallClock": 8.201,
       "failureDetail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
       "testUrl": null
+    },
+    {
+      "status": "OWED",
+      "reason": "infrastructure",
+      "at": "2026-08-20T08:35:38.797Z",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+      "durationWallClock": 7.277,
+      "kaneStatus": "failed",
+      "phase": "gate"
     }
   ]
 }

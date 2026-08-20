@@ -74,7 +74,7 @@ try {
 // Publish only rows from a real gate phase. Offline fail-open tests emit OWED /
 // timeout rows with no phase; 44 of them buried the genuine runs and read as the
 // product failing constantly.
-const REAL_PHASES = new Set(["tier1", "prosecution", "regression"]);
+const REAL_PHASES = new Set(["tier1", "prosecution", "regression", "gate"]);
 const isStub = (e) =>
   !e ||
   e.MOCKED === true ||

@@ -69,6 +69,10 @@ function writeOwed(dir, reason, extra) {
     // overwrite "OWED" mislabels an allowed pass-through as a failure.
     status: "OWED",
     reason,
+    // Debt is part of the record. Without a phase these never reach the
+    // dashboard, and the ledger would only ever show proven and falsified,
+    // quietly hiding everything the gate let through unverified.
+    phase: "gate",
     at: new Date().toISOString(),
   };
   mkdirSync(dir, { recursive: true });
