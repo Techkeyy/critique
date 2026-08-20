@@ -129,6 +129,23 @@ export function extractClaims(lastAssistantMessage) {
       if (!matched) continue;
       const text = normalizeSentence(raw);
       if (text.length < 15 || text.length > 280) continue;
+
+      // Reported speech is not a claim. "It says it is fixed" describes the
+      // agent rather than asserting anything, and prosecuting it produces a
+      // test about the narration instead of the product.
+      if (/\b(says?|said|claims?|claimed|reports?)\b/i.test(raw)) continue;
+
+      // A heading is not a claim. "Fixed three ways:" and "What I changed:"
+      // announce what follows; prosecuting one produces a test about nothing,
+      // authored against whatever the browser happened to be showing.
+      if (/[:;]$/.test(text)) continue;
+
+      // A claim needs an object, not just a verb and a quantity. "Fixed three
+      // ways" names nothing a browser could go and look at.
+      const after = text.slice(text.toLowerCase().indexOf(matched.verb) + matched.verb.length);
+      if (!/[a-z]{3,}/i.test(after.replace(/\b(one|two|three|four|five|six|ways?|times?|things?|bugs?|issues?|places?)\b/gi, ""))) {
+        continue;
+      }
       scored.push({
         text,
         verb: matched.verb,
