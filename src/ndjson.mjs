@@ -260,6 +260,30 @@ export function buildFailureDetail(events, terminal, stderr) {
     }
   }
 
+  // Suite runs (testrun) report per-member, not per-step, so collectStepEvents
+  // finds nothing and the agent gets blocked with no reason. Rather than guess
+  // the exact event names, scan any event that looks failed and lift whichever
+  // member and message fields it actually carries.
+  if (!lines.length) {
+    for (const ev of events || []) {
+      if (!ev || typeof ev !== "object") continue;
+      const status = ev.status ?? ev.overall_status ?? ev.result;
+      if (!isFailedStatus(status)) continue;
+      const member = ev.member || ev.path || ev.file || ev.name || ev.test || "";
+      const why =
+        (typeof ev.summary === "string" && ev.summary.trim()) ||
+        (typeof ev.reason === "string" && ev.reason.trim()) ||
+        (typeof ev.detail === "string" && ev.detail.trim()) ||
+        (typeof ev.error === "string" && ev.error.trim()) ||
+        (typeof ev.message === "string" && ev.message.trim()) ||
+        "";
+      if (!member && !why) continue;
+      const short = String(member).split(/[\\/]/).pop() || String(member);
+      lines.push(short ? `${short} failed${why ? `: ${why}` : "."}` : why);
+      if (lines.length >= 3) break;
+    }
+  }
+
   const err = typeof stderr === "string" ? stderr.trim() : "";
   if (!lines.length && err) {
     const useful = err

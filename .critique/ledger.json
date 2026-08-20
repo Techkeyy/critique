@@ -1061,5 +1061,25 @@
     "durationWallClock": 0.008,
     "failureDetail": "Step 1 (Step 1) failed: The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
     "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page"
+  },
+  {
+    "at": "2026-08-20T22:29:31.487Z",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 111.322,
+    "failureDetail": "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.",
+    "testUrl": null
+  },
+  {
+    "at": "2026-08-20T23:31:26.831Z",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 98.473,
+    "failureDetail": "Kane reported a failure but provided no step detail. Re-run the failing _test.md and inspect the evidence pack.",
+    "testUrl": null
   }
 ]
