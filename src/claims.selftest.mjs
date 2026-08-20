@@ -10,7 +10,7 @@ function assert(cond, msg) {
   }
 }
 
-const probe = JSON.parse(readFileSync(new URL("../.critique/probe-log.json", import.meta.url), "utf8"));
+const probe = JSON.parse(readFileSync(new URL("../fixtures/stop-payload.json", import.meta.url), "utf8"));
 
 const fixtures = [
   {

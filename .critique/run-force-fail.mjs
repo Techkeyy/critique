@@ -8,7 +8,7 @@ mkdirSync(dir, { recursive: true });
 writeFileSync(join(dir, "touched.json"), JSON.stringify(["src/kane.mjs"]));
 writeFileSync(join(dir, "attempts.json"), JSON.stringify({ attempts: 0 }));
 
-const probe = JSON.parse(readFileSync(".critique/probe-log.json", "utf8"));
+const probe = JSON.parse(readFileSync("fixtures/stop-payload.json", "utf8"));
 const payload = {
   ...probe[0],
   session_id: SESSION,

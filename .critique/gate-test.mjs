@@ -22,7 +22,7 @@ const GATE = ".claude/hooks/gate.mjs";
 const OBSERVE = ".claude/hooks/observe.mjs";
 const SESSION = "t-gate-offline";
 const dir = join(".critique", "sessions", SESSION);
-const probe = JSON.parse(readFileSync(".critique/probe-log.json", "utf8"));
+const probe = JSON.parse(readFileSync("fixtures/stop-payload.json", "utf8"));
 const captured = probe[0];
 
 function pipe(script, payload, env = {}) {
