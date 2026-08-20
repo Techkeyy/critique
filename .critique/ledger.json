@@ -788,5 +788,234 @@
     "reason": "infrastructure",
     "phase": "gate",
     "at": "2026-08-20T12:42:15.443Z"
+  },
+  {
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "kaneStatus": "failed",
+    "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+    "durationWallClock": 10.032,
+    "status": "OWED",
+    "reason": "infrastructure",
+    "phase": "gate",
+    "at": "2026-08-20T13:15:19.198Z"
+  },
+  {
+    "at": "2026-08-20T21:50:24.901Z",
+    "phase": "regression",
+    "status": "failed",
+    "source": "recorded",
+    "open": true,
+    "session_id": "demo",
+    "claim": null,
+    "files": [
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md"
+    ],
+    "failureDetail": "Step 2 (Step 2) failed: action_failed: click @ step 1\nDriver: click: Clicking Toggle Dark Mode button",
+    "steps": [
+      {
+        "type": "run_end",
+        "run_id": "run-0",
+        "status": "passed",
+        "summary": "",
+        "reason": "replay completed",
+        "duration": 2.28,
+        "final_url": "https://techkeyy.github.io/critique/demo/",
+        "actions_executed": 1,
+        "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\0\\replay-test\\screenshots/step_001.png",
+        "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\0\\replay-test",
+        "total_runs": 1,
+        "context": {
+          "memory": {},
+          "variables": {},
+          "pointer": ""
+        },
+        "variables_out": {},
+        "store_out": {},
+        "result_code": 100,
+        "reason_code": "success.complete"
+      },
+      {
+        "type": "test_md_step_end",
+        "step_index": 1,
+        "status": "passed",
+        "duration_s": 2.28,
+        "ref_kind": null,
+        "unit_kind": null,
+        "inlined_count": null,
+        "failed_sub_step_index": null
+      },
+      {
+        "type": "run_end",
+        "run_id": "run-1",
+        "status": "failed",
+        "summary": "",
+        "reason": "action_failed: click @ step 1",
+        "duration": 57.98,
+        "final_url": "https://techkeyy.github.io/critique/demo/",
+        "actions_executed": 1,
+        "screenshot_path": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\1\\replay-test\\screenshots/step_001.png",
+        "run_dir": "C:\\Users\\HomePC\\.testmuai\\kaneai\\sessions\\f9f222f3-cda4-44b1-ba95-cec3b3332af3\\scratch\\1\\replay-test",
+        "total_runs": 1,
+        "context": {
+          "memory": {},
+          "variables": {},
+          "pointer": ""
+        },
+        "variables_out": {},
+        "store_out": {},
+        "verdict": {
+          "confirmed": false,
+          "status": "broken",
+          "family": "automation_bug",
+          "category": "locator_rot",
+          "category_proposal": "",
+          "severity": "minor",
+          "root_cause": "The test was recorded against an older version of the page that used a different button name. The live page still shows an appearance toggle, but the recorded click target no longer matches it.",
+          "agent_fault_assessment": "The agent did not cause the outcome. It followed the recorded step, but the recording appears to target an old button label. On the live page, the dark-mode control is present in a different form, so the replayed click likely could not find or match the original target.",
+          "bug_title": "Dark-mode toggle label change broke recorded click",
+          "signals": [],
+          "confidence": 0.93,
+          "suggestion": "Update the test to use a stable locator for the appearance toggle, and keep the text check separate if the wording itself is a requirement.",
+          "one_liner": "The replay broke because it looked for an outdated dark-mode button target rather than because the page visibly malfunctioned.",
+          "relevant_steps": [
+            1
+          ],
+          "culprit_step": "step 1-1",
+          "credits_consumed": 2.1856
+        }
+      },
+      {
+        "type": "test_md_step_end",
+        "step_index": 2,
+        "status": "failed",
+        "duration_s": 57.98,
+        "ref_kind": null,
+        "unit_kind": null,
+        "inlined_count": null,
+        "failed_sub_step_index": null
+      }
+    ],
+    "testUrl": null,
+    "durationWallClock": 98.12
+  },
+  {
+    "at": "2026-08-20T21:50:24.906Z",
+    "phase": "prosecution",
+    "session_id": "demo",
+    "status": "skipped",
+    "source": "replay",
+    "claim": null,
+    "files": [],
+    "tagsInjected": null,
+    "message": "no claim",
+    "durationWallClock": 197.174
+  },
+  {
+    "at": "2026-08-20T21:52:04.996Z",
+    "session_id": "demo",
+    "observer_session_id": "demo",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "recorded",
+    "durationWallClock": 0.004,
+    "failureDetail": "Step 2 (Step 2) failed: action_failed: click @ step 1\nDriver: click: Clicking Toggle Dark Mode button",
+    "testUrl": null
+  },
+  {
+    "at": "2026-08-20T22:02:16.951Z",
+    "phase": "prosecution",
+    "status": "failed",
+    "source": "recorded",
+    "open": true,
+    "session_id": "demo",
+    "claim": "I fixed the dark mode toggle.",
+    "files": [
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\verify-dark-mode-setting-persists_test.md"
+    ],
+    "failureDetail": "Step 1 (Step 1) failed: The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
+    "steps": [
+      {
+        "type": "run_end",
+        "status": "failed",
+        "summary": "The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.",
+        "one_liner": "The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting.",
+        "final_state": {},
+        "reason": "AP determined agent is stuck — no viable actions remain",
+        "duration": 122.4,
+        "bifurcated": false,
+        "total_runs": 1,
+        "context": {
+          "memory": {},
+          "variables": {},
+          "pointer": "(failed) The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting."
+        },
+        "credits_consumed": 17.091314999999998,
+        "session_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\d57203cf-3f8c-44ca-9f7d-6529a9adf40c",
+        "run_dir": "C:\\Users\\HomePC/.testmuai/kaneai/sessions\\d57203cf-3f8c-44ca-9f7d-6529a9adf40c\\runs\\0",
+        "result_code": 330,
+        "reason_code": "stuck.ap_stuck",
+        "per_flow_metadata": [
+          {
+            "result_code": "330",
+            "reason_code": "stuck.ap_stuck",
+            "error_message": "AP determined agent is stuck — no viable actions remain",
+            "summary": "The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.\nUpdate the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.",
+            "one_liner": "The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting.",
+            "credits_consumed": 17.091314999999998
+          }
+        ],
+        "run_id": "run-0",
+        "verdict": {
+          "confirmed": false,
+          "status": "broken",
+          "family": "automation_bug",
+          "category": "agent_misstep",
+          "category_proposal": "",
+          "severity": "major",
+          "root_cause": "The test went down the wrong path on the page. It used a notification switch that was unrelated to the goal, so after refresh there was nothing meaningful to verify about dark mode.",
+          "agent_fault_assessment": "The agent caused the failed run by interacting with the wrong control. Instead of finding and enabling a dark mode setting, it clicked the \"Enable Notification\" toggle labeled \"Off,\" then refreshed the page. Because the run never exercised a dark mode feature, it could not complete the persistence check and ended stuck.",
+          "bug_title": "Agent toggled notifications instead of dark mode",
+          "signals": [],
+          "confidence": 0.95,
+          "suggestion": "Update the test or prompt so it identifies the actual dark mode control before clicking anything. If this page no longer has a dark mode option, point the test at the correct page or revise the scenario.",
+          "one_liner": "The automation failed because it acted on an unrelated notification toggle rather than a dark mode setting.",
+          "relevant_steps": [
+            2,
+            3
+          ],
+          "culprit_step": "0-2",
+          "credits_consumed": 2.7661,
+          "mode": "terminal"
+        }
+      },
+      {
+        "type": "test_md_step_end",
+        "step_index": 1,
+        "status": "failed",
+        "duration_s": 122.4,
+        "ref_kind": null,
+        "unit_kind": null,
+        "inlined_count": null,
+        "failed_sub_step_index": null
+      }
+    ],
+    "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GJZ4DRBAN2KVTVKKMAGZKA/dashboard/share/US_6A4VLJG3XCLPT7SGIX712YXL7XX2NZGRCFZZ50GSYYCT4FKPJYC6GAEJGX0KN5ZI?type=summary&agentView=true&fqdn=summary-page",
+    "durationWallClock": 180.941
+  },
+  {
+    "at": "2026-08-20T22:02:16.957Z",
+    "phase": "prosecution",
+    "session_id": "demo",
+    "status": "failed",
+    "source": "recorded",
+    "claim": "I fixed the dark mode toggle.",
+    "files": [
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\disable-dark-mode-and-verify_test.md",
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\enable-dark-mode-and-verify_test.md",
+      "C:\\Users\\HomePC\\Desktop\\critique\\.testmuai\\tests\\prosecutions\\i-fixed-the-dark-mode-toggle\\UI-Dark-Mode-Toggle\\verify-dark-mode-setting-persists_test.md"
+    ],
+    "tagsInjected": true,
+    "message": "1/3 test(s) failed",
+    "durationWallClock": 556.092
   }
 ]

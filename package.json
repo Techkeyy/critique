@@ -17,6 +17,7 @@
     "critique:install": "node src/install.mjs",
     "critique:uninstall": "node src/install.mjs --uninstall",
     "critique:init": "node src/init.mjs",
-    "stress": "node test/stress.test.mjs"
+    "stress": "node test/stress.test.mjs",
+    "demo:stage": "node src/stage-demo.mjs"
   }
 }
