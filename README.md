@@ -4,8 +4,9 @@ A Claude Code plugin that intercepts the coding agent at `Stop`, prosecutes its 
 
 ## Live
 
-- Dashboard: **https://techkeyy.github.io/critique/**
-- Subject app: **https://techkeyy.github.io/critique/demo/**
+- Dashboard: **https://critique-six.vercel.app/**
+- Mirror: https://techkeyy.github.io/critique/
+- Subject app: **https://critique-six.vercel.app/demo/**
 - Repo: https://github.com/Techkeyy/critique
 
 ## Built by an agent, and gated by itself
@@ -27,20 +28,26 @@ authors, not at a staged demo.
 The suite grew the same way. Nobody wrote a claim-verification test; Kane authored them from the
 agent's own sentences.
 
-## Install (stranger)
+## Install
 
-1. Install [Kane CLI](https://www.npmjs.com/package/@testmuai/kane-cli) and sign in (`kane-cli whoami`).
-2. Clone this repo. Working directory must be the clone root.
-3. Node 20+ (`type: module`, no install: zero runtime dependencies).
-4. Register the Stop / PostToolUse hooks in `~/.claude/settings.json` pointing at absolute paths:
+1. Install [Kane CLI](https://www.npmjs.com/package/@testmuai/kane-cli) and sign in. Check with `kane-cli whoami`.
+2. Clone this repo. Node 20 or newer. There are no dependencies to install.
+3. From the clone root:
 
 ```
-node C:/path/to/critique/.claude/hooks/observe.mjs
-node C:/path/to/critique/.claude/hooks/gate.mjs
+npm run critique:install
 ```
 
-See this repo's user-level pattern: Stop timeout 120, PostToolUse matcher `Edit|Write`.
-5. Open Claude Code with cwd = this repo. Edit a file, stop. The gate runs.
+That registers two hooks in `~/.claude/settings.json`. It merges rather than
+overwrites, backs the file up first, refuses to touch a file it cannot parse, and
+is safe to run twice. Remove it with `npm run critique:uninstall`, which takes out
+only Critique's own entries and leaves every other hook alone.
+
+4. Open Claude Code with this folder as the working directory. Edit a file, let the
+   agent finish, and the gate runs.
+
+The gate is scoped to this folder. In any other project the hooks fire and exit
+immediately, so nothing else you work on is affected.
 
 ## Commands
 

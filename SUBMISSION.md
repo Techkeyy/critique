@@ -35,8 +35,9 @@ Test the link in an incognito window before pasting it into the form.
 
 ## 4. Live URL
 
-- Dashboard: **https://techkeyy.github.io/critique/**
-- Subject app under test: **https://techkeyy.github.io/critique/demo/**
+- Dashboard: **https://critique-six.vercel.app/**
+- Mirror (fallback): https://techkeyy.github.io/critique/
+- Subject app under test: **https://critique-six.vercel.app/demo/**
 
 Runnable in under 30 seconds, no setup:
 ```
