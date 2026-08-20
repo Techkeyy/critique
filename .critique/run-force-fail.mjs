@@ -12,7 +12,7 @@ const probe = JSON.parse(readFileSync(".critique/probe-log.json", "utf8"));
 const payload = {
   ...probe[0],
   session_id: SESSION,
-  cwd: "C:/Users/HomePC/Desktop/critique",
+  cwd: process.cwd().split(String.fromCharCode(92)).join("/"),
   stop_hook_active: false,
   last_assistant_message: "I added the dark mode toggle.",
 };
