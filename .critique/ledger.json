@@ -530,5 +530,14 @@
     "source": "replay",
     "durationWallClock": 47.451,
     "testUrl": null
+  },
+  {
+    "at": "2026-08-20T00:05:41.628Z",
+    "session_id": "74dc74c1-65cc-487d-b248-0bc55674c3bd",
+    "status": "passed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 54.614,
+    "testUrl": null
   }
 ]
