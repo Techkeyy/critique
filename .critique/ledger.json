@@ -554,7 +554,7 @@
     "phase": "regression",
     "status": "failed",
     "source": "recorded",
-    "open": true,
+    "open": false,
     "session_id": "t-x",
     "claim": null,
     "files": [
@@ -652,7 +652,9 @@
       }
     ],
     "testUrl": null,
-    "durationWallClock": 87.052
+    "durationWallClock": 87.052,
+    "clearedAt": "2026-08-20T08:18:35.461Z",
+    "clearedBy": "critique:clear"
   },
   {
     "at": "2026-08-20T08:02:38.497Z",

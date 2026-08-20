@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T08:04:23.547Z",
+  "generatedAt": "2026-08-20T08:18:36.121Z",
   "suite": {
     "tests": 7,
     "humanWroteToVerifyAClaim": 0,
@@ -233,7 +233,7 @@
       "phase": "regression",
       "status": "failed",
       "source": "recorded",
-      "open": true,
+      "open": false,
       "session_id": "t-x",
       "claim": null,
       "files": [
@@ -331,7 +331,9 @@
         }
       ],
       "testUrl": null,
-      "durationWallClock": 87.052
+      "durationWallClock": 87.052,
+      "clearedAt": "2026-08-20T08:18:35.461Z",
+      "clearedBy": "critique:clear"
     },
     {
       "at": "2026-08-20T08:02:38.497Z",
@@ -344,6 +346,16 @@
       "tagsInjected": null,
       "message": "no claim",
       "durationWallClock": 119.569
+    },
+    {
+      "at": "2026-08-20T08:06:43.585Z",
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "status": "failed",
+      "phase": "tier1",
+      "source": "replay",
+      "durationWallClock": 99.38,
+      "failureDetail": "Evidence — view locally:",
+      "testUrl": null
     }
   ]
 }

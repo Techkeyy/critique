@@ -85,6 +85,12 @@ credits and needs no network.
   code** are therefore never prosecuted — a docs-only turn has no browser behaviour to falsify.
   One prosecution in this repo (`prosecutions/and-i-ve-added-part-0-…`) predates that filter and
   is left in place rather than deleted, because it is real evidence of the failure mode.
+- **Cached replays go brittle when the page is restructured.** Editing the subject app's markup
+  around an assertion (adding a header, rewriting a paragraph) made a passing contraband check
+  fail even though the thing it looks for was still there and still live. Kane's auto-heal did
+  not recover it. The gate reported a real failure for a false reason, which is the failure mode
+  to watch: re-authoring the test fixed it, at roughly 22 credits and 148s. Treat a sudden
+  failure after a layout change as suspect before treating it as a regression.
 - Suite counts on the dashboard are derived from the filesystem by `critique:publish`, never
   hand-maintained.
 - **The contraband sweep covers one check, not the five originally planned.** Kane's assertion
