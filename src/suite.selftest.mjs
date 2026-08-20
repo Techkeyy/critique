@@ -66,6 +66,20 @@ if (openRecordedFailures(rec, "sess-z").length !== 0) {
   console.error("openRecordedFailures should be empty for unknown session");
   process.exit(1);
 }
+
+// Debt must be explicit. A row without `open: true` is an audit record, not an
+// obligation: the gate writes one every time it blocks.
+if (openRecordedFailures([{ source: "recorded", status: "failed", session_id: "sess-a" }], "sess-a").length !== 0) {
+  console.error("an entry without open:true must not count as debt");
+  process.exit(1);
+}
+
+// A debt on a test that no longer exists can never be paid.
+const goneFile = join(process.cwd(), ".critique", "definitely-not-here_test.md");
+if (openRecordedFailures([{ source: "recorded", status: "failed", open: true, session_id: "s", files: [goneFile] }], "s").length !== 0) {
+  console.error("a debt on a missing test must be ignored");
+  process.exit(1);
+}
 const cleared = clearRecordedForFiles(
   [{ source: "recorded", status: "failed", open: true, files: ["C:/x/a_test.md"] }],
   ["C:\\x\\a_test.md"],

@@ -220,6 +220,9 @@ async function main() {
       status: "failed",
       phase: "tier1",
       source: "recorded",
+      // An audit record of a block, not a new obligation. Without this the gate
+      // fed itself: every block wrote a row that qualified as fresh debt.
+      open: false,
       durationWallClock: verdict.durationWallClock,
       failureDetail: rec.failureDetail || null,
       testUrl: rec.testUrl || null,

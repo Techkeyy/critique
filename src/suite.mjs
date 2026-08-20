@@ -3,8 +3,8 @@
  * D-11: only members with a passed, valid cached execution.
  */
 
-import { readdirSync, readFileSync, statSync } from "node:fs";
-import { basename, dirname, join } from "node:path";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { basename, dirname, isAbsolute, join } from "node:path";
 
 const TAG = "critique-gate";
 
@@ -88,9 +88,20 @@ export function openRecordedFailures(entries, sessionId) {
   const list = Array.isArray(entries) ? entries : [];
   const sid = sessionId == null || sessionId === "" ? null : String(sessionId);
   return list.filter((e) => {
-    if (!e || e.source !== "recorded" || e.status !== "failed" || e.open === false) return false;
-    if (sid == null) return true;
-    return String(e.session_id || "") === sid;
+    // Debt must be explicit. Entries without `open: true` are audit records,
+    // not obligations: the gate writes one every time it blocks, and treating
+    // those as debt meant blocking generated more blocking.
+    if (!e || e.source !== "recorded" || e.status !== "failed" || e.open !== true) return false;
+    if (sid != null && String(e.session_id || "") !== sid) return false;
+    // A debt on a test that no longer exists can never be paid. Deleting or
+    // renaming a test used to leave the agent blocked forever with no way to
+    // clear it, which is the worst possible failure for a gate.
+    // Only absolute paths can be checked reliably; a relative one depends on
+    // whatever cwd happens to be, and guessing wrong would silently drop a
+    // real obligation.
+    const absolute = (Array.isArray(e.files) ? e.files : []).filter((f) => isAbsolute(String(f)));
+    if (absolute.length && !absolute.some((f) => existsSync(f))) return false;
+    return true;
   });
 }
 
