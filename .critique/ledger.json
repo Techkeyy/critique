@@ -708,5 +708,15 @@
     "durationWallClock": 7.277,
     "kaneStatus": "failed",
     "phase": "gate"
+  },
+  {
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "kaneStatus": "failed",
+    "detail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+    "durationWallClock": 9.307,
+    "status": "OWED",
+    "reason": "infrastructure",
+    "phase": "gate",
+    "at": "2026-08-20T08:50:14.901Z"
   }
 ]

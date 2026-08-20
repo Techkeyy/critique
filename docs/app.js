@@ -64,16 +64,30 @@ function renderHome(data) {
 
   app.innerHTML = `
     <section class="hero">
-      <div class="wrap">
-        <p class="eyebrow gold">Kane CLI${DOT}Live verification ledger</p>
-        <h1 class="wordmark">Critique</h1>
-        <p class="statement">The agent marks its own <em>homework</em>.</p>
-        <p class="lede">Critique intercepts a coding agent the moment it claims to be finished, prosecutes that claim in a real browser, and refuses to let it exit until the claim survives. Every prosecution becomes a cached test. The suite below grew by itself.</p>
+      <img class="hero-art" src="./img/hero.jpg" alt="A gloved investigator reviewing a claim form stamped NOT APPROVED on a dark desk beside a typewriter." />
+      <div class="hero-scrim"></div>
+      <div class="hero-copy">
+        <h1 class="wordmark">CRITI<em>Q</em>UE</h1>
+        <div class="rule"></div>
+        <p class="hero-head">
+          Your coding agent says it works.
+          <span class="prove">Make it prove it.</span>
+        </p>
+        <p class="hero-sub">
+          Critique <span class="accent">prosecutes</span> every claim.<br />
+          Real browser. Real tests. Real evidence.<br />
+          No pass. No merge. No escape.
+        </p>
         <div class="actions">
-          <a class="btn solid" href="#ledger">Read the ledger</a>
-          <a class="btn" href="./demo/">Open the app under test</a>
+          <a class="btn solid" href="#ledger">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1 3 5v6c0 5.25 3.84 10.16 9 12 5.16-1.84 9-6.75 9-12V5l-9-4Zm0 6.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm0 11.9c-2.2-.9-4.1-2.9-5-5.2 1.4-1.1 3.2-1.7 5-1.7s3.6.6 5 1.7c-.9 2.3-2.8 4.3-5 5.2Z"/></svg>
+            See it in action
+          </a>
+          <a class="btn" href="https://github.com/Techkeyy/critique">
+            View on GitHub
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.700.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg>
+          </a>
         </div>
-        <p class="caption">The app under test is Notebook, a small app with a dark mode toggle, a counter and a note field. Kane drives it in a real browser. It also carries deliberate contraband so the sweep has something real to catch.</p>
       </div>
     </section>
 
@@ -85,7 +99,7 @@ function renderHome(data) {
             <div class="n">${esc(tests)}</div>
             <p>${esc(breakdown)}</p>
           </div>
-          <div class="stat gold">
+          <div class="stat red">
             <p class="eyebrow" style="margin:0">Written by a human</p>
             <div class="n">${esc(human)}</div>
             <p>Kane authored every one of them from the agent's own sentences.</p>
@@ -97,7 +111,7 @@ function renderHome(data) {
     <section>
       <div class="wrap">
         <p class="eyebrow">How the loop closes</p>
-        <h2 class="section-head">Three moves. No human in the middle.</h2>
+        <h2 class="section-head">Three moves. <em>No human in the middle.</em></h2>
         <div class="steps-grid">
           <div class="stepcard">
             <span class="num">01</span>
@@ -121,7 +135,7 @@ function renderHome(data) {
     <section id="ledger">
       <div class="wrap">
         <p class="eyebrow">The ledger</p>
-        <h2 class="section-head">Every claim, and what a browser proved.</h2>
+        <h2 class="section-head">Every claim, and what a browser <em>proved</em>.</h2>
         <div class="list">${cards}</div>
       </div>
     </section>
