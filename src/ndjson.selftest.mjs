@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { Readable } from "node:stream";
-import { parseNdjsonText, parseNdjsonStream, statusFrom } from "./ndjson.mjs";
+import { parseNdjsonText, parseNdjsonStream, statusFrom, isNoiseLine } from "./ndjson.mjs";
 
 function assert(cond, msg) {
   if (!cond) {
@@ -54,3 +54,23 @@ if (process.exitCode) {
 console.log("selftest passed");
 console.log("failureDetail:\n" + detail);
 
+// --- stderr noise must never masquerade as a failure reason (regression) ---
+{
+  const noise = [
+    "Evidence — view locally:",
+    "evidence: view locally with kane-cli evidence serve /tmp/x.evidence",
+    "Running on: Desktop · Chrome",
+    "Skill update available: 0.0.17",
+  ];
+  const real = ["assert: expected title X, got Y", "action_failed: click @ step 1"];
+  for (const n of noise) assert(isNoiseLine(n), "noise rejected: " + n.slice(0, 28));
+  for (const r of real) assert(!isNoiseLine(r), "diagnosis kept: " + r.slice(0, 28));
+
+  const { buildFailureDetail: bfd } = await import("./ndjson.mjs");
+  const fromNoise = bfd([], null, noise.join("\n"));
+  assert(!/view locally/i.test(fromNoise), "pure noise does not become the failure reason");
+  assert(fromNoise.length > 40, "pure noise falls back to an honest message");
+
+  const fromMixed = bfd([], null, "Running on: Desktop\nassert: expected title X, got Y");
+  assert(/assert:/.test(fromMixed), "the diagnostic line wins over chatter");
+}

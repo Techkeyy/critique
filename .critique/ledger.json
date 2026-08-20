@@ -665,5 +665,15 @@
     "tagsInjected": null,
     "message": "no claim",
     "durationWallClock": 119.569
+  },
+  {
+    "at": "2026-08-20T08:06:43.585Z",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 99.38,
+    "failureDetail": "Evidence — view locally:",
+    "testUrl": null
   }
 ]

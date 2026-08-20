@@ -172,6 +172,24 @@ function firstFailedDriver(events) {
  * Human-readable failure string for the agent. Must be non-empty on ok:false
  * and usable without opening any other file (R9).
  */
+/**
+ * Lines Kane writes to stderr that carry no diagnostic value. Surfacing one of
+ * these as a failure reason is worse than silence: the agent gets blocked and
+ * told "Evidence, view locally" with no idea what actually broke.
+ */
+const NOISE = [
+  /^evidence\b/i,
+  /view locally/i,
+  /^running on\b/i,
+  /^skill update/i,
+  /kane-cli evidence serve/i,
+  /^warning: /i,
+];
+
+export function isNoiseLine(line) {
+  return NOISE.some((re) => re.test(String(line || "").trim()));
+}
+
 export function buildFailureDetail(events, terminal, stderr) {
   const lines = [];
   const steps = collectStepEvents(events);
@@ -217,8 +235,17 @@ export function buildFailureDetail(events, terminal, stderr) {
 
   const err = typeof stderr === "string" ? stderr.trim() : "";
   if (!lines.length && err) {
-    const first = err.split(/\r?\n/).find((l) => l.trim()) || err;
-    lines.push(first.slice(0, 500));
+    const useful = err
+      .split(/\r?\n/)
+      .map((l) => l.trim())
+      .filter((l) => l && !isNoiseLine(l));
+    // Prefer a line that reads like a diagnosis over the first line, which is
+    // usually chatter. Kane writes evidence hints and progress notes to stderr,
+    // and one of those masquerading as a failure tells the agent nothing, which
+    // defeats the whole point of having blocked it.
+    const diagnostic = useful.find((l) => /fail|error|assert|timeout|refus|denied|not found/i.test(l));
+    const pick = diagnostic || useful[0];
+    if (pick) lines.push(pick.slice(0, 500));
   }
 
   if (!lines.length) {
