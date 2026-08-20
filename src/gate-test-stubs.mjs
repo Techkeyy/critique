@@ -3,7 +3,18 @@
  * Not used in production.
  */
 
+const INFRA_VERDICT = {
+  ok: false,
+  status: "failed",
+  failureDetail:
+    "member demo/dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+  testUrl: null,
+  durationWallClock: 0,
+  MOCKED: true,
+};
+
 export function stubVerdict(kind) {
+  if (kind === "infra") return INFRA_VERDICT;
   if (kind === "fail") {
     return {
       ok: false,

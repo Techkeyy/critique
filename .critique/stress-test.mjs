@@ -213,6 +213,31 @@ console.log("\n8. OUT OF SCOPE STAYS SILENT");
   }
 }
 
+
+console.log("\n9. INFRASTRUCTURE FAILURES MUST NOT BLOCK");
+{
+  const { isInfrastructureFailure } = await import("../src/ndjson.mjs");
+  const infra = [
+    "chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+    "connect ECONNREFUSED 127.0.0.1:9222",
+    "net::ERR_INTERNET_DISCONNECTED",
+    "Not authenticated [prod]. Run kane-cli login first.",
+    "insufficient credits",
+    "failed to launch the browser process",
+  ];
+  const product = [
+    "Step 2 failed: assert: expected title X, got Y",
+    "action_failed: click @ step 1",
+    "analyzer_failed: @ step 1",
+  ];
+  for (const t of infra) check(isInfrastructureFailure(t), "infra classified: " + t.slice(0, 34));
+  for (const t of product) check(!isInfrastructureFailure(t), "product failure still blocks: " + t.slice(0, 30));
+
+  seed("stress-infra");
+  const r = runHook(GATE, base({ session_id: "stress-infra" }), { CRITIQUE_TEST_STUB: "infra" });
+  check(r.code === 0, "gate fails open on an infrastructure failure", "exit " + r.code);
+}
+
 // cleanup
 for (const d of readdirSync(SESSIONS).filter((n) => n.startsWith("stress"))) {
   rmSync(join(SESSIONS, d), { recursive: true, force: true });

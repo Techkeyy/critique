@@ -190,6 +190,33 @@ export function isNoiseLine(line) {
   return NOISE.some((re) => re.test(String(line || "").trim()));
 }
 
+/**
+ * Failures of the verification machinery itself, as opposed to failures of the
+ * software under test. No free Chrome debug port, no network, a dead session:
+ * none of these say anything about the agent's claim.
+ *
+ * Blocking on one of these is the same defect as a gate that cannot let go.
+ * The agent would be held hostage by the machine being busy, with a failure it
+ * has no way to fix. These must fail open.
+ */
+const INFRASTRUCTURE = [
+  /cdp ports?/i,
+  /chrome slot/i,
+  /close other chrome/i,
+  /failed to launch/i,
+  /browser (launch|start|connect)/i,
+  /econnrefused|enotfound|etimedout|econnreset|socket hang up/i,
+  /net::err_/i,
+  /not authenticated|unauthori[sz]ed|401|403/i,
+  /insufficient credits|quota exceeded|rate limit/i,
+  /session (expired|not found)/i,
+];
+
+export function isInfrastructureFailure(text) {
+  const s = String(text || "");
+  return s ? INFRASTRUCTURE.some((re) => re.test(s)) : false;
+}
+
 export function buildFailureDetail(events, terminal, stderr) {
   const lines = [];
   const steps = collectStepEvents(events);

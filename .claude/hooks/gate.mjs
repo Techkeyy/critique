@@ -13,6 +13,7 @@ import { INSTALL_ROOT, payloadCwd, readStdinPayload, safeSessionId, workspaceFor
 import { extractClaims } from "../../src/claims.mjs";
 import { touchedCode, writeSessionDiff } from "../../src/diff.mjs";
 import { hasPassedCache, openRecordedFailures } from "../../src/suite.mjs";
+import { isInfrastructureFailure } from "../../src/ndjson.mjs";
 
 const MAX_ATTEMPTS = 3;
 
@@ -232,6 +233,20 @@ async function main() {
       session_id: sessionId,
       status: verdict?.status || "error",
       durationWallClock: verdict?.durationWallClock,
+    });
+    process.exit(0);
+  }
+
+  // A failure of the verification machinery is not a failure of the claim.
+  // Kane could not get a Chrome port, or the network was down: that says nothing
+  // about what the agent shipped, and the agent cannot fix it. Fail open and
+  // record the debt rather than holding the turn hostage to a busy machine.
+  if (!verdict.ok && isInfrastructureFailure(verdict.failureDetail || verdict.summary)) {
+    writeOwed(dir, "infrastructure", {
+      session_id: sessionId,
+      status: verdict.status,
+      detail: (verdict.failureDetail || verdict.summary || "").slice(0, 300),
+      durationWallClock: verdict.durationWallClock,
     });
     process.exit(0);
   }

@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import { findWorkspace, INSTALL_ROOT, safeSessionId } from "./guard.mjs";
 import { generateSave, runGenerate, runTestMd } from "./kane.mjs";
 import { clearRecordedForFiles } from "./suite.mjs";
+import { isInfrastructureFailure } from "./ndjson.mjs";
 
 const PLAY_URL = "https://kaneai-playground.lambdatest.io";
 

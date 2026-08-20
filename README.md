@@ -89,6 +89,10 @@ credits and needs no network.
   code** are therefore never prosecuted — a docs-only turn has no browser behaviour to falsify.
   One prosecution in this repo (`prosecutions/and-i-ve-added-part-0-…`) predates that filter and
   is left in place rather than deleted, because it is real evidence of the failure mode.
+- **A failure of the verification machinery never blocks.** No free Chrome debug port, a dropped
+  network, an expired Kane login, exhausted credits: none of these say anything about the agent's
+  claim, and the agent cannot fix them. Those record OWED and let the turn finish. Only real
+  product failures hold the door.
 - **Cached replays go brittle when the page is restructured.** Editing the subject app's markup
   around an assertion (adding a header, rewriting a paragraph) made a passing contraband check
   fail even though the thing it looks for was still there and still live. Kane's auto-heal did

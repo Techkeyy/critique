@@ -677,5 +677,15 @@
     "durationWallClock": 99.38,
     "failureDetail": "Evidence — view locally:",
     "testUrl": null
+  },
+  {
+    "at": "2026-08-20T08:31:33.747Z",
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "status": "failed",
+    "phase": "tier1",
+    "source": "replay",
+    "durationWallClock": 8.201,
+    "failureDetail": "member .testmuai\\tests\\prosecutions\\demo\\dark_mode_toggle_test.md: chrome slot failed: All CDP ports 9222-9230 are in use. Close other Chrome instances.",
+    "testUrl": null
   }
 ]

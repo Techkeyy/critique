@@ -186,6 +186,14 @@ Last updated: 19 Aug 2026, ~21:10 IST · **~50 hours to deadline** (21 Aug 23:59
   now strips path separators and traversal, caps length at 100, rejects Windows reserved device
   names, and falls back to `unknown`; real UUIDs pass through unchanged. Applied in `gate.mjs`,
   `observe.mjs` and `prosecute.mjs` (argv is equally untrusted).
+- **D-16 — MACHINERY FAILURES FAIL OPEN.** Found live: the gate blocked a turn because
+  `All CDP ports 9222-9230 are in use. Close other Chrome instances.` That is Kane failing to
+  start, not the claim failing. The agent was held hostage by a busy machine, with a failure it
+  had no way to fix, which is the "gate that cannot let go" defect wearing a different costume.
+  `isInfrastructureFailure()` now classifies port exhaustion, browser launch failures, network
+  errors, auth failures and credit exhaustion. Those exit 0 and record OWED instead of blocking,
+  and the Tier-2 regression pass refuses to record them as debt at all. Product failures
+  (`assert:`, `action_failed`, `analyzer_failed`) still block. 10 stress cases cover the split.
 - **D-08** All Windows path comparisons normalize to **forward slashes, lowercased**, on both
   sides. Backslash escaping is corrupted silently by shells, heredocs, and JSON round-trips.
 - **D-09 (tooling)** **Do not use Bash heredocs to write files containing backslashes** on this
