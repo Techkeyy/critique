@@ -1211,5 +1211,14 @@
     "durationWallClock": 0.003,
     "failureDetail": "Step 1 (Step 1) failed: The browser was on a guided tutorial screen, and the agent treated that tutorial as the task. It used unrelated buttons and form steps, so it never got to the place where the requested change could be made.\nRestart from the correct editor screen and limit actions to elements tied to the goal, such as the code area and the 'Fixed' and 'Finish' buttons. Add a check that stops or recovers if a tutorial or login form appears instead.\nShare: https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GRGGXYAPMHTNVT863JE8VP/dashboard/share/US_563OCE2IOLBAP4PGVOM8NG667CFI1JZF0L4VF8BXQ8WOQC95AGU38Y4MT7HPEXKR?type=summary&agentView=true&fqdn=summary-page",
     "testUrl": "https://test-manager.lambdatest.com/projects/01M0D9ANFP5FET956GVS702BAZ/test-cases/01M0GRGGXYAPMHTNVT863JE8VP/dashboard/share/US_563OCE2IOLBAP4PGVOM8NG667CFI1JZF0L4VF8BXQ8WOQC95AGU38Y4MT7HPEXKR?type=summary&agentView=true&fqdn=summary-page"
+  },
+  {
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "attempts": 3,
+    "stop_hook_active": true,
+    "status": "OWED",
+    "reason": "max-attempts",
+    "phase": "gate",
+    "at": "2026-08-20T23:53:27.622Z"
   }
 ]

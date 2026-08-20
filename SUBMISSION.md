@@ -13,7 +13,7 @@ Every line below is checkable by a stranger in under five minutes.
 | Dimension | Evidence |
 |---|---|
 | **Ships** | Two deployed apps, no setup: the [dashboard](https://critique-six.vercel.app/) and the [app under test](https://critique-six.vercel.app/demo/). Real primary flows, real data, 20 genuine ledger entries. `git clone && npm test` passes on a virgin clone with zero dependencies. |
-| **Verified** | Kane authored 4 of the 7 suite tests from the agent's own sentences. It falsified a real dark-mode claim, caught a real regression when the subject app broke, and detects live contraband (a leftover `localhost:4000` probe). Failure text is rendered verbatim on the dashboard, two clicks from the landing page. |
+| **Verified** | Kane authored 7 of the 10 suite tests from the agent's own sentences. It falsified a real dark-mode claim, caught a real regression when the subject app broke, and detects live contraband (a leftover `localhost:4000` probe). Failure text is rendered verbatim on the dashboard, two clicks from the landing page. |
 | **Closed loop** | Not "a hook fired Kane". The agent is **denied exit**. Break the app, Tier 2 records it in 221s, the next Stop blocks in **331ms** with Kane's failure text, the agent reads it and fixes it. Measured end to end, numbers in [LEDGER.md](LEDGER.md). |
 | **Craft** | One-command install that merges into `~/.claude/settings.json` rather than overwriting, backs up first, and uninstalls cleanly. Works on any project via a `.critique/` marker. 58 adversarial stress cases. Honest limitations section. Fails open on its own machinery failing. |
 
@@ -55,7 +55,7 @@ running out of them is what triggered the infrastructure bug during the build.
 > the agent as Kane's verbatim failure text, so the agent fixes it and tries again; that block
 > lands in 331 milliseconds because the verdict is already on record. Every prosecution that
 > passes seals into a cached `_test.md` that replays free forever, so the repo accretes a
-> regression suite as exhaust: seven tests, none written by a human to verify a claim. The whole
+> regression suite as exhaust: ten tests, none written by a human to verify a claim. The whole
 > repo was written by Claude Code with the hooks armed, so Critique spent the hackathon gating the
 > agent that was writing it, and four real bugs were found that way rather than in a staged demo.
 
