@@ -12,7 +12,7 @@ Every line below is checkable by a stranger in under five minutes.
 
 | Dimension | Evidence |
 |---|---|
-| **Ships** | Two deployed apps, no setup: the [dashboard](https://critique-six.vercel.app/) and the [app under test](https://critique-six.vercel.app/demo/). Real primary flows, real data, 20 genuine ledger entries. `git clone && npm test` passes on a virgin clone with zero dependencies. |
+| **Ships** | Two deployed apps, no setup: the [dashboard](https://critique-six.vercel.app/) and the [app under test](https://critique-six.vercel.app/demo/). Real primary flows, real data, 20 genuine ledger entries. `git clone` then `npm test` passes on a virgin clone with zero dependencies. |
 | **Verified** | Kane authored 7 of the 10 suite tests from the agent's own sentences. It falsified a real dark-mode claim, caught a real regression when the subject app broke, and detects live contraband (a leftover `localhost:4000` probe). Failure text is rendered verbatim on the dashboard, two clicks from the landing page. |
 | **Closed loop** | Not "a hook fired Kane". The agent is **denied exit**. Break the app, Tier 2 records it in 221s, the next Stop blocks in **331ms** with Kane's failure text, the agent reads it and fixes it. Measured end to end, numbers in [LEDGER.md](LEDGER.md). |
 | **Craft** | One-command install that merges into `~/.claude/settings.json` rather than overwriting, backs up first, and uninstalls cleanly. Works on any project via a `.critique/` marker. 58 adversarial stress cases. Honest limitations section. Fails open on its own machinery failing. |
@@ -68,7 +68,9 @@ running out of them is what triggered the infrastructure bug during the build.
 Under 30 seconds, no setup:
 
 ```bash
-git clone https://github.com/Techkeyy/critique && cd critique && npm test
+git clone https://github.com/Techkeyy/critique
+cd critique
+npm test
 ```
 
 Zero dependencies, no Kane account, no network. 58 stress cases plus the unit suites.

@@ -130,7 +130,7 @@ labels on the current data, and it looks broken on camera.
 ## Scene 6 · 2:05–2:38 · Tab D
 
 **On screen**
-1. Type `git clone https://github.com/Techkeyy/critique && cd critique && npm test`
+1. Type `git clone https://github.com/Techkeyy/critique demo-clone` then `cd demo-clone` then `npm test`
 2. Let it scroll. Land on `58 passed`.
 3. Type `npm run critique:install`. Show the output.
 

@@ -44,9 +44,13 @@ Every prosecution that passes seals into a cached `_test.md` that replays free f
 ## Quickstart
 
 ```bash
-git clone https://github.com/Techkeyy/critique && cd critique
-npm test                    # 58 stress cases + unit suites. No Kane, no credits, no network.
+git clone https://github.com/Techkeyy/critique
+cd critique
+npm test          # 58 stress cases + unit suites. No Kane, no credits, no network.
 ```
+
+Three lines rather than one on purpose: Windows PowerShell 5.1 does not support
+`&&`, and a quickstart that fails on the very first command is worse than none.
 
 To run the gate itself you need [Kane CLI](https://www.npmjs.com/package/@testmuai/kane-cli):
 

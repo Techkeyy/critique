@@ -1220,5 +1220,14 @@
     "reason": "max-attempts",
     "phase": "gate",
     "at": "2026-08-20T23:53:27.622Z"
+  },
+  {
+    "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+    "attempts": 3,
+    "stop_hook_active": false,
+    "status": "OWED",
+    "reason": "max-attempts",
+    "phase": "gate",
+    "at": "2026-08-20T23:55:15.597Z"
   }
 ]
