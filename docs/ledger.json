@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-20T23:54:27.843Z",
+  "generatedAt": "2026-08-21T00:31:21.826Z",
   "suite": {
-    "tests": 10,
+    "tests": 11,
     "humanWroteToVerifyAClaim": 0,
-    "generatedFromClaims": 7,
+    "generatedFromClaims": 8,
     "subjectAppHarness": 2,
     "seededBaseline": 1
   },
@@ -888,6 +888,15 @@
       "reason": "max-attempts",
       "phase": "gate",
       "at": "2026-08-20T23:53:27.622Z"
+    },
+    {
+      "session_id": "3297ec5a-1351-4bd2-89ba-58a2fc6f8a7f",
+      "attempts": 3,
+      "stop_hook_active": false,
+      "status": "OWED",
+      "reason": "max-attempts",
+      "phase": "gate",
+      "at": "2026-08-20T23:55:15.597Z"
     }
   ]
 }

@@ -36,8 +36,13 @@ const openCount = () => {
 
 function newestSession() {
   if (!existsSync(SESSIONS)) return null;
+  // Only a real Claude Code session, which is a UUID. Test suites leave folders
+  // behind here with names like "aaaa..." and "with-space-and--quote-", and
+  // picking one of those stages the failure against a session that will never
+  // run again, so the block silently never fires.
+  const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const dirs = readdirSync(SESSIONS)
-    .filter((n) => !n.startsWith("t-") && !n.endsWith(".json"))
+    .filter((n) => UUID.test(n))
     .map((n) => ({ n, t: statSync(join(SESSIONS, n)).mtimeMs }))
     .sort((a, b) => b.t - a.t);
   return dirs.length ? dirs[0].n : null;
@@ -57,7 +62,16 @@ const chromeAlive = () => {
 };
 
 const arg = process.argv[2];
-const session = safeSessionId(arg || newestSession() || "demo");
+const found = arg || newestSession();
+if (!found) {
+  console.log("");
+  console.log("  No Claude Code session found in this project.");
+  console.log("  Open a Claude Code window here, send it any short message, then run this again.");
+  console.log("  That message is what creates the session this failure attaches to.");
+  console.log("");
+  process.exit(1);
+}
+const session = safeSessionId(found);
 
 console.log("");
 console.log("  workspace : " + WS);

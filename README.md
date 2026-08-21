@@ -39,7 +39,7 @@ Runtime debris is invisible to a diff reader and ordinary for an agent to leave:
 5. **Records** regressions. The same background pass replays every cached test and records anything that broke.
 6. **Denies** the next exit. A recorded failure blocks the following turn in **331ms** with Kane's verbatim failure text, which the agent then reads and fixes.
 
-Every prosecution that passes seals into a cached `_test.md` that replays free forever. The suite is exhaust: **10 tests, none written by a human to verify a claim.**
+Every prosecution that passes seals into a cached `_test.md` that replays free forever. The suite is exhaust: **11 tests, none written by a human to verify a claim.**
 
 ## Quickstart
 
